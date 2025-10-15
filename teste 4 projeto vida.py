@@ -845,6 +845,214 @@ def apply_custom_styles():
         font-size: 0.9rem;
         line-height: 1.4;
     }
+    
+    /* Previdência Card Styles */
+    .previdencia-card {
+        background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+        padding: 2rem;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        margin: 2rem 0;
+        border-left: 8px solid #ff6b35;
+        color: #2c3e50;
+    }
+    
+    .previdencia-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+    
+    .previdencia-title {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #2c3e50;
+        margin: 0;
+    }
+    
+    .previdencia-value {
+        font-size: 2.2rem;
+        font-weight: bold;
+        color: #ff6b35;
+        margin: 0;
+    }
+    
+    .oportunidade-alavancagem {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 1.5rem;
+        border-radius: 15px;
+        margin: 1rem 0;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+    
+    /* Pilar Financeiro Card */
+    .pilar-financeiro-card {
+        background: linear-gradient(135deg, #00b09b 0%, #96c93d 100%);
+        padding: 1.5rem;
+        border-radius: 15px;
+        color: white;
+        margin: 1rem 0;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    /* Patrimonio Card */
+    .patrimonio-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 1.5rem;
+        border-radius: 15px;
+        color: white;
+        margin: 1rem 0;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    /* Regime Casamento Card - ESTILO MELHORADO E CORRIGIDO */
+    .regime-casamento-card {
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        padding: 3rem;
+        border-radius: 25px;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        margin: 2rem 0;
+        border-left: 10px solid #8A2BE2;
+        border-right: 3px solid #f0f0f0;
+        border-top: 3px solid #f0f0f0;
+        border-bottom: 3px solid #f0f0f0;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .regime-casamento-card::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(138, 43, 226, 0.03) 1px, transparent 1px);
+        background-size: 30px 30px;
+        animation: float 20s linear infinite;
+    }
+    
+    .regime-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 3rem;
+        padding-bottom: 2rem;
+        border-bottom: 2px solid rgba(138, 43, 226, 0.2);
+        position: relative;
+    }
+    
+    .regime-title {
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: #2c3e50;
+        margin: 0;
+        background: linear-gradient(135deg, #2c3e50, #8A2BE2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    
+    .regime-subtitle {
+        color: #666;
+        font-size: 1.1rem;
+        margin: 0.8rem 0 0 0;
+        line-height: 1.5;
+    }
+    
+    .regime-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin-bottom: 2.5rem;
+    }
+    
+    .regime-info-card {
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(102, 126, 234, 0.15));
+        padding: 2rem;
+        border-radius: 18px;
+        border: 1px solid rgba(102, 126, 234, 0.3);
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .regime-info-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 30px rgba(102, 126, 234, 0.2);
+    }
+    
+    .regime-section {
+        background: linear-gradient(135deg, rgba(40, 167, 69, 0.1), rgba(40, 167, 69, 0.15));
+        padding: 2.5rem;
+        border-radius: 18px;
+        border: 1px solid rgba(40, 167, 69, 0.3);
+        margin-bottom: 2.5rem;
+        position: relative;
+    }
+    
+    .regime-calculation {
+        background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 193, 7, 0.15));
+        padding: 2.5rem;
+        border-radius: 18px;
+        border: 1px solid rgba(255, 193, 7, 0.3);
+        position: relative;
+    }
+    
+    .regime-formula {
+        background: rgba(255,255,255,0.9);
+        padding: 1.5rem;
+        border-radius: 12px;
+        border-left: 4px solid #ffc107;
+        font-family: 'Courier New', monospace;
+        font-size: 1rem;
+        margin-top: 1rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    
+    .regime-note {
+        background: rgba(102, 126, 234, 0.08);
+        padding: 1.5rem;
+        border-radius: 12px;
+        border-left: 4px solid #667eea;
+        margin-top: 2rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    
+    /* Efeitos de hover para melhor interatividade */
+    .regime-info-card:hover,
+    .regime-section:hover,
+    .regime-calculation:hover {
+        transform: translateY(-3px);
+        transition: all 0.3s ease;
+    }
+    
+    /* Responsividade */
+    @media (max-width: 768px) {
+        .regime-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        
+        .regime-casamento-card {
+            padding: 2rem;
+            margin: 1rem 0;
+        }
+        
+        .regime-title {
+            font-size: 1.8rem;
+        }
+        
+        .regime-header {
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        .regime-header > div:first-child {
+            margin-right: 0;
+            margin-bottom: 1.5rem;
+        }
+    }
     </style>
     """, unsafe_allow_html=True)
 
@@ -906,6 +1114,23 @@ FILIAIS = [
     "VOLTA REDOND",
     "GROWTH",
     "SMART OFFICE"
+]
+
+# ---------- ESTADO CIVIL E REGIMES DE CASAMENTO ----------
+ESTADO_CIVIL_OPCOES = [
+    "Solteiro(a)",
+    "Casado(a)",
+    "Divorciado(a)", 
+    "Viúvo(a)",
+    "União Estável"
+]
+
+REGIME_CASAMENTO_OPCOES = [
+    "Não especificado",
+    "Comunhão Universal de Bens",
+    "Comunhão Parcial de Bens", 
+    "Separação Total de Bens",
+    "Participação Final nos Aquestos"
 ]
 
 # ---------- BASE DE DADOS DE PERFIS E PESOS ----------
@@ -1072,9 +1297,59 @@ class CalculadoraCapital:
     
     @staticmethod
     def calcular_whole_life(cliente):
-        """Calcula Whole Life - 20% do patrimônio imobilizado"""
-        patrimonio = cliente.get('patrimonio_total', 0)
-        return patrimonio * 0.20
+        """Calcula Whole Life - Ajustado para regime de casamento"""
+        patrimonio_total = cliente.get('patrimonio_total', 0)
+        pilar_financeiro = cliente.get('pilar_financeiro', False)
+        
+        # Considerar regime de casamento no cálculo
+        estado_civil = cliente.get('estado_civil', '')
+        regime_casamento = cliente.get('regime_casamento', 'Não especificado')
+        
+        # LÓGICA DOS REGIMES DE CASAMENTO
+        if estado_civil == 'Casado(a)':
+            if regime_casamento == 'Comunhão Universal de Bens':
+                # Universal - usa metade do patrimônio
+                percentual_patrimonio = 0.5
+                descricao_regime = "Universal (50% do patrimônio)"
+            elif regime_casamento == 'Separação Total de Bens':
+                # Separação Total - usa patrimônio total
+                percentual_patrimonio = 1.0
+                descricao_regime = "Separação Total (100% do patrimônio)"
+            elif regime_casamento == 'Comunhão Parcial de Bens':
+                # Parcial - antes do casamento (total) e depois (metade)
+                # Para simplificar, vamos considerar 75% como média ponderada
+                percentual_patrimonio = 0.75
+                descricao_regime = "Parcial (75% do patrimônio - média)"
+            elif regime_casamento == 'Participação Final nos Aquestos':
+                # Similar à separação total para cálculo de proteção
+                percentual_patrimonio = 1.0
+                descricao_regime = "Participação Final (100% do patrimônio)"
+            else:
+                # Default caso não especificado
+                percentual_patrimonio = 0.5
+                descricao_regime = "Regime padrão (50% do patrimônio)"
+        else:
+            # Solteiro, divorciado, viúvo - usa patrimônio total
+            percentual_patrimonio = 1.0
+            descricao_regime = f"{estado_civil} (100% do patrimônio)"
+        
+        # Aplicar percentual do pilar financeiro sobre o patrimônio ajustado
+        if pilar_financeiro:
+            # Pilar financeiro: 20% do patrimônio ajustado
+            percentual_protecao = 0.20
+            descricao_pilar = "Pilar Financeiro (20%)"
+        else:
+            # Não é pilar financeiro: 15% do patrimônio ajustado
+            percentual_protecao = 0.15
+            descricao_pilar = "Contribuidor (15%)"
+        
+        # Calcular patrimônio ajustado pelo regime
+        patrimonio_ajustado = patrimonio_total * percentual_patrimonio
+        
+        # Calcular valor final da cobertura
+        valor_cobertura = patrimonio_ajustado * percentual_protecao
+        
+        return valor_cobertura
     
     @staticmethod
     def calcular_term_life(cliente):
@@ -1124,6 +1399,7 @@ class CalculadoraCapital:
             'coberturas_detalhadas': coberturas,
             'detalhes_calculo': coberturas
         }
+
 
 # ---------- SISTEMA DE RECOMENDAÇÃO POR PERFIL ----------
 class SistemaRecomendacao:
@@ -1373,9 +1649,37 @@ class InsuranceAI:
         dependentes = cliente.get('dependentes', 0)
         renda_mensal = cliente.get('renda_mensal', 5000)
         capital_total = cliente.get('capital_sugerido', 0)
+        pilar_financeiro = cliente.get('pilar_financeiro', False)
+        estado_civil = cliente.get('estado_civil', '')
+        regime_casamento = cliente.get('regime_casamento', '')
+        patrimonio_liquido = cliente.get('patrimonio_liquido', 0)
+        patrimonio_imobilizado = cliente.get('patrimonio_imobilizado', 0)
+        patrimonio_total = cliente.get('patrimonio_total', 0)
         
         calculo = CalculadoraCapital.calcular_capital_total(cliente)
         coberturas = calculo['coberturas_detalhadas']
+        
+        # Informações sobre estado civil
+        info_estado_civil = ""
+        if estado_civil == 'Casado(a)':
+            info_estado_civil = f"**💍 Estado Civil:** Casado(a) - {regime_casamento}"
+        elif estado_civil:
+            info_estado_civil = f"**💍 Estado Civil:** {estado_civil}"
+        
+        # Informações sobre patrimônio
+        info_patrimonio = f"""
+        **💰 Composição Patrimonial:**
+        - **Patrimônio Líquido:** {formatar_moeda(patrimonio_liquido)}
+        - **Patrimônio Imobilizado:** {formatar_moeda(patrimonio_imobilizado)}
+        - **Patrimônio Total:** {formatar_moeda(patrimonio_total)}
+        """
+        
+        # Detalhes do cálculo do Whole Life
+        if 'detalhes_whole_life' in cliente:
+            detalhes = cliente['detalhes_whole_life']
+            info_whole_life = f"**Proteção Patrimonial:** {formatar_moeda(coberturas['Whole Life'])} ({detalhes['descricao_pilar']} sobre {detalhes['descricao_regime'].lower()})"
+        else:
+            info_whole_life = f"**Proteção Patrimonial:** {formatar_moeda(coberturas['Whole Life'])} ({'20%' if pilar_financeiro else '15%'} do patrimônio)"
         
         stories = {
             'familia': f"""
@@ -1383,9 +1687,15 @@ class InsuranceAI:
             
             Aos **{idade} anos**, {nome} é responsável por **{dependentes} dependente(s)** e possui uma **renda mensal de {formatar_moeda(renda_mensal)}**.
             
+            {info_estado_civil}
+            
+            {info_patrimonio}
+            
+            **🎯 Perfil Financeiro:** {'**🏆 Pilar Financeiro da Família** - Proteção reforçada' if pilar_financeiro else '**🤝 Contribuidor Familiar** - Proteção adequada'}
+            
             **🛡️ Coberturas Calculadas:**
             - **Doenças Graves:** {formatar_moeda(coberturas['Doenças Graves'])} (36 meses de despesas)
-            - **Proteção Patrimonial:** {formatar_moeda(coberturas['Whole Life'])} (20% do patrimônio)
+            - {info_whole_life}
             - **Educação dos Filhos:** {formatar_moeda(coberturas['Term Life'])} (custo até independência)
             - **Invalidez Permanente:** {formatar_moeda(coberturas['Invalidez Permanente'])} (100x a renda mensal)
             - **Proteção de Renda:** {formatar_moeda(coberturas['Diária Incapacidade Temporária'])}/dia
@@ -1401,9 +1711,15 @@ class InsuranceAI:
             
             Aos **{idade} anos**, {nome} está no auge da carreira com **renda de {formatar_moeda(renda_mensal)} mensais**.
             
+            {info_estado_civil}
+            
+            {info_patrimonio}
+            
+            **🎯 Perfil Financeiro:** {'**🏆 Pilar Financeiro** - Proteção máxima' if pilar_financeiro else '**💼 Profissional Independente** - Proteção estratégica'}
+            
             **🛡️ Coberturas Calculadas:**
             - **Doenças Graves:** {formatar_moeda(coberturas['Doenças Graves'])} (36 meses de despesas)
-            - **Proteção Patrimonial:** {formatar_moeda(coberturas['Whole Life'])} (20% do patrimônio)
+            - {info_whole_life}
             - **Invalidez Permanente:** {formatar_moeda(coberturas['Invalidez Permanente'])} (100x a renda mensal)
             - **Proteção de Renda:** {formatar_moeda(coberturas['Diária Incapacidade Temporária'])}/dia
             - **Proteção Hospitalar:** {formatar_moeda(coberturas['Diária Internação Hospitalar'])}/dia
@@ -1448,9 +1764,12 @@ class InsuranceAI:
             idade = cliente.get('idade', 30)
             dependentes = cliente.get('dependentes', 0)
             profissao = cliente.get('profissao', '').lower()
-            patrimonio = cliente.get('patrimonio_total', 0)
+            patrimonio_total = cliente.get('patrimonio_total', 0)
+            pilar_financeiro = cliente.get('pilar_financeiro', False)
+            estado_civil = cliente.get('estado_civil', '')
+            regime_casamento = cliente.get('regime_casamento', '')
             
-            if renda_mensal > 25000 and patrimonio > 500000 and "Alta Renda" in dados['especialidade']:
+            if renda_mensal > 25000 and patrimonio_total > 500000 and "Alta Renda" in dados['especialidade']:
                 score_final += 0.5
                 match_reasons.append("💎 Perfil alta renda e patrimônio")
             elif 3000 <= renda_mensal <= 15000 and "Classe Média" in dados['especialidade']:
@@ -1460,13 +1779,23 @@ class InsuranceAI:
             if idade < 35 and "Jovens" in dados['especialidade']:
                 score_final += 0.2
                 match_reasons.append("🎯 Público jovem")
-            elif idade > 45 and patrimonio > 300000 and "Planejamento Sucessório" in dados['especialidade']:
+            elif idade > 45 and patrimonio_total > 300000 and "Planejamento Sucessório" in dados['especialidade']:
                 score_final += 0.4
                 match_reasons.append("📊 Perfil sucessório")
             
             if dependentes > 0 and "Famílias" in dados['especialidade']:
                 score_final += 0.3
                 match_reasons.append("👨‍👩‍👧‍👦 Perfil familiar")
+            
+            if pilar_financeiro and "Planejamento Sucessório" in dados['especialidade']:
+                score_final += 0.3
+                match_reasons.append("🏆 Pilar financeiro familiar")
+            
+            # Considerar estado civil e regime de casamento
+            if estado_civil == 'Casado(a)' and regime_casamento == 'Separação Total de Bens':
+                if "Planejamento Sucessório" in dados['especialidade']:
+                    score_final += 0.2
+                    match_reasons.append("💼 Casado com separação total - sucessão importante")
             
             for perfil, ativo in perfil_cliente.items():
                 if ativo and scores_perfil.get(nome, {}).get('detalhes', {}).get(perfil, 0) > 5:
@@ -1497,11 +1826,25 @@ def create_coverage_hero(cliente, calculo):
     """Cria seção hero para análise de coberturas"""
     capital_total = calculo['capital_total']
     coberturas = calculo['coberturas_detalhadas']
+    pilar_financeiro = cliente.get('pilar_financeiro', False)
+    estado_civil = cliente.get('estado_civil', '')
+    regime_casamento = cliente.get('regime_casamento', '')
+    
+    info_estado_civil = ""
+    if estado_civil == 'Casado(a)':
+        info_estado_civil = f"💍 {estado_civil} - {regime_casamento}"
+    elif estado_civil:
+        info_estado_civil = f"💍 {estado_civil}"
     
     st.markdown(f"""
     <div class="coverage-hero">
         <h1 style="font-size: 3rem; margin-bottom: 1rem; font-weight: 800;">🛡️ Análise de Coberturas</h1>
         <p style="font-size: 1.5rem; margin-bottom: 2rem; opacity: 0.9;">Proteção Personalizada para {cliente.get('nome', 'Você')}</p>
+        <div style="background: rgba(255,255,255,0.2); padding: 1rem 2rem; border-radius: 25px; display: inline-block; backdrop-filter: blur(10px); margin: 0.5rem;">
+            <span style="font-size: 1.2rem; font-weight: 600;">🎯 Perfil: </span>
+            <span style="font-size: 1.2rem;">{'🏆 Pilar Financeiro' if pilar_financeiro else '🤝 Contribuidor'}</span>
+        </div>
+        {f'<div style="background: rgba(255,255,255,0.2); padding: 1rem 2rem; border-radius: 25px; display: inline-block; backdrop-filter: blur(10px); margin: 0.5rem;"><span style="font-size: 1.2rem;">{info_estado_civil}</span></div>' if info_estado_civil else ''}
     </div>
     """, unsafe_allow_html=True)
 
@@ -1548,6 +1891,9 @@ def create_protection_level_analysis(cliente, calculo):
     
     coberturas = calculo['coberturas_detalhadas']
     capital_total = calculo['capital_total']
+    pilar_financeiro = cliente.get('pilar_financeiro', False)
+    estado_civil = cliente.get('estado_civil', '')
+    regime_casamento = cliente.get('regime_casamento', '')
     
     niveis_protecao = [
         {
@@ -1566,7 +1912,7 @@ def create_protection_level_analysis(cliente, calculo):
             'nome': '🏠 Patrimônio e Família',
             'coberturas': ['Whole Life', 'Term Life'],
             'icone': '👨‍👩‍👧‍👦',
-            'descricao': 'Proteção do patrimônio e futuro da família'
+            'descricao': f"Proteção do patrimônio ({'20%' if pilar_financeiro else '15%'}) e futuro da família"
         }
     ]
     
@@ -1609,7 +1955,10 @@ def create_coverage_recommendations(cliente, calculo):
     idade = cliente.get('idade', 0)
     dependentes = cliente.get('dependentes', 0)
     renda = cliente.get('renda_mensal', 0)
-    patrimonio = cliente.get('patrimonio_total', 0)
+    patrimonio_total = cliente.get('patrimonio_total', 0)
+    pilar_financeiro = cliente.get('pilar_financeiro', False)
+    estado_civil = cliente.get('estado_civil', '')
+    regime_casamento = cliente.get('regime_casamento', '')
     
     if idade > 45 and coberturas['Doenças Graves'] == 0:
         recomendacoes.append({
@@ -1627,12 +1976,17 @@ def create_coverage_recommendations(cliente, calculo):
             'acao': 'Essencial para garantir o futuro dos seus dependentes'
         })
     
-    if patrimonio > 100000 and coberturas['Whole Life'] < patrimonio * 0.15:
+    if patrimonio_total > 100000 and coberturas['Whole Life'] < patrimonio_total * 0.15:
+        percentual_ideal = 0.20 if pilar_financeiro else 0.15
+        # Ajuste para separação total de bens
+        if estado_civil == 'Casado(a)' and regime_casamento == 'Separação Total de Bens':
+            percentual_ideal = percentual_ideal * 0.7
+            
         recomendacoes.append({
             'tipo': '🏠 Whole Life',
             'prioridade': 'Média',
-            'motivo': f'Seu patrimônio de {formatar_moeda(patrimonio)} merece proteção adequada',
-            'acao': 'Aumente para 20% do patrimônio para melhor proteção'
+            'motivo': f'Seu patrimônio de {formatar_moeda(patrimonio_total)} merece proteção adequada{" (ajustada para separação total)" if estado_civil == "Casado(a)" and regime_casamento == "Separação Total de Bens" else ""}',
+            'acao': f'Aumente para {percentual_ideal*100:.1f}% do patrimônio para melhor proteção'
         })
     
     if renda > 0 and coberturas['Invalidez Permanente'] < renda * 80:
@@ -1815,6 +2169,12 @@ def show_risk_analysis(cliente):
     dependentes = cliente.get('dependentes', 0)
     renda_mensal = cliente.get('renda_mensal', 0)
     profissao = cliente.get('profissao', '')
+    pilar_financeiro = cliente.get('pilar_financeiro', False)
+    estado_civil = cliente.get('estado_civil', '')
+    regime_casamento = cliente.get('regime_casamento', '')
+    patrimonio_liquido = cliente.get('patrimonio_liquido', 0)
+    patrimonio_imobilizado = cliente.get('patrimonio_imobilizado', 0)
+    patrimonio_total = cliente.get('patrimonio_total', 0)
     
     st.markdown('<div class="subsection-title">⚠️ Análise de Riscos e Necessidade</div>', unsafe_allow_html=True)
     
@@ -1834,6 +2194,22 @@ def show_risk_analysis(cliente):
             riscos.append(f"**👨‍👩‍👧‍👦 {dependentes} dependente(s)**: Responsabilidade familiar aumentada")
         if renda_mensal > 0:
             riscos.append(f"**💰 Renda de {formatar_moeda(renda_mensal)}**: Necessidade de proteção de renda")
+        
+        if pilar_financeiro:
+            riscos.append("**🏆 Pilar Financeiro**: Responsabilidade principal pelo sustento familiar")
+        
+        # Informações sobre patrimônio
+        if patrimonio_total > 0:
+            riscos.append(f"**🏠 Patrimônio Total de {formatar_moeda(patrimonio_total)}**: Necessidade de proteção patrimonial")
+        
+        # Informações sobre estado civil
+        if estado_civil == 'Casado(a)':
+            if regime_casamento == 'Separação Total de Bens':
+                riscos.append("**💼 Separação Total de Bens**: Proteção patrimonial diferenciada")
+            else:
+                riscos.append(f"**💍 {estado_civil}**: Responsabilidades compartilhadas - {regime_casamento}")
+        elif estado_civil:
+            riscos.append(f"**💍 {estado_civil}**: Considerações específicas de proteção")
         
         profissoes_risco = {
             'construção': 'Risco de acidentes de trabalho',
@@ -1887,6 +2263,12 @@ def gerar_proposta_txt(cliente, seguradoras_recomendadas, melhores_seguradoras):
     
     calculo = CalculadoraCapital.calcular_capital_total(cliente)
     coberturas = calculo['coberturas_detalhadas']
+    pilar_financeiro = cliente.get('pilar_financeiro', False)
+    estado_civil = cliente.get('estado_civil', '')
+    regime_casamento = cliente.get('regime_casamento', '')
+    patrimonio_liquido = cliente.get('patrimonio_liquido', 0)
+    patrimonio_imobilizado = cliente.get('patrimonio_imobilizado', 0)
+    patrimonio_total = cliente.get('patrimonio_total', 0)
     
     proposta = f"""
 ============================================
@@ -1898,9 +2280,18 @@ DADOS DO CLIENTE:
 Nome: {cliente.get('nome', 'Não informado')}
 Idade: {cliente.get('idade', 'Não informado')} anos
 Profissão: {cliente.get('profissao', 'Não informado')}
+Estado Civil: {estado_civil}
+{('Regime de Casamento: ' + regime_casamento) if estado_civil == 'Casado(a)' else ''}
 Dependentes: {cliente.get('dependentes', 0)}
 Renda Mensal: {formatar_moeda(cliente.get('renda_mensal', 0))}
-Patrimônio: {formatar_moeda(cliente.get('patrimonio_total', 0))}
+
+COMPOSIÇÃO PATRIMONIAL:
+----------------------
+Patrimônio Líquido: {formatar_moeda(patrimonio_liquido)}
+Patrimônio Imobilizado: {formatar_moeda(patrimonio_imobilizado)}
+Patrimônio Total: {formatar_moeda(patrimonio_total)}
+
+Pilar Financeiro: {'Sim' if pilar_financeiro else 'Não'}
 Filial: {cliente.get('filial', 'Não informado')}
 
 PERFIL DO CLIENTE:
@@ -1925,6 +2316,11 @@ DETALHAMENTO DAS COBERTURAS:
                 proposta += f"- {cobertura}: {formatar_moeda(valor)}/dia\n"
             else:
                 proposta += f"- {cobertura}: {formatar_moeda(valor)}\n"
+    
+    # Informação sobre ajuste de regime de casamento
+    if 'detalhes_whole_life' in cliente:
+        detalhes = cliente['detalhes_whole_life']
+        proposta += f"\n💡 **OBSERVAÇÃO:** {detalhes['descricao_pilar']} sobre {detalhes['descricao_regime'].lower()}\n"
     
     proposta += f"""
 CAPITAL TOTAL SUGERIDO: {formatar_moeda(calculo['capital_total'])}
@@ -1968,23 +2364,7 @@ Data: {datetime.now().strftime('%d/%m/%Y %H:%M')}
 BeSmart PRO - Parceiro Oficial
 ============================================
 """
-    
-    return proposta
-
-def criar_download_button(data, filename, button_text, file_type):
-    """Cria um botão de download"""
-    
-    if file_type == 'txt':
-        b64 = base64.b64encode(data.encode()).decode()
-        href = f'<a href="data:file/txt;base64,{b64}" download="{filename}" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 14px 28px; text-decoration: none; border-radius: 10px; display: inline-block; font-weight: bold; text-align: center; font-size: 1rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: all 0.3s ease;">{button_text}</a>'
-    elif file_type == 'csv':
-        csv = data.to_csv(index=False)
-        b64 = base64.b64encode(csv.encode()).decode()
-        href = f'<a href="data:file/csv;base64,{b64}" download="{filename}" style="background: linear-gradient(135deg, #00b09b 0%, #96c93d 100%); color: white; padding: 14px 28px; text-decoration: none; border-radius: 10px; display: inline-block; font-weight: bold; text-align: center; font-size: 1rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: all 0.3s ease;">{button_text}</a>'
-    
-    return href
-
-# ---------- FAQ COMPLETO ----------
+    # ---------- FAQ COMPLETO ----------
 FAQ_COMPLETO = {
     "🧭 1. Conceitos Gerais e Funcionamento (1 – 30)": [
         {
@@ -2631,6 +3011,20 @@ FAQ_COMPLETO = {
         }
     ]
 }
+    
+
+def criar_download_button(data, filename, button_text, file_type):
+    """Cria um botão de download"""
+    
+    if file_type == 'txt':
+        b64 = base64.b64encode(data.encode()).decode()
+        href = f'<a href="data:file/txt;base64,{b64}" download="{filename}" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 14px 28px; text-decoration: none; border-radius: 10px; display: inline-block; font-weight: bold; text-align: center; font-size: 1rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: all 0.3s ease;">{button_text}</a>'
+    elif file_type == 'csv':
+        csv = data.to_csv(index=False)
+        b64 = base64.b64encode(csv.encode()).decode()
+        href = f'<a href="data:file/csv;base64,{b64}" download="{filename}" style="background: linear-gradient(135deg, #00b09b 0%, #96c93d 100%); color: white; padding: 14px 28px; text-decoration: none; border-radius: 10px; display: inline-block; font-weight: bold; text-align: center; font-size: 1rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: all 0.3s ease;">{button_text}</a>'
+    
+    return href
 
 # ---------- INTERFACE PRINCIPAL ----------
 st.markdown("""
@@ -2671,6 +3065,12 @@ if aba_selecionada == "🎯 Dashboard":
         cliente = st.session_state.cliente
         risk_score = InsuranceAI.calculate_risk_score(cliente)
         calculo = CalculadoraCapital.calcular_capital_total(cliente)
+        pilar_financeiro = cliente.get('pilar_financeiro', False)
+        estado_civil = cliente.get('estado_civil', '')
+        regime_casamento = cliente.get('regime_casamento', '')
+        patrimonio_liquido = cliente.get('patrimonio_liquido', 0)
+        patrimonio_imobilizado = cliente.get('patrimonio_imobilizado', 0)
+        patrimonio_total = cliente.get('patrimonio_total', 0)
         
         col1, col2, col3, col4 = st.columns(4)
         
@@ -2708,10 +3108,40 @@ if aba_selecionada == "🎯 Dashboard":
             st.markdown(f"""
             <div class="metric-card">
                 <div style="font-size: 1rem; color: #666; margin-bottom: 0.8rem;">📊 Coberturas</div>
-                <div style="font-size: 2rem; font-weight: bold; color: #6f42c1; margin-bottom: 0.5rem;">{coberturas_ativas}</div>
+                <div style="font-size: 2rem; font-weight: bold; color: #6f42c1; margin-bottom: 0.5rem;">{coberturas_ativas}/6</div>
                 <div style="font-size: 0.9rem; color: #6f42c1; background: rgba(111, 66, 193, 0.1); padding: 0.3rem 0.8rem; border-radius: 10px; display: inline-block;">Proteções ativas</div>
             </div>
             """, unsafe_allow_html=True)
+        
+        # Informações sobre estado civil
+        info_estado_civil = ""
+        if estado_civil == 'Casado(a)':
+            info_estado_civil = f"💍 **Estado Civil:** {estado_civil} - {regime_casamento}"
+            if regime_casamento == 'Separação Total de Bens':
+                info_estado_civil += " (Proteção patrimonial ajustada)"
+        elif estado_civil:
+            info_estado_civil = f"💍 **Estado Civil:** {estado_civil}"
+        
+        # Card de Patrimônio
+        st.markdown(f"""
+        <div class="patrimonio-card">
+            <h3 class="capital-title">💰 COMPOSIÇÃO PATRIMONIAL</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; margin: 2rem 0;">
+                <div style="text-align: center;">
+                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">💵 Líquido</div>
+                    <div style="font-size: 1.8rem; font-weight: bold;">{formatar_moeda(patrimonio_liquido)}</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">🏠 Imobilizado</div>
+                    <div style="font-size: 1.8rem; font-weight: bold;">{formatar_moeda(patrimonio_imobilizado)}</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 1.2rem; margin-bottom: 0.5rem;">📊 Total</div>
+                    <div style="font-size: 2rem; font-weight: bold; text-shadow: 0 2px 10px rgba(0,0,0,0.3);">{formatar_moeda(patrimonio_total)}</div>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
         
         # Capital Total
         st.markdown(f"""
@@ -2719,6 +3149,10 @@ if aba_selecionada == "🎯 Dashboard":
             <h3 class="capital-title">💎 CAPITAL TOTAL SUGERIDO</h3>
             <p class="capital-value">{formatar_moeda(calculo['capital_total'])}</p>
             <p class="capital-subtitle">Proteção completa e personalizada para você e sua família</p>
+            <div style="margin-top: 1rem; font-size: 1.1rem;">
+                🎯 <strong>Perfil:</strong> {'🏆 Pilar Financeiro' if pilar_financeiro else '🤝 Contribuidor Familiar'}
+            </div>
+            {f'<div style="margin-top: 0.5rem; font-size: 1.1rem;">{info_estado_civil}</div>' if info_estado_civil else ''}
         </div>
         """, unsafe_allow_html=True)
         
@@ -2766,6 +3200,19 @@ elif aba_selecionada == "👤 Cadastro Completo":
             nome = st.text_input("**Nome Completo***", placeholder="Digite seu nome completo", help="Nome completo do cliente")
             idade = st.number_input("**Idade***", min_value=18, max_value=80, value=30, help="Idade entre 18 e 80 anos")
             profissao = st.text_input("**Profissão***", placeholder="Sua profissão atual", help="Profissão principal do cliente")
+            
+            # CAMPO ESTADO CIVIL - AGORA COM LÓGICA CONDICIONAL
+            estado_civil = st.selectbox("**Estado Civil***", ESTADO_CIVIL_OPCOES, help="Estado civil do cliente")
+            
+            # CAMPO REGIME DE CASAMENTO - APARECE APENAS SE FOR CASADO E NÃO É OBRIGATÓRIO
+            regime_casamento = ""
+            if estado_civil == "Casado(a)":
+                regime_casamento = st.selectbox(
+                    "**Regime de Casamento** (Opcional)", 
+                    REGIME_CASAMENTO_OPCOES,
+                    help="Regime de bens do casamento (opcional)"
+                )
+            
             dependentes = st.number_input("**Número de dependentes***", min_value=0, max_value=10, value=0, help="Pessoas que dependem financeiramente do cliente")
             st.markdown("</div>", unsafe_allow_html=True)
         
@@ -2775,10 +3222,82 @@ elif aba_selecionada == "👤 Cadastro Completo":
                 <h4 style="margin: 0 0 1rem 0; color: #2c3e50;">💰 Situação Financeira</h4>
             """, unsafe_allow_html=True)
             renda_mensal = st.number_input("**Renda Mensal Líquida (R$)***", min_value=0.0, value=5000.0, step=500.0, format="%.2f", help="Renda líquida mensal do cliente")
-            patrimonio_total = st.number_input("**Patrimônio Total (R$)**", min_value=0.0, value=0.0, step=10000.0, format="%.2f",
-                                             help="Patrimônio total incluindo imóveis, investimentos, veículos, etc.")
+            
+            patrimonio_liquido = st.number_input("**Patrimônio Líquido (R$)***", min_value=0.0, value=0.0, step=10000.0, format="%.2f",
+                                               help="Patrimônio líquido (investimentos, aplicações, dinheiro em conta, etc.)")
+            
+            patrimonio_imobilizado = st.number_input("**Patrimônio Imobilizado (R$)***", min_value=0.0, value=0.0, step=10000.0, format="%.2f",
+                                                   help="Patrimônio imobilizado (imóveis, veículos, equipamentos, etc.)")
+            
+            # Calcular patrimônio total automaticamente
+            patrimonio_total = patrimonio_liquido + patrimonio_imobilizado
+            
+            # Mostrar patrimônio total calculado
+            st.markdown(f"""
+            <div class="metric-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                <div style="font-size: 1rem; margin-bottom: 0.8rem;">💰 Patrimônio Total Calculado</div>
+                <div style="font-size: 1.8rem; font-weight: bold; margin-bottom: 0.5rem;">{formatar_moeda(patrimonio_total)}</div>
+                <div style="font-size: 0.9rem; opacity: 0.9;">(Líquido + Imobilizado)</div>
+            </div>
+            """, unsafe_allow_html=True)
+            
             despesas_mensais = st.number_input("**Despesas Mensais Fixas (R$)***", min_value=0.0, value=2000.0, step=100.0, format="%.2f", help="Despesas mensais fixas do cliente")
             st.markdown("</div>", unsafe_allow_html=True)
+        
+        # SEÇÃO: REGIME DE CASAMENTO (APENAS SE FOR CASADO)
+        if estado_civil == "Casado(a)":
+            st.markdown("""
+            <div class="section-header">
+                <h3 style="margin: 0; font-size: 1.5rem;">💍 Informações do Casamento</h3>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            col_regime1, col_regime2 = st.columns([2, 1])
+            
+            with col_regime1:
+                st.markdown("""
+                <div class="info-card">
+                    <h4 style="margin: 0 0 1rem 0; color: #2c3e50;">📝 Detalhes do Regime</h4>
+                """, unsafe_allow_html=True)
+                
+                # Informações específicas sobre separação total de bens
+                if regime_casamento == "Separação Total de Bens":
+                    st.markdown("""
+                    <div class="warning-card">
+                        <h4 style="margin: 0 0 1rem 0; color: white;">💡 Importante para Separação Total</h4>
+                        <p style="margin: 0; line-height: 1.5;">
+                            No regime de <strong>Separação Total de Bens</strong>, a proteção patrimonial será ajustada para considerar 
+                            apenas os bens de propriedade individual. Isso pode impactar o cálculo do capital segurado.
+                        </p>
+                    </div>
+                    """, unsafe_allow_html=True)
+                else:
+                    st.markdown("""
+                    <div class="info-card" style="background: rgba(40, 167, 69, 0.1);">
+                        <h4 style="margin: 0 0 1rem 0; color: #28a745;">✅ Regime Selecionado</h4>
+                        <p style="color: #666; line-height: 1.5; margin: 0;">
+                            <strong>{}</strong> - Este regime influencia no planejamento sucessório e proteção patrimonial.
+                        </p>
+                    </div>
+                    """.format(regime_casamento), unsafe_allow_html=True)
+                
+                st.markdown("</div>", unsafe_allow_html=True)
+            
+            with col_regime2:
+                st.markdown("""
+                <div class="info-card">
+                    <h4 style="margin: 0 0 1rem 0; color: #2c3e50;">💡 Por que isso importa?</h4>
+                    <p style="color: #666; line-height: 1.5; margin: 0;">
+                        O <strong>regime de casamento</strong> influencia diretamente:
+                    </p>
+                    <ul style="color: #666; line-height: 1.5; margin: 1rem 0;">
+                        <li><strong>Proteção Patrimonial</strong></li>
+                        <li><strong>Planejamento Sucessório</strong></li>
+                        <li><strong>Direitos dos Herdeiros</strong></li>
+                        <li><strong>Divisão de Bens</strong></li>
+                    </ul>
+                </div>
+                """, unsafe_allow_html=True)
         
         st.markdown("""
         <div class="section-header">
@@ -2810,6 +3329,204 @@ elif aba_selecionada == "👤 Cadastro Completo":
             </div>
             """, unsafe_allow_html=True)
         
+        # SEÇÃO: PILAR FINANCEIRO
+        st.markdown("""
+        <div class="section-header">
+            <h3 style="margin: 0; font-size: 1.5rem;">🏆 Pilar Financeiro da Família</h3>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        col5, col6 = st.columns(2)
+        
+        with col5:
+            st.markdown("""
+            <div class="info-card">
+                <h4 style="margin: 0 0 1rem 0; color: #2c3e50;">🎯 Responsabilidade Financeira</h4>
+            """, unsafe_allow_html=True)
+            
+            pilar_financeiro = st.radio(
+                "**Você é o pilar financeiro principal da família?***",
+                ["Sim", "Não"],
+                horizontal=True,
+                help="É o principal provedor financeiro da família?"
+            )
+            
+            if pilar_financeiro == "Sim":
+                st.markdown("""
+                <div class="pilar-financeiro-card">
+                    <h4 style="margin: 0 0 1rem 0; color: white;">🏆 Pilar Financeiro Identificado</h4>
+                    <p style="margin: 0; line-height: 1.5;">
+                        <strong>Proteção Reforçada:</strong> Sua proteção patrimonial será calculada em <strong>20% do seu patrimônio</strong> para garantir segurança máxima à sua família.
+                    </p>
+                </div>
+                """, unsafe_allow_html=True)
+            else:
+                st.markdown("""
+                <div class="info-card" style="background: rgba(255,255,255,0.8);">
+                    <h4 style="margin: 0 0 1rem 0; color: #2c3e50;">🤝 Contribuidor Familiar</h4>
+                    <p style="color: #666; line-height: 1.5; margin: 0;">
+                        <strong>Proteção Adequada:</strong> Sua proteção patrimonial será calculada em <strong>15% do seu patrimônio</strong> para uma cobertura equilibrada.
+                    </p>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            st.markdown("</div>", unsafe_allow_html=True)
+        
+        with col6:
+            st.markdown("""
+            <div class="info-card">
+                <h4 style="margin: 0 0 1rem 0; color: #2c3e50;">💡 Por que essa informação é importante?</h4>
+                <p style="color: #666; line-height: 1.5; margin: 0;">
+                    O <strong>pilar financeiro</strong> da família tem uma responsabilidade maior na proteção do patrimônio familiar:
+                </p>
+                <ul style="color: #666; line-height: 1.5; margin: 1rem 0;">
+                    <li><strong>Pilar Financeiro (20%):</strong> Proteção reforçada para o principal provedor</li>
+                    <li><strong>Contribuidor (15%):</strong> Proteção adequada para quem divide responsabilidades</li>
+                </ul>
+                <p style="color: #666; line-height: 1.5; margin: 0;">
+                    Esta diferenciação garante que cada perfil receba a <strong>proteção ideal</strong> para sua realidade familiar.
+                </p>
+            </div>
+            """, unsafe_allow_html=True)
+        
+        # SEÇÃO: PREVIDÊNCIA PRIVADA
+        st.markdown("""
+        <div class="section-header">
+            <h3 style="margin: 0; font-size: 1.5rem;">💰 Previdência Privada</h3>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        col7, col8 = st.columns(2)
+        
+        with col7:
+            st.markdown("""
+            <div class="info-card">
+                <h4 style="margin: 0 0 1rem 0; color: #2c3e50;">🏦 Informações de Previdência</h4>
+            """, unsafe_allow_html=True)
+            
+            tem_previdencia = st.radio(
+                "**Tem previdência privada?***",
+                ["Sim", "Não"],
+                horizontal=True,
+                help="Possui algum plano de previdência privada ativo?"
+            )
+            
+            if tem_previdencia == "Sim":
+                valor_previdencia = st.number_input(
+                    "**Qual o valor acumulado? (R$)**",
+                    min_value=0.0,
+                    value=0.0,
+                    step=10000.0,
+                    format="%.2f",
+                    help="Valor total acumulado na previdência privada"
+                )
+                
+                # CAMPO: RENTABILIDADE DA PREVIDÊNCIA
+                rentabilidade_previdencia = st.number_input(
+                    "**Rentabilidade da Previdência (%)**",
+                    min_value=0.0,
+                    max_value=100.0,
+                    value=0.0,
+                    step=0.1,
+                    format="%.1f",
+                    help="Rentabilidade anual média da previdência privada em porcentagem"
+                )
+                
+                modelo_previdencia = st.selectbox(
+                    "**Qual o modelo?**",
+                    ["VGBL", "PGBL", "Não sei"],
+                    help="Modelo do plano de previdência"
+                )
+                
+                # CAMPO MODIFICADO: ALÍQUOTA DE RESGATE - AGORA É UM NÚMERO
+                aliquota_resgate = st.number_input(
+                    "**Alíquota de Resgate (%)**",
+                    min_value=0.0,
+                    max_value=100.0,
+                    value=15.0,
+                    step=0.5,
+                    format="%.1f",
+                    help="Alíquota regressiva atual para resgate em porcentagem"
+                )
+                
+                st.markdown("</div>", unsafe_allow_html=True)
+                
+                # Card de oportunidade de alavancagem para valores >= 500 mil
+                if valor_previdencia >= 500000:
+                    st.markdown(f"""
+                    <div class="previdencia-card">
+                        <div class="previdencia-header">
+                            <h3 class="previdencia-title">🚀 Oportunidade de Alavancagem Financeira</h3>
+                            <div class="previdencia-value">{formatar_moeda(valor_previdencia)}</div>
+                        </div>
+                        
+                        <div class="oportunidade-alavancagem">
+                            <h4 style="margin: 0 0 1rem 0; color: white;">💎 Estratégia Recomendada</h4>
+                            <p style="margin: 0 0 1rem 0; line-height: 1.5;">
+                                Com <strong>{formatar_moeda(valor_previdencia)}</strong> acumulados em previdência {modelo_previdencia}, 
+                                você tem uma excelente oportunidade para <strong>otimizar sua estratégia financeira</strong>.
+                            </p>
+                            
+                            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                                <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 10px;">
+                                    <strong style="color: white;">📊 Modelo Atual</strong><br>
+                                    <span>{modelo_previdencia}</span>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 10px;">
+                                    <strong style="color: white;">📈 Rentabilidade</strong><br>
+                                    <span>{rentabilidade_previdencia}% ao ano</span>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 10px;">
+                                    <strong style="color: white;">💰 Alíquota</strong><br>
+                                    <span>{aliquota_resgate}%</span>
+                                </div>
+                            </div>
+                            
+                            <h5 style="margin: 0 0 0.5rem 0; color: white;">🎯 Benefícios da Otimização:</h5>
+                            <ul style="margin: 0; padding-left: 1.5rem; color: white;">
+                                <li><strong>Redução de impostos</strong> na aposentadoria</li>
+                                <li><strong>Proteção patrimonial</strong> adicional</li>
+                                <li><strong>Sucessão planejada</strong> para herdeiros</li>
+                                <li><strong>Rentabilidade potencializada</strong></li>
+                            </ul>
+                        </div>
+                        
+                        <div style="margin-top: 1.5rem; text-align: center;">
+                            <p style="color: #2c3e50; font-weight: 500; margin: 0;">
+                                💡 <strong>Consulte nosso especialista em wealth management</strong><br>
+                                para uma análise personalizada da sua estratégia
+                            </p>
+                        </div>
+                    </div>
+                    """, unsafe_allow_html=True)
+            else:
+                valor_previdencia = 0.0
+                rentabilidade_previdencia = 0.0
+                modelo_previdencia = "Não"
+                aliquota_resgate = 0.0
+                st.markdown("</div>", unsafe_allow_html=True)
+        
+        with col8:
+            st.markdown("""
+            <div class="info-card">
+                <h4 style="margin: 0 0 1rem 0; color: #2c3e50;">💡 Por que essa informação é importante?</h4>
+                <p style="color: #666; line-height: 1.5; margin: 0;">
+                    A <strong>previdência privada</strong> é um pilar importante do seu planejamento financeiro:
+                </p>
+                <ul style="color: #666; line-height: 1.5; margin: 1rem 0;">
+                    <li><strong>Complemento da aposentadoria</strong> do INSS</li>
+                    <li><strong>Proteção tributária</strong> inteligente</li>
+                    <li><strong>Acumulo de patrimônio</strong> de longo prazo</li>
+                    <li><strong>Sucessão patrimonial</strong> planejada</li>
+                    <li><strong>Rentabilidade</strong> do seu investimento</li>
+                    <li><strong>Alíquota de resgate</strong> impacta no valor líquido recebido</li>
+                </ul>
+                <p style="color: #666; line-height: 1.5; margin: 0;">
+                    Com essas informações, podemos <strong>integrar sua previdência</strong> com a proteção de seguros para uma estratégia completa.
+                </p>
+            </div>
+            """, unsafe_allow_html=True)
+        
         st.markdown("""
         <div class="section-header">
             <h3 style="margin: 0; font-size: 1.5rem;">🎯 Perfil do Cliente</h3>
@@ -2824,14 +3541,14 @@ elif aba_selecionada == "👤 Cadastro Completo":
         </div>
         """, unsafe_allow_html=True)
         
-        col5, col6 = st.columns(2)
+        col9, col10 = st.columns(2)
         perfil_cliente = {}
         
-        with col5:
+        with col9:
             for i, perfil in enumerate(PERFIS_CLIENTE[:10]):
                 perfil_cliente[perfil] = st.checkbox(f"**{perfil}**", key=f"perfil_{i}")
         
-        with col6:
+        with col10:
             for i, perfil in enumerate(PERFIS_CLIENTE[10:]):
                 perfil_cliente[perfil] = st.checkbox(f"**{perfil}**", key=f"perfil_{i+10}")
         
@@ -2841,9 +3558,9 @@ elif aba_selecionada == "👤 Cadastro Completo":
         </div>
         """, unsafe_allow_html=True)
         
-        col7, col8 = st.columns(2)
+        col11, col12 = st.columns(2)
         
-        with col7:
+        with col11:
             st.markdown("""
             <div class="info-card">
                 <h4 style="margin: 0 0 1rem 0; color: #2c3e50;">🏢 Filial</h4>
@@ -2851,7 +3568,7 @@ elif aba_selecionada == "👤 Cadastro Completo":
             filial = st.selectbox("**Filial***", FILIAIS, help="Selecione a filial do assessor")
             st.markdown("</div>", unsafe_allow_html=True)
         
-        with col8:
+        with col12:
             st.markdown("""
             <div class="info-card">
                 <h4 style="margin: 0 0 1rem 0; color: #2c3e50;">👤 Assessor</h4>
@@ -2863,28 +3580,44 @@ elif aba_selecionada == "👤 Cadastro Completo":
         
         if submitted:
             if nome and profissao and renda_mensal > 0 and despesas_mensais > 0 and filial and assessor:
+                # Validação - regime de casamento NÃO é obrigatório mesmo para casados
                 calculo = CalculadoraCapital.calcular_capital_total({
                     'nome': nome,
                     'idade': idade,
                     'profissao': profissao,
+                    'estado_civil': estado_civil,
+                    'regime_casamento': regime_casamento,
                     'dependentes': dependentes,
                     'renda_mensal': renda_mensal,
+                    'patrimonio_liquido': patrimonio_liquido,
+                    'patrimonio_imobilizado': patrimonio_imobilizado,
                     'patrimonio_total': patrimonio_total,
                     'despesas_mensais': despesas_mensais,
                     'despesas_filhos_mensais': despesas_filhos_mensais,
-                    'anos_ate_independencia': anos_ate_independencia
+                    'anos_ate_independencia': anos_ate_independencia,
+                    'pilar_financeiro': pilar_financeiro == "Sim"
                 })
                 
                 st.session_state.cliente = {
                     'nome': nome,
                     'idade': idade,
                     'profissao': profissao,
+                    'estado_civil': estado_civil,
+                    'regime_casamento': regime_casamento,
                     'dependentes': dependentes,
                     'renda_mensal': renda_mensal,
+                    'patrimonio_liquido': patrimonio_liquido,
+                    'patrimonio_imobilizado': patrimonio_imobilizado,
                     'patrimonio_total': patrimonio_total,
                     'despesas_mensais': despesas_mensais,
                     'despesas_filhos_mensais': despesas_filhos_mensais,
                     'anos_ate_independencia': anos_ate_independencia,
+                    'pilar_financeiro': pilar_financeiro == "Sim",
+                    'tem_previdencia': tem_previdencia,
+                    'valor_previdencia': valor_previdencia,
+                    'rentabilidade_previdencia': rentabilidade_previdencia,
+                    'modelo_previdencia': modelo_previdencia,
+                    'aliquota_resgate': aliquota_resgate,
                     'filial': filial,
                     'assessor': assessor,
                     'capital_sugerido': calculo['capital_total'],
@@ -2913,12 +3646,39 @@ elif aba_selecionada == "👤 Cadastro Completo":
                     </div>
                     """, unsafe_allow_html=True)
                     st.info(f"**👤 Idade:** {idade} anos")
+                    st.info(f"**💍 Estado Civil:** {estado_civil}")
+                    if estado_civil == 'Casado(a)':
+                        st.info(f"**📝 Regime:** {regime_casamento}")
                     st.info(f"**👨‍👩‍👧‍👦 Dependentes:** {dependentes}")
+                    st.info(f"**🏆 Pilar Financeiro:** {'Sim' if pilar_financeiro == 'Sim' else 'Não'}")
                 
                 with col2:
                     st.info(f"**💰 Renda Mensal:** {formatar_moeda(renda_mensal)}")
-                    st.info(f"**🏠 Patrimônio:** {formatar_moeda(patrimonio_total)}")
+                    st.info(f"**💵 Patrimônio Líquido:** {formatar_moeda(patrimonio_liquido)}")
+                    st.info(f"**🏠 Patrimônio Imobilizado:** {formatar_moeda(patrimonio_imobilizado)}")
+                    st.info(f"**📊 Patrimônio Total:** {formatar_moeda(patrimonio_total)}")
                     st.info(f"**💸 Despesas Mensais:** {formatar_moeda(despesas_mensais)}")
+                
+                # Mostrar informações da previdência se aplicável
+                if tem_previdencia == "Sim":
+                    st.markdown('<div class="subsection-title">💰 Situação da Previdência</div>', unsafe_allow_html=True)
+                    col_prev1, col_prev2, col_prev3, col_prev4 = st.columns(4)
+                    
+                    with col_prev1:
+                        st.info(f"**🏦 Previdência:** {formatar_moeda(valor_previdencia)}")
+                    with col_prev2:
+                        st.info(f"**📈 Rentabilidade:** {rentabilidade_previdencia}% ao ano")
+                    with col_prev3:
+                        st.info(f"**📊 Modelo:** {modelo_previdencia}")
+                    with col_prev4:
+                        st.info(f"**💰 Alíquota:** {aliquota_resgate}%")
+                    
+                    if valor_previdencia >= 500000:
+                        st.success("""
+                        **🚀 Oportunidade Identificada!**
+                        
+                        Seu patrimônio em previdência privada é significativo. Recomendamos uma consulta com nosso especialista em wealth management para otimização tributária e sucessória.
+                        """)
                 
                 with st.expander("📈 **Detalhamento das Coberturas**", expanded=True):
                     for cobertura, valor in calculo['coberturas_detalhadas'].items():
@@ -2927,6 +3687,16 @@ elif aba_selecionada == "👤 Cadastro Completo":
                                 st.write(f"**🛡️ {cobertura}:** {formatar_moeda(valor)}/dia")
                             else:
                                 st.write(f"**🛡️ {cobertura}:** {formatar_moeda(valor)}")
+                    
+                    # Explicação do cálculo do Whole Life baseado no pilar financeiro e regime de casamento
+                    if 'detalhes_whole_life' in st.session_state.cliente:
+                        detalhes = st.session_state.cliente['detalhes_whole_life']
+                        st.markdown(f"""
+                        **💡 Detalhe do Cálculo:**
+                        - **Proteção Patrimonial (Whole Life):** {formatar_moeda(calculo['coberturas_detalhadas']['Whole Life'])}
+                        - **Percentual aplicado:** {detalhes['descricao_pilar']} sobre {detalhes['descricao_regime'].lower()}
+                        - **Justificativa:** {detalhes['descricao_pilar']} aplicado sobre patrimônio ajustado pelo regime
+                        """)
                 
                 st.markdown('<div class="subsection-title">🏆 Melhores Seguradoras para seu Perfil</div>', unsafe_allow_html=True)
                 melhores_seguradoras = SistemaRecomendacao.recomendar_melhores_seguradoras(perfil_cliente)
@@ -2945,7 +3715,10 @@ elif aba_selecionada == "👤 Cadastro Completo":
                 - Nome completo está preenchido
                 - Profissão está informada
                 - Renda mensal é maior que zero
+                - Patrimônio líquido foi informado
+                - Patrimônio imobilizado foi informado
                 - Despesas mensais são maiores que zero
+                - Pilar financeiro foi selecionado
                 - Filial foi selecionada
                 - Nome do assessor está preenchido
                 """)
@@ -3018,8 +3791,11 @@ elif aba_selecionada == "🏆 Seguradoras Recomendadas":
             'Cliente': [cliente.get('nome', '')],
             'Capital_Sugerido': [cliente.get('capital_sugerido', 0)],
             'Renda_Mensal': [cliente.get('renda_mensal', 0)],
-            'Patrimonio': [cliente.get('patrimonio_total', 0)],
+            'Patrimonio_Total': [cliente.get('patrimonio_total', 0)],
+            'Patrimonio_Liquido': [cliente.get('patrimonio_liquido', 0)],
+            'Patrimonio_Imobilizado': [cliente.get('patrimonio_imobilizado', 0)],
             'Dependentes': [cliente.get('dependentes', 0)],
+            'Pilar_Financeiro': [cliente.get('pilar_financeiro', False)],
             'Melhor_Seguradora': [melhores_seguradoras[0]['seguradora'] if melhores_seguradoras else ''],
             'Pontuacao_Melhor': [melhores_seguradoras[0]['score'] if melhores_seguradoras else 0],
             'Compatibilidade_Melhor': [melhores_seguradoras[0]['porcentagem'] if melhores_seguradoras else 0]
