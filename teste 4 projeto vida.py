@@ -1111,7 +1111,7 @@ FILIAIS = [
     "TRES INVEST",
     "UBERLANDIA",
     "UNISUAM",
-    "VOLTA REDOND",
+    "VOLTA REDONDA",
     "GROWTH",
     "SMART OFFICE"
 ]
@@ -1301,35 +1301,42 @@ class CalculadoraCapital:
         patrimonio_total = cliente.get('patrimonio_total', 0)
         pilar_financeiro = cliente.get('pilar_financeiro', False)
         
-        # Considerar regime de casamento no cálculo
+        # Considerar regime de casamento no cálculo (agora disponível para todos)
         estado_civil = cliente.get('estado_civil', '')
         regime_casamento = cliente.get('regime_casamento', 'Não especificado')
         
-        # LÓGICA DOS REGIMES DE CASAMENTO
-        if estado_civil == 'Casado(a)':
-            if regime_casamento == 'Comunhão Universal de Bens':
-                # Universal - usa metade do patrimônio
-                percentual_patrimonio = 0.5
-                descricao_regime = "Universal (50% do patrimônio)"
-            elif regime_casamento == 'Separação Total de Bens':
-                # Separação Total - usa patrimônio total
-                percentual_patrimonio = 1.0
-                descricao_regime = "Separação Total (100% do patrimônio)"
-            elif regime_casamento == 'Comunhão Parcial de Bens':
-                # Parcial - antes do casamento (total) e depois (metade)
-                # Para simplificar, vamos considerar 75% como média ponderada
-                percentual_patrimonio = 0.75
-                descricao_regime = "Parcial (75% do patrimônio - média)"
-            elif regime_casamento == 'Participação Final nos Aquestos':
-                # Similar à separação total para cálculo de proteção
-                percentual_patrimonio = 1.0
-                descricao_regime = "Participação Final (100% do patrimônio)"
-            else:
-                # Default caso não especificado
-                percentual_patrimonio = 0.5
-                descricao_regime = "Regime padrão (50% do patrimônio)"
+        # LÓGICA DOS REGIMES DE CASAMENTO - ATUALIZADA
+        if regime_casamento == 'Comunhão Universal de Bens':
+            # Universal - usa metade do patrimônio
+            percentual_patrimonio = 0.5
+            descricao_regime = "Universal (50% do patrimônio)"
+        elif regime_casamento == 'Separação Total de Bens':
+            # Separação Total - usa patrimônio total
+            percentual_patrimonio = 1.0
+            descricao_regime = "Separação Total (100% do patrimônio)"
+        elif regime_casamento == 'Comunhão Parcial de Bens':
+            # PARCIAL - ANTES DO CASAMENTO (TOTAL) + DEPOIS DO CASAMENTO (METADE)
+            patrimonio_antes_casamento = cliente.get('patrimonio_antes_casamento', 0)
+            patrimonio_depois_casamento = cliente.get('patrimonio_depois_casamento', 0)
+            
+            # Cálculo específico para regime parcial
+            patrimonio_ajustado_parcial = patrimonio_antes_casamento + (patrimonio_depois_casamento * 0.5)
+            percentual_patrimonio = patrimonio_ajustado_parcial / patrimonio_total if patrimonio_total > 0 else 0.75
+            descricao_regime = f"Parcial (Antes: 100% + Depois: 50%)"
+            
+            # Salvar detalhes para exibição
+            cliente['detalhes_regime_parcial'] = {
+                'patrimonio_antes_casamento': patrimonio_antes_casamento,
+                'patrimonio_depois_casamento': patrimonio_depois_casamento,
+                'patrimonio_ajustado_parcial': patrimonio_ajustado_parcial,
+                'descricao_regime': descricao_regime
+            }
+        elif regime_casamento == 'Participação Final nos Aquestos':
+            # Similar à separação total para cálculo de proteção
+            percentual_patrimonio = 1.0
+            descricao_regime = "Participação Final (100% do patrimônio)"
         else:
-            # Solteiro, divorciado, viúvo - usa patrimônio total
+            # Default para qualquer estado civil sem regime específico
             percentual_patrimonio = 1.0
             descricao_regime = f"{estado_civil} (100% do patrimônio)"
         
@@ -1344,10 +1351,26 @@ class CalculadoraCapital:
             descricao_pilar = "Contribuidor (15%)"
         
         # Calcular patrimônio ajustado pelo regime
-        patrimonio_ajustado = patrimonio_total * percentual_patrimonio
+        if regime_casamento == 'Comunhão Parcial de Bens' and 'detalhes_regime_parcial' in cliente:
+            # Usar cálculo específico para regime parcial
+            patrimonio_ajustado = cliente['detalhes_regime_parcial']['patrimonio_ajustado_parcial']
+        else:
+            # Usar cálculo padrão para outros regimes
+            patrimonio_ajustado = patrimonio_total * percentual_patrimonio
         
         # Calcular valor final da cobertura
         valor_cobertura = patrimonio_ajustado * percentual_protecao
+        
+        # Salvar detalhes para exibição
+        cliente['detalhes_whole_life'] = {
+            'valor_cobertura': valor_cobertura,
+            'patrimonio_total': patrimonio_total,
+            'patrimonio_ajustado': patrimonio_ajustado,
+            'percentual_protecao': percentual_protecao,
+            'descricao_pilar': descricao_pilar,
+            'descricao_regime': descricao_regime,
+            'regime_casamento': regime_casamento
+        }
         
         return valor_cobertura
     
@@ -1399,7 +1422,6 @@ class CalculadoraCapital:
             'coberturas_detalhadas': coberturas,
             'detalhes_calculo': coberturas
         }
-
 
 # ---------- SISTEMA DE RECOMENDAÇÃO POR PERFIL ----------
 class SistemaRecomendacao:
@@ -1530,17 +1552,16 @@ COBERTURAS_DETALHADAS = {
         'descricao': 'Proteção financeira para tratamento de doenças graves como câncer, infarto, AVC, etc.',
         'beneficios': [
             'Capital para tratamento especializado',
-            'Cobertura para 60+ doenças graves',
+            'Cobertura para 60+ doenças graves e dependendo da seguradora até 85 anos',
             'Pagamento em até 30 dias após diagnóstico',
             'Não precisa esperar alta hospitalar'
         ],
         'indicacao': 'Ideal para todos os perfis, especialmente acima de 40 anos',
         'valor_sugerido': '36x suas despesas mensais',
         'detalhes_tecnicos': {
-            'Carência': '90 dias',
+            'Carência': '60 dias e 1 ano para doenças específicas (ELA, Esclerose múltipla, Alzheimer)',
             'Coberturas Incluídas': 'Câncer, Infarto, AVC, Transplantes, etc.',
-            'Limite Idade': '70 anos',
-            'Renovação': 'Automática até 65 anos'
+            'Renovação': 'Automática até 65 anos com exceção de um produto específico da MAG que pode contratar até 85 anos'
         }
     },
     'Whole Life': {
@@ -1554,12 +1575,11 @@ COBERTURAS_DETALHADAS = {
             'Excelente para planejamento sucessório'
         ],
         'indicacao': 'Perfis com patrimônio e planejamento familiar',
-        'valor_sugerido': '20% do seu patrimônio total',
+        'valor_sugerido': '20% ou 15% do seu patrimônio total',
         'detalhes_tecnicos': {
             'Carência': '2 anos para suicídio',
-            'Participação nos Lucros': 'Sim',
             'Resgate': 'Após 2 anos',
-            'Forma Pagamento': 'Única ou parcelada'
+            'Forma Pagamento': 'Anual Único ou Mensal'
         }
     },
     'Term Life': {
@@ -1575,9 +1595,8 @@ COBERTURAS_DETALHADAS = {
         'indicacao': 'Pais com filhos dependentes',
         'valor_sugerido': 'Despesas com filhos × anos até independência × 12',
         'detalhes_tecnicos': {
-            'Carência': '30 dias para morte natural',
-            'Prazos': '10, 15, 20, 30 anos',
-            'Conversão': 'Para Whole Life sem médicos',
+            'Carência': 'sem carência ',
+            'Prazos': '10, 15, 20, 25, 30 anos',
             'Cobertura': 'Morte por qualquer causa'
         }
     },
@@ -1589,13 +1608,13 @@ COBERTURAS_DETALHADAS = {
             'Cobertura total e parcial',
             'Isenção de pagamento após sinistro',
             'Reabilitação profissional',
-            'Proteção mundial 24h'
+            
         ],
         'indicacao': 'Todos os perfis, especialmente profissões de risco',
         'valor_sugerido': '100x sua renda mensal',
         'detalhes_tecnicos': {
-            'Carência': '30 dias para doenças',
-            'Grau Invalidez': 'A partir de 25%',
+            'Carência': '60 dias apenas para doença',
+            'Grau Invalidez': 'não possui',
             'Idade Máxima': '65 anos',
             'Causas Cobertas': 'Acidentes e doenças'
         }
@@ -1613,9 +1632,9 @@ COBERTURAS_DETALHADAS = {
         'indicacao': 'Trabalhadores formais e informais',
         'valor_sugerido': 'Suas despesas mensais ÷ 30',
         'detalhes_tecnicos': {
-            'Carência': '30 dias',
-            'Prazo Máximo': '180 dias por evento',
-            'Período Espera': '15 dias',
+            'Carência': '60 dias para doenças',
+            'Prazo Máximo': '1 ano completo por evento',
+            'Período Espera': 'varia de acordo com cada seguradora',
             'Limite Diário': 'Até R$ 1.000,00'
         }
     },
@@ -1624,7 +1643,7 @@ COBERTURAS_DETALHADAS = {
         'cor': '#FF9FF3',
         'descricao': 'Suporte financeiro durante internações hospitalares',
         'beneficios': [
-            'Pagamento a partir do 1º dia',
+            'Pagamento a partir do 1º dia, no mínimo internação de 5 dias para pagamento de retroativo',
             'Não precisa de DIT ativada',
             'Uso livre do valor',
             'Cobertura em qualquer hospital'
@@ -1632,10 +1651,10 @@ COBERTURAS_DETALHADAS = {
         'indicacao': 'Complementar ao plano de saúde',
         'valor_sugerido': 'Suas despesas mensais ÷ 30',
         'detalhes_tecnicos': {
-            'Carência': '30 dias',
-            'Limite Anual': '180 dias',
-            'Internação Domiciliar': 'Coberta',
-            'Doenças Pré-existentes': 'Após 2 anos'
+            'Carência': '60 dias somente para doença',
+            'Limite Anual': '250 diarias por eventos',
+            
+            
         }
     }
 }
@@ -2364,654 +2383,8 @@ Data: {datetime.now().strftime('%d/%m/%Y %H:%M')}
 BeSmart PRO - Parceiro Oficial
 ============================================
 """
-    # ---------- FAQ COMPLETO ----------
-FAQ_COMPLETO = {
-    "🧭 1. Conceitos Gerais e Funcionamento (1 – 30)": [
-        {
-            "pergunta": "O que é um seguro de vida?",
-            "resposta": """
-            **Seguro de Vida** é um contrato entre você (segurado) e uma seguradora, onde você paga prêmios periódicos em troca de proteção financeira para seus beneficiários em caso de:
-            
-            • **Morte** - Sua família recebe o capital segurado
-            • **Invalidez** - Você recebe em caso de acidentes incapacitantes
-            • **Doenças Graves** - Suporte financeiro para tratamentos
-            
-            É a **proteção mais importante** que você pode oferecer à sua família! 🛡️
-            """,
-            "destaque": "Proteção financeira familiar essencial"
-        },
-        {
-            "pergunta": "Como funciona um seguro de vida?",
-            "resposta": """
-            **Funcionamento do Seguro de Vida:**
-            
-            1. **Contratação**: Você escolhe as coberturas e valores
-            2. **Pagamento**: Paga prêmios mensais/anuais
-            3. **Vigência**: A proteção está ativa enquanto pagar
-            4. **Sinistro**: Em caso de evento coberto, aciona a seguradora
-            5. **Indenização**: Beneficiários recebem o capital segurado
-            
-            **💡 É como um guarda-chuva: você espera nunca precisar, mas fica tranquilo sabendo que está protegido.**
-            """,
-            "destaque": "Proteção contínua em troca de pagamento periódico"
-        },
-        {
-            "pergunta": "Qual a diferença entre seguro de vida e previdência privada?",
-            "resposta": """
-            **Principais Diferenças:**
-            
-            **🎯 Seguro de Vida:**
-            • Foco em **proteção**
-            • Indenização em caso de sinistro
-            • Beneficiários recebem
-            • Prazo determinado ou vitalício
-            
-            **💰 Previdência Privada:**
-            • Foco em **acumulação**
-            • Você recebe o valor
-            • Para aposentadoria
-            • Longo prazo com rentabilidade
-            
-            **💡 Ideal: Ter ambos para proteção completa!**
-            """,
-            "destaque": "Seguro protege, previdência acumula"
-        },
-        {
-            "pergunta": "Qual a importância de ter um seguro de vida?",
-            "resposta": """
-            **Importância do Seguro de Vida:**
-            
-            • **Proteção Familiar**: Garante sustento dos dependentes
-            • **Cobertura de Dívidas**: Evita herança de financiamentos
-            • **Educação dos Filhos**: Assegura continuidade dos estudos
-            • **Custos Finais**: Cobre despesas funerárias e médicas
-            • **Planejamento Sucessório**: Organiza transferência patrimonial
-            • **Tranquilidade**: Segurança psicológica e emocional
-            
-            **🎯 É um ato de amor e responsabilidade com quem você ama.**
-            """,
-            "destaque": "Proteção para quem depende de você"
-        },
-        {
-            "pergunta": "Existe carência no seguro de vida?",
-            "resposta": """
-            **Sim, existe carência no seguro de vida:**
-            
-            • **Morte Natural**: 2 anos (em média)
-            • **Morte Acidental**: 24 horas a 30 dias
-            • **Doenças Graves**: 90 a 180 dias
-            • **Invalidez**: 30 a 90 dias
-            
-            **💡 A carência é o período entre a contratação e o início da cobertura total.**
-            
-            **Importante**: Suicídio geralmente tem carência de 2 anos.
-            """,
-            "destaque": "Período de espera para cobertura total"
-        },
-        {
-            "pergunta": "Qual a idade mínima para contratar?",
-            "resposta": """
-            **Idade Mínima para Contratar:**
-            
-            • **18 anos** - Maioridade civil
-            • Algumas seguradoras aceitam a partir de **16 anos** com autorização dos pais
-            • Para crianças, pais podem contratar a partir do **nascimento**
-            
-            **💡 Quanto mais cedo contratar, menores serão os prêmios!**
-            """,
-            "destaque": "A partir de 18 anos, ou 16 com autorização"
-        },
-        {
-            "pergunta": "Qual a idade máxima para contratar?",
-            "resposta": """
-            **Idade Máxima para Contratação:**
-            
-            • **Seguro Temporário**: Até 70-75 anos
-            • **Seguro Vitalício**: Até 80-85 anos
-            • **Doenças Graves**: Até 60-65 anos
-            
-            **💡 A idade máxima varia por seguradora e tipo de cobertura.**
-            
-            **Dica**: Contrate enquanto é jovem para garantir melhores condições!
-            """,
-            "destaque": "Varia de 70 a 85 anos dependendo do produto"
-        },
-        {
-            "pergunta": "Quem pode contratar um seguro de vida?",
-            "resposta": """
-            **Quem Pode Contratar:**
-            
-            • **Maiores de 18 anos** em pleno gozo de capacidade civil
-            • **Estrangeiros** residentes no Brasil com documentação regular
-            • **Pessoas físicas** de qualquer profissão (algumas com restrições)
-            • **Empresas** para seguros coletivos de funcionários
-            
-            **💡 Basicamente qualquer pessoa que tenha interesse em proteger sua família ou patrimônio.**
-            """,
-            "destaque": "Maiores de 18 anos com capacidade civil"
-        },
-        {
-            "pergunta": "Qual a duração do seguro?",
-            "resposta": """
-            **Duração do Seguro de Vida:**
-            
-            • **Temporário**: 1 a 30 anos (prazo determinado)
-            • **Vitalício**: Até o falecimento (sem prazo)
-            • **Resgatável**: 15+ anos (com valor de resgate)
-            • **Anual**: Renovação anual
-            
-            **💡 Você escolhe a duração de acordo com suas necessidades!**
-            
-            **Exemplo**: Contrate até os filhos se formarem ou até a aposentadoria.
-            """,
-            "destaque": "De 1 ano até vitalício, conforme necessidade"
-        },
-        {
-            "pergunta": "O seguro de vida tem validade no exterior?",
-            "resposta": """
-            **Validade no Exterior:**
-            
-            • **Morte e Invalidez**: Geralmente cobertura mundial
-            • **Doenças Graves**: Pode ter restrições por país
-            • **Assistências**: Podem ser apenas no Brasil
-            
-            **💡 Verifique sempre as condições específicas da apólice!**
-            
-            **Dica**: Se viaja muito, contrate cobertura internacional.
-            """,
-            "destaque": "Geralmente sim, mas verifique condições específicas"
-        }
-    ],
-    "📝 2. Tipos e Modalidades de Seguro (31 – 60)": [
-        {
-            "pergunta": "Quais são os principais tipos de seguro de vida?",
-            "resposta": """
-            **Principais Tipos de Seguro de Vida:**
-            
-            • **Temporário**: Proteção por prazo determinado
-            • **Vitalício**: Proteção por toda a vida
-            • **Resgatável**: Combina proteção com investimento
-            • **Universal**: Flexibilidade de prêmios e coberturas
-            • **Coletivo**: Para grupos (empresas, associações)
-            • **Acidentes Pessoais**: Foco em acidentes
-            
-            **💡 Cada tipo atende a uma necessidade específica!**
-            """,
-            "destaque": "Temporário, vitalício, resgatável, universal e coletivo"
-        },
-        {
-            "pergunta": "O que é seguro temporário?",
-            "resposta": """
-            **Seguro Temporário:**
-            
-            • **Proteção por prazo determinado** (ex: 10, 20, 30 anos)
-            • **Mais barato** que o vitalício
-            • **Ideal** para períodos específicos (filhos na escola, financiamento)
-            • **Sem valor de resgate** (puro risco)
-            
-            **💡 Perfeito para quem precisa de proteção por um período específico!**
-            
-            **Exemplo**: Até os filhos se formarem na faculdade.
-            """,
-            "destaque": "Proteção por prazo determinado, mais econômico"
-        },
-        {
-            "pergunta": "O que é seguro vitalício?",
-            "resposta": """
-            **Seguro Vitalício:**
-            
-            • **Proteção por toda a vida**
-            • **Prêmios geralmente mais altos**
-            • **Garantia** de que os beneficiários sempre receberão
-            • **Excelente** para planejamento sucessório
-            
-            **💡 Ideal para quem quer garantir que a família receba independentemente de quando falecer!**
-            """,
-            "destaque": "Proteção vitalícia, ideal para sucessão"
-        },
-        {
-            "pergunta": "O que é seguro de vida resgatável?",
-            "resposta": """
-            **Seguro Resgatável:**
-            
-            • **Combina proteção com poupança**
-            • **Acumula valor** em conta de participação
-            • **Pode resgatar** após período de carência
-            • **Prêmios mais altos** que o temporário
-            
-            **💡 Protege sua família e ajuda a construir patrimônio!**
-            
-            **Funciona como**: Seguro + investimento de longo prazo.
-            """,
-            "destaque": "Combina proteção com acumulação de patrimônio"
-        },
-        {
-            "pergunta": "O que é seguro universal?",
-            "resposta": """
-            **Seguro Universal:**
-            
-            • **Máxima flexibilidade** de prêmios e coberturas
-            • **Pode ajustar** valores conforme necessidade
-            • **Componente de investimento**
-            • **Transparência** total dos custos
-            
-            **💡 Para quem quer controle total sobre o seguro!**
-            
-            **Vantagem**: Adapta-se às mudanças da sua vida.
-            """,
-            "destaque": "Máxima flexibilidade em prêmios e coberturas"
-        }
-    ],
-    "💰 3. Coberturas e Benefícios (61 – 100)": [
-        {
-            "pergunta": "Quais são as coberturas básicas?",
-            "resposta": """
-            **Coberturas Básicas do Seguro de Vida:**
-            
-            • **Morte por qualquer causa** (natural ou acidental)
-            • **Invalidez Permanente** por acidente
-            • **Doenças Graves** (câncer, infarto, AVC)
-            • **Diária por Incapacidade Temporária** (DIT)
-            • **Diária por Internação Hospitalar** (DIH)
-            
-            **💡 Estas são as coberturas essenciais para proteção completa!**
-            """,
-            "destaque": "Morte, invalidez, doenças graves, DIT e DIH"
-        },
-        {
-            "pergunta": "Quais são as coberturas adicionais mais comuns?",
-            "resposta": """
-            **Coberturas Adicionais Mais Comuns:**
-            
-            • **Invalidez Funcional** por doença
-            • **Transplante de Órgãos**
-            • **Assistência Funeral**
-            • **Despesas Médicas**
-            • **Proteção Financeira**
-            • **Cesta Básica Familiar**
-            
-            **💡 Personalize seu seguro conforme suas necessidades específicas!**
-            """,
-            "destaque": "Diversas opções para personalização completa"
-        },
-        {
-            "pergunta": "O que é cobertura por morte natural?",
-            "resposta": """
-            **Cobertura por Morte Natural:**
-            
-            • **Proteção** contra morte por causas naturais
-            • **Doenças**, idade avançada, condições crônicas
-            • **Carência** geralmente de 2 anos
-            • **Capital** pago aos beneficiários
-            
-            **💡 Garante que sua família receba mesmo se falecer por causas naturais!**
-            """,
-            "destaque": "Proteção contra morte por causas naturais"
-        },
-        {
-            "pergunta": "O que é cobertura por morte acidental?",
-            "resposta": """
-            **Cobertura por Morte Acidental:**
-            
-            • **Proteção** contra morte por acidentes
-            • **Trânsito**, quedas, afogamento, etc.
-            • **Carência** geralmente de 24h a 30 dias
-            • **Capital** geralmente dobrado ou triplicado
-            
-            **💡 Cobertura essencial, especialmente para profissões de risco!**
-            """,
-            "destaque": "Proteção contra morte por acidentes"
-        },
-        {
-            "pergunta": "O que é cobertura por invalidez permanente total ou parcial?",
-            "resposta": """
-            **Cobertura por Invalidez:**
-            
-            • **Invalidez Total**: Incapacidade para trabalho
-            • **Invalidez Parcial**: Perda parcial de capacidade
-            • **Por Acidente**: Geralmente sem carência
-            • **Por Doença**: Carência de 30-90 dias
-            
-            **💡 Protege sua renda em caso de incapacidade para trabalhar!**
-            
-            **Importante**: Define percentuais de acordo com o grau de invalidez.
-            """,
-            "destaque": "Proteção contra incapacidade para trabalho"
-        }
-    ],
-    "🧑‍💼 4. Beneficiários (101 – 130)": [
-        {
-            "pergunta": "Quem pode ser beneficiário?",
-            "resposta": """
-            **Quem Pode Ser Beneficiário:**
-            
-            • **Qualquer pessoa física** (parentes ou não)
-            • **Instituições** (ONGs, fundações)
-            • **Herdeiros legais** (se não indicar beneficiários)
-            • **Menores de idade** (com representante)
-            
-            **💡 Você tem liberdade para escolher quem receberá a indenização!**
-            
-            **Dica**: Sempre indique beneficiários específicos para evitar inventário.
-            """,
-            "destaque": "Qualquer pessoa física ou instituição"
-        },
-        {
-            "pergunta": "Posso indicar qualquer pessoa?",
-            "resposta": """
-            **Sim, pode indicar qualquer pessoa:**
-            
-            • **Cônjuge/Companheiro**
-            • **Filhos** (mesmo adotivos)
-            • **Pais e avós**
-            • **Amigos**
-            • **Funcionários**
-            • **Instituições de caridade**
-            
-            **💡 Não é necessário ter parentesco com o beneficiário!**
-            
-            **Importante**: Para evitar problemas, sempre informe os beneficiários.
-            """,
-            "destaque": "Sim, qualquer pessoa sem necessidade de parentesco"
-        },
-        {
-            "pergunta": "Posso indicar menores de idade?",
-            "resposta": """
-            **Sim, pode indicar menores:**
-            
-            • **Com representante legal** para receber
-            • **Valor fica em conta bloqueada** até maioridade
-            • **Administrado** por tutor indicado
-            • **Pode receber** rendimentos periodicamente
-            
-            **💡 Perfeito para garantir educação e sustento dos filhos!**
-            
-            **Dica**: Indique um administrador responsável.
-            """,
-            "destaque": "Sim, com representante legal para administração"
-        },
-        {
-            "pergunta": "Como indicar um beneficiário?",
-            "resposta": """
-            **Como Indicar Beneficiários:**
-            
-            1. **Na proposta**: Durante a contratação
-            2. **Por escrito**: Comunicado à seguradora
-            3. **Por percentuais**: Definir partes de cada um
-            4. **Com dados completos**: Nome, CPF, parentesco
-            
-            **💡 Pode alterar quantas vezes quiser, sem custo!**
-            
-            **Importante**: Mantenha sempre atualizado.
-            """,
-            "destaque": "Na proposta ou por comunicação à seguradora"
-        },
-        {
-            "pergunta": "Preciso informar CPF do beneficiário?",
-            "resposta": """
-            **Sim, é necessário informar CPF:**
-            
-            • **Identificação** precisa do beneficiário
-            • **Evita confusões** com nomes iguais
-            • **Agiliza** o pagamento da indenização
-            • **Obrigatório** para pessoas físicas
-            
-            **💡 Sem o CPF, pode haver dificuldades no pagamento!**
-            
-            **Dica**: Tenha os CPFs em mãos na hora da contratação.
-            """,
-            "destaque": "Sim, é obrigatório para identificação precisa"
-        }
-    ],
-    "📊 5. Custos, Prêmios e Valores (131 – 160)": [
-        {
-            "pergunta": "Quanto custa um seguro de vida?",
-            "resposta": """
-            **Custo do Seguro de Vida:**
-            
-            • **A partir de R$ 20/mês** para coberturas básicas
-            • **R$ 50-200/mês** para proteção familiar completa
-            • **R$ 300+/mês** para alta renda e coberturas especiais
-            
-            **💡 O custo depende da idade, saúde, profissão e coberturas escolhidas!**
-            
-            **Dica**: Quanto mais jovem contratar, mais barato será.
-            """,
-            "destaque": "A partir de R$ 20/mês, varia conforme perfil"
-        },
-        {
-            "pergunta": "Como é calculado o valor do prêmio?",
-            "resposta": """
-            **Fatores que Influenciam o Prêmio:**
-            
-            • **Idade** (quanto mais jovem, mais barato)
-            • **Sexo** (mulheres geralmente pagam menos)
-            • **Profissão** (risco ocupacional)
-            • **Hábitos** (fumo, esportes radicais)
-            • **Coberturas** escolhidas
-            • **Capital segurado**
-            
-            **💡 Cada seguradora tem sua própria tabela de risco!**
-            """,
-            "destaque": "Baseado em idade, saúde, profissão e coberturas"
-        },
-        {
-            "pergunta": "Quais fatores influenciam no preço?",
-            "resposta": """
-            **Principais Fatores de Preço:**
-            
-            • **Idade**: Principal fator (tabela por idade)
-            • **Sexo**: Mulheres têm expectativa de vida maior
-            • **Profissão**: Risco ocupacional
-            • **Hábitos**: Fumo, álcool, esportes radicais
-            • **Histórico médico**: Doenças preexistentes
-            • **Coberturas**: Quantidade e valores
-            
-            **💡 Seja sincero nas informações para evitar problemas futuros!**
-            """,
-            "destaque": "Idade, sexo, profissão, hábitos e histórico médico"
-        },
-        {
-            "pergunta": "Idade influencia no preço?",
-            "resposta": """
-            **Sim, a idade é o principal fator:**
-            
-            • **18-30 anos**: Melhores preços
-            • **31-45 anos**: Preços moderados
-            • **46-60 anos**: Preços mais altos
-            • **61+ anos**: Preços significativamente mais altos
-            
-            **💡 Contrate jovem para travar preços baixos por mais tempo!**
-            
-            **Dica**: Alguns seguros têm preço fixo por período.
-            """,
-            "destaque": "Sim, é o principal fator de precificação"
-        },
-        {
-            "pergunta": "Doenças preexistentes influenciam no preço?",
-            "resposta": """
-            **Sim, doenças preexistentes influenciam:**
-            
-            • **Pode aumentar** o prêmio
-            • **Pode excluir** cobertura para aquela doença
-            • **Pode ter carência** maior
-            • **Pode recusar** a proposta em casos graves
-            
-            **💡 Seja sempre transparente sobre condições médicas!**
-            
-            **Importante**: Omitir informações pode anular a apólice.
-            """,
-            "destaque": "Sim, podem aumentar preço ou excluir coberturas"
-        }
-    ],
-    "🧾 6. Contratação e Documentação (161 – 185)": [
-        {
-            "pergunta": "Como contratar um seguro de vida?",
-            "resposta": """
-            **Passos para Contratar:**
-            
-            1. **Análise de necessidades** (quanto e por quanto tempo)
-            2. **Cotação** com várias seguradoras
-            3. **Preenchimento** da proposta
-            4. **Pagamento** do primeiro prêmio
-            5. **Análise** pela seguradora
-            6. **Emissão** da apólice
-            
-            **💡 Pode contratar online, por telefone ou com corretor!**
-            """,
-            "destaque": "Análise, cotação, proposta, pagamento e emissão"
-        },
-        {
-            "pergunta": "Posso contratar online?",
-            "resposta": """
-            **Sim, pode contratar online:**
-            
-            • **Site das seguradoras**
-            • **Corretoras online**
-            • **Comparadores de seguro**
-            • **Totalmente digital**
-            
-            **💡 Processo rápido, seguro e conveniente!**
-            
-            **Vantagens**: Rapidez, praticidade e often melhores preços.
-            """,
-            "destaque": "Sim, processo 100% digital disponível"
-        },
-        {
-            "pergunta": "Posso contratar pelo celular?",
-            "resposta": """
-            **Sim, pode contratar pelo celular:**
-            
-            • **Apps** das seguradoras
-            • **Sites mobile**
-            • **WhatsApp** de corretores
-            • **Assinatura eletrônica**
-            
-            **💡 Contrate onde e quando quiser!**
-            
-            **Conveniência**: Documentação digital e pagamento por PIX/cartão.
-            """,
-            "destaque": "Sim, através de apps e sites mobile"
-        },
-        {
-            "pergunta": "Preciso apresentar exames?",
-            "resposta": """
-            **Depende do caso:**
-            
-            • **Seguros simples**: Geralmente não
-            • **Capital alto**: Pode exigir exames
-            • **Idade avançada**: Maior probabilidade
-            • **Histórico médico**: Pode exigir complementares
-            
-            **💡 A necessidade de exames varia por seguradora e capital!**
-            
-            **Dica**: Seguros até R$ 100.000 geralmente não exigem exames.
-            """,
-            "destaque": "Depende do capital, idade e histórico médico"
-        },
-        {
-            "pergunta": "Quais documentos são exigidos?",
-            "resposta": """
-            **Documentos Básicos:**
-            
-            • **CPF** do segurado e beneficiários
-            • **RG** ou CNH
-            • **Comprovante de residência**
-            • **Comprovante de renda** (para capitais altos)
-            
-            **💡 Documentação simples e rápida!**
-            
-            **Processo**: Geralmente digital, sem necessidade de cópias físicas.
-            """,
-            "destaque": "CPF, RG, comprovante de residência e renda"
-        }
-    ],
-    "⚖️ 7. Sinistro e Indenização (186 – 200)": [
-        {
-            "pergunta": "O que é sinistro?",
-            "resposta": """
-            **Sinistro é o evento coberto:**
-            
-            • **Morte** do segurado
-            • **Invalidez** permanente
-            • **Diagnóstico** de doença grave
-            • **Internação** hospitalar
-            • **Incapacidade** temporária
-            
-            **💡 É a ocorrência que dá direito ao recebimento da indenização!**
-            
-            **Importante**: Comunique o sinistro o mais rápido possível.
-            """,
-            "destaque": "Evento coberto que gera direito à indenização"
-        },
-        {
-            "pergunta": "Como acionar o seguro?",
-            "resposta": """
-            **Como Acionar o Seguro:**
-            
-            1. **Contate a seguradora** imediatamente
-            2. **Preencha** formulário de sinistro
-            3. **Envie documentos** necessários
-            4. **Aguarde análise** (geralmente 30 dias)
-            5. **Receba** a indenização
-            
-            **💡 Pode acionar por telefone, app ou site!**
-            
-            **Dica**: Tenha a apólice em mãos para agilizar.
-            """,
-            "destaque": "Contatar seguradora e enviar documentação"
-        },
-        {
-            "pergunta": "Quais documentos são necessários para acionar?",
-            "resposta": """
-            **Documentos para Sinistro:**
-            
-            • **Apólice** ou número do contrato
-            • **Documentos pessoais** do segurado e beneficiários
-            • **Comprovante** do sinistro (atestado óbito, laudo médico)
-            • **Formulário** de sinistro preenchido
-            
-            **💡 Cada tipo de sinistro exige documentos específicos!**
-            
-            **Dica**: A seguradora informará a lista completa.
-            """,
-            "destaque": "Apólice, documentos pessoais e comprovante do sinistro"
-        },
-        {
-            "pergunta": "Quem pode solicitar a indenização?",
-            "resposta": """
-            **Quem Pode Solicitar:**
-            
-            • **Beneficiários** indicados na apólice
-            • **Herdeiros legais** (se não há beneficiários)
-            • **Representante legal** (para menores)
-            • **Procurador** com poderes específicos
-            
-            **💡 Os beneficiários não precisam ser parentes!**
-            
-            **Importante**: Mantenha os beneficiários sempre atualizados.
-            """,
-            "destaque": "Beneficiários indicados ou herdeiros legais"
-        },
-        {
-            "pergunta": "Quanto tempo leva para pagar a indenização?",
-            "resposta": """
-            **Prazo para Pagamento:**
-            
-            • **30 dias** após documentação completa
-            • **Casos simples**: 15-20 dias
-            • **Casos complexos**: Até 45 dias
-            • **Com documentação incompleta**: Pode demorar mais
-            
-            **💡 A agilidade depende da qualidade da documentação!**
-            
-            **Dica**: Envie todos os documentos de uma vez para agilizar.
-            """,
-            "destaque": "Até 30 dias após documentação completa"
-        }
-    ]
-}
     
+    return proposta
 
 def criar_download_button(data, filename, button_text, file_type):
     """Cria um botão de download"""
@@ -3201,17 +2574,15 @@ elif aba_selecionada == "👤 Cadastro Completo":
             idade = st.number_input("**Idade***", min_value=18, max_value=80, value=30, help="Idade entre 18 e 80 anos")
             profissao = st.text_input("**Profissão***", placeholder="Sua profissão atual", help="Profissão principal do cliente")
             
-            # CAMPO ESTADO CIVIL - AGORA COM LÓGICA CONDICIONAL
+            # === MODIFICADO: REGIME APARECE PARA QUALQUER ESTADO CIVIL ===
             estado_civil = st.selectbox("**Estado Civil***", ESTADO_CIVIL_OPCOES, help="Estado civil do cliente")
             
-            # CAMPO REGIME DE CASAMENTO - APARECE APENAS SE FOR CASADO E NÃO É OBRIGATÓRIO
-            regime_casamento = ""
-            if estado_civil == "Casado(a)":
-                regime_casamento = st.selectbox(
-                    "**Regime de Casamento** (Opcional)", 
-                    REGIME_CASAMENTO_OPCOES,
-                    help="Regime de bens do casamento (opcional)"
-                )
+            # CAMPO REGIME DE CASAMENTO - AGORA DISPONÍVEL PARA TODOS (NÃO OBRIGATÓRIO)
+            regime_casamento = st.selectbox(
+                "**Regime de Casamento** (Opcional)", 
+                REGIME_CASAMENTO_OPCOES,
+                help="Regime de bens - preencha se aplicável ao seu estado civil"
+            )
             
             dependentes = st.number_input("**Número de dependentes***", min_value=0, max_value=10, value=0, help="Pessoas que dependem financeiramente do cliente")
             st.markdown("</div>", unsafe_allow_html=True)
@@ -3229,6 +2600,28 @@ elif aba_selecionada == "👤 Cadastro Completo":
             patrimonio_imobilizado = st.number_input("**Patrimônio Imobilizado (R$)***", min_value=0.0, value=0.0, step=10000.0, format="%.2f",
                                                    help="Patrimônio imobilizado (imóveis, veículos, equipamentos, etc.)")
             
+            # === NOVO: CAMPOS PARA REGIME PARCIAL - SEMPRE VISÍVEIS ===
+            st.markdown("---")
+            st.markdown("**💍 Informações para Regime de Casamento (Opcional)**")
+            
+            patrimonio_antes_casamento = st.number_input(
+                "**Patrimônio Antes do Casamento (R$)**",
+                min_value=0.0,
+                value=0.0,
+                step=10000.0,
+                format="%.2f",
+                help="Preencha apenas se for casado(a) em regime parcial de bens"
+            )
+            
+            patrimonio_depois_casamento = st.number_input(
+                "**Patrimônio Depois do Casamento (R$)**", 
+                min_value=0.0,
+                value=0.0,
+                step=10000.0,
+                format="%.2f",
+                help="Preencha apenas se for casado(a) em regime parcial de bens"
+            )
+            
             # Calcular patrimônio total automaticamente
             patrimonio_total = patrimonio_liquido + patrimonio_imobilizado
             
@@ -3243,61 +2636,6 @@ elif aba_selecionada == "👤 Cadastro Completo":
             
             despesas_mensais = st.number_input("**Despesas Mensais Fixas (R$)***", min_value=0.0, value=2000.0, step=100.0, format="%.2f", help="Despesas mensais fixas do cliente")
             st.markdown("</div>", unsafe_allow_html=True)
-        
-        # SEÇÃO: REGIME DE CASAMENTO (APENAS SE FOR CASADO)
-        if estado_civil == "Casado(a)":
-            st.markdown("""
-            <div class="section-header">
-                <h3 style="margin: 0; font-size: 1.5rem;">💍 Informações do Casamento</h3>
-            </div>
-            """, unsafe_allow_html=True)
-            
-            col_regime1, col_regime2 = st.columns([2, 1])
-            
-            with col_regime1:
-                st.markdown("""
-                <div class="info-card">
-                    <h4 style="margin: 0 0 1rem 0; color: #2c3e50;">📝 Detalhes do Regime</h4>
-                """, unsafe_allow_html=True)
-                
-                # Informações específicas sobre separação total de bens
-                if regime_casamento == "Separação Total de Bens":
-                    st.markdown("""
-                    <div class="warning-card">
-                        <h4 style="margin: 0 0 1rem 0; color: white;">💡 Importante para Separação Total</h4>
-                        <p style="margin: 0; line-height: 1.5;">
-                            No regime de <strong>Separação Total de Bens</strong>, a proteção patrimonial será ajustada para considerar 
-                            apenas os bens de propriedade individual. Isso pode impactar o cálculo do capital segurado.
-                        </p>
-                    </div>
-                    """, unsafe_allow_html=True)
-                else:
-                    st.markdown("""
-                    <div class="info-card" style="background: rgba(40, 167, 69, 0.1);">
-                        <h4 style="margin: 0 0 1rem 0; color: #28a745;">✅ Regime Selecionado</h4>
-                        <p style="color: #666; line-height: 1.5; margin: 0;">
-                            <strong>{}</strong> - Este regime influencia no planejamento sucessório e proteção patrimonial.
-                        </p>
-                    </div>
-                    """.format(regime_casamento), unsafe_allow_html=True)
-                
-                st.markdown("</div>", unsafe_allow_html=True)
-            
-            with col_regime2:
-                st.markdown("""
-                <div class="info-card">
-                    <h4 style="margin: 0 0 1rem 0; color: #2c3e50;">💡 Por que isso importa?</h4>
-                    <p style="color: #666; line-height: 1.5; margin: 0;">
-                        O <strong>regime de casamento</strong> influencia diretamente:
-                    </p>
-                    <ul style="color: #666; line-height: 1.5; margin: 1rem 0;">
-                        <li><strong>Proteção Patrimonial</strong></li>
-                        <li><strong>Planejamento Sucessório</strong></li>
-                        <li><strong>Direitos dos Herdeiros</strong></li>
-                        <li><strong>Divisão de Bens</strong></li>
-                    </ul>
-                </div>
-                """, unsafe_allow_html=True)
         
         st.markdown("""
         <div class="section-header">
@@ -3580,8 +2918,8 @@ elif aba_selecionada == "👤 Cadastro Completo":
         
         if submitted:
             if nome and profissao and renda_mensal > 0 and despesas_mensais > 0 and filial and assessor:
-                # Validação - regime de casamento NÃO é obrigatório mesmo para casados
-                calculo = CalculadoraCapital.calcular_capital_total({
+                # Preparar dados do cliente
+                dados_cliente = {
                     'nome': nome,
                     'idade': idade,
                     'profissao': profissao,
@@ -3595,8 +2933,12 @@ elif aba_selecionada == "👤 Cadastro Completo":
                     'despesas_mensais': despesas_mensais,
                     'despesas_filhos_mensais': despesas_filhos_mensais,
                     'anos_ate_independencia': anos_ate_independencia,
-                    'pilar_financeiro': pilar_financeiro == "Sim"
-                })
+                    'pilar_financeiro': pilar_financeiro == "Sim",
+                    'patrimonio_antes_casamento': patrimonio_antes_casamento,
+                    'patrimonio_depois_casamento': patrimonio_depois_casamento
+                }
+                
+                calculo = CalculadoraCapital.calcular_capital_total(dados_cliente)
                 
                 st.session_state.cliente = {
                     'nome': nome,
@@ -3613,6 +2955,8 @@ elif aba_selecionada == "👤 Cadastro Completo":
                     'despesas_filhos_mensais': despesas_filhos_mensais,
                     'anos_ate_independencia': anos_ate_independencia,
                     'pilar_financeiro': pilar_financeiro == "Sim",
+                    'patrimonio_antes_casamento': patrimonio_antes_casamento,
+                    'patrimonio_depois_casamento': patrimonio_depois_casamento,
                     'tem_previdencia': tem_previdencia,
                     'valor_previdencia': valor_previdencia,
                     'rentabilidade_previdencia': rentabilidade_previdencia,
@@ -3658,6 +3002,21 @@ elif aba_selecionada == "👤 Cadastro Completo":
                     st.info(f"**🏠 Patrimônio Imobilizado:** {formatar_moeda(patrimonio_imobilizado)}")
                     st.info(f"**📊 Patrimônio Total:** {formatar_moeda(patrimonio_total)}")
                     st.info(f"**💸 Despesas Mensais:** {formatar_moeda(despesas_mensais)}")
+                
+                # Mostrar informações específicas do regime parcial se preenchido
+                if regime_casamento == "Comunhão Parcial de Bens" and (patrimonio_antes_casamento > 0 or patrimonio_depois_casamento > 0):
+                    st.markdown('<div class="subsection-title">📊 Detalhes do Regime Parcial</div>', unsafe_allow_html=True)
+                    col_parcial1, col_parcial2 = st.columns(2)
+                    
+                    with col_parcial1:
+                        st.info(f"**💰 Patrimônio Antes do Casamento:** {formatar_moeda(patrimonio_antes_casamento)}")
+                        st.info(f"**💼 Patrimônio Depois do Casamento:** {formatar_moeda(patrimonio_depois_casamento)}")
+                    
+                    with col_parcial2:
+                        patrimonio_ajustado = patrimonio_antes_casamento + (patrimonio_depois_casamento * 0.5)
+                        st.info(f"**🧮 Patrimônio Ajustado:** {formatar_moeda(patrimonio_ajustado)}")
+                        percentual_protecao = 0.20 if pilar_financeiro == "Sim" else 0.15
+                        st.info(f"**🛡️ Percentual de Proteção:** {percentual_protecao*100}%")
                 
                 # Mostrar informações da previdência se aplicável
                 if tem_previdencia == "Sim":
@@ -4146,8 +3505,8 @@ with st.sidebar:
     """, unsafe_allow_html=True)
 
 # ---------- ANIMAÇÕES ----------
-if st.session_state.get('cliente'):
-    st.balloons()
+#if st.session_state.get('cliente'):
+    #st.balloons()
     
 if st.session_state.get('calculation_complete'):
     st.markdown("""
@@ -4157,3 +3516,4 @@ if st.session_state.get('calculation_complete'):
     </script>
     """, unsafe_allow_html=True)
     st.session_state.calculation_complete = False
+
