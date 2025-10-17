@@ -1053,6 +1053,144 @@ def apply_custom_styles():
             margin-bottom: 1.5rem;
         }
     }
+
+    /* CORREÇÃO DO PROBLEMA VISUAL - CARACTERÍSTICAS PRINCIPAIS */
+    .caracteristicas-principais {
+        margin-bottom: 1.5rem;
+    }
+    
+    .caracteristicas-principais h4 {
+        color: #2c3e50;
+        margin-bottom: 0.8rem;
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+    
+    .caracteristicas-lista {
+        background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+        padding: 1.5rem;
+        border-radius: 15px;
+        border-left: 4px solid #667eea;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+    
+    .caracteristica-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 0.8rem;
+        padding: 0.8rem;
+        background: rgba(102, 126, 234, 0.05);
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+    
+    .caracteristica-item:hover {
+        background: rgba(102, 126, 234, 0.1);
+        transform: translateX(5px);
+    }
+    
+    .caracteristica-item:last-child {
+        margin-bottom: 0;
+    }
+    
+    .caracteristica-icon {
+        color: #667eea;
+        margin-right: 0.8rem;
+        font-size: 1.1rem;
+        min-width: 20px;
+    }
+    
+    .caracteristica-text {
+        color: #2c3e50;
+        font-weight: 500;
+        line-height: 1.4;
+    }
+
+    /* Estilos para a aba Comparativo de Produtos - CORRIGIDO */
+    .produto-card {
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        padding: 2rem;
+        border-radius: 20px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        border-top: 6px solid;
+        margin-bottom: 2rem;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .produto-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    }
+    
+    .produto-badge {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: bold;
+    }
+    
+    .produto-header {
+        margin-bottom: 1.5rem;
+    }
+    
+    .produto-title {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #2c3e50;
+        margin: 0 0 0.5rem 0;
+    }
+    
+    .produto-descricao {
+        color: #666;
+        line-height: 1.5;
+        margin: 0;
+    }
+    
+    .produto-metricas {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .produto-metrica {
+        background: rgba(102, 126, 234, 0.05);
+        padding: 1rem;
+        border-radius: 10px;
+        text-align: center;
+        border-left: 3px solid #667eea;
+    }
+    
+    .produto-metrica-label {
+        font-size: 0.9rem;
+        color: #667eea;
+        font-weight: 600;
+        margin-bottom: 0.3rem;
+    }
+    
+    .produto-metrica-valor {
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: #2c3e50;
+    }
+    
+    .destaques-container {
+        margin-top: 1rem;
+    }
+    
+    .destaques-label {
+        font-size: 1rem;
+        color: #2c3e50;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
     </style>
     """, unsafe_allow_html=True)
 
@@ -3047,6 +3185,208 @@ FAQ_COMPLETO = {
     ]
 }
 
+# ---------- DADOS PARA COMPARATIVO DE PRODUTOS ----------
+COMPARATIVO_PRODUTOS = {
+    "Azos": {
+        "cores": ["#7C3AED", "#6D28D9"],
+        "produtos": {
+            "Vida Individual": {
+                "descricao": "Proteção básica com foco em DIT e profissões de risco",
+                "caracteristicas": [
+                    "Aceita porte de armas",
+                    "DIT ampliada",
+                    "Carência reduzida para acidentes",
+                    "Perfis especiais aceitos"
+                ],
+                "preco_medio": "R$ 89,90",
+                "idade_minima": 18,
+                "idade_maxima": 70,
+                "capital_maximo": "R$ 500.000",
+                "destaques": ["Porte de Armas", "DIT", "Profissões Risco"]
+            },
+            "Vida Plus": {
+                "descricao": "Proteção ampliada com coberturas adicionais",
+                "caracteristicas": [
+                    "Todas as características do Vida Individual",
+                    "Doenças Graves incluída",
+                    "Invalidez Funcional",
+                    "Assistência funeral"
+                ],
+                "preco_medio": "R$ 129,90",
+                "idade_minima": 18,
+                "idade_maxima": 65,
+                "capital_maximo": "R$ 1.000.000",
+                "destaques": ["Cobertura Completa", "Doenças Graves", "Assistências"]
+            }
+        }
+    },
+    "Prudential": {
+        "cores": ["#1E40AF", "#1E3A8A"],
+        "produtos": {
+            "Planejamento Sucessório": {
+                "descricao": "Focado em proteção patrimonial e sucessão familiar",
+                "caracteristicas": [
+                    "Whole Life com acumulação",
+                    "Proteção sucessória",
+                    "Resgate parcial após 2 anos",
+                    "Cobertura internacional"
+                ],
+                "preco_medio": "R$ 199,90",
+                "idade_minima": 18,
+                "idade_maxima": 60,
+                "capital_maximo": "R$ 5.000.000",
+                "destaques": ["Sucessão", "Whole Life", "Alta Renda"]
+            },
+            "Doenças Graves Plus": {
+                "descricao": "Proteção especializada contra doenças graves",
+                "caracteristicas": [
+                    "85 doenças graves cobertas",
+                    "Pagamento em 30 dias",
+                    "Carência reduzida",
+                    "Segunda opinião médica"
+                ],
+                "preco_medio": "R$ 159,90",
+                "idade_minima": 18,
+                "idade_maxima": 55,
+                "capital_maximo": "R$ 2.000.000",
+                "destaques": ["Doenças Graves", "Cobertura Ampla", "Saúde"]
+            }
+        }
+    },
+    "Omint": {
+        "cores": ["#FF6B35", "#EA580C"],
+        "produtos": {
+            "Executivo Premium": {
+                "descricao": "Solução completa para executivos de alta renda",
+                "caracteristicas": [
+                    "Rede médica premium",
+                    "Atendimento concierge",
+                    "Cobertura internacional",
+                    "Hospitais de excelência"
+                ],
+                "preco_medio": "R$ 399,00",
+                "idade_minima": 25,
+                "idade_maxima": 60,
+                "capital_maximo": "R$ 10.000.000",
+                "destaques": ["Alta Renda", "Premium", "Internacional"]
+            },
+            "Saúde Corporativa": {
+                "descricao": "Soluções para empresas com foco em saúde",
+                "caracteristicas": [
+                    "Planos coletivos personalizados",
+                    "Gestão de saúde populacional",
+                    "Prevenção e wellness",
+                    "Telemedicina inclusa"
+                ],
+                "preco_medio": "Sob consulta",
+                "idade_minima": 18,
+                "idade_maxima": 70,
+                "capital_maximo": "Personalizado",
+                "destaques": ["Corporativo", "Saúde", "Personalizado"]
+            }
+        }
+    },
+    "MAG Seguros": {
+        "cores": ["#8A2BE2", "#7C3AED"],
+        "produtos": {
+            "Primeiro Seguro": {
+                "descricao": "Ideal para primeira contratação e classe média",
+                "caracteristicas": [
+                    "Preço acessível",
+                    "Documentação simplificada",
+                    "Carências reduzidas",
+                    "Pagamento flexível"
+                ],
+                "preco_medio": "R$ 59,90",
+                "idade_minima": 18,
+                "idade_maxima": 65,
+                "capital_maximo": "R$ 300.000",
+                "destaques": ["Econômico", "Primeira Vez", "Simples"]
+            },
+            "Servidor Público": {
+                "descricao": "Condições especiais para servidores públicos",
+                "caracteristicas": [
+                    "Desconto especial",
+                    "Carência diferenciada",
+                    "Pagamento via desconto em folha",
+                    "Cobertura familiar"
+                ],
+                "preco_medio": "R$ 79,90",
+                "idade_minima": 18,
+                "idade_maxima": 70,
+                "capital_maximo": "R$ 500.000",
+                "destaques": ["Servidores", "Desconto", "Folha"]
+            }
+        }
+    },
+    "Icatu Seguros": {
+        "cores": ["#00A859", "#059669"],
+        "produtos": {
+            "Wealth Protection": {
+                "descricao": "Proteção patrimonial para investidores",
+                "caracteristicas": [
+                    "Integração com investimentos",
+                    "Consultoria wealth",
+                    "Solução sucessória",
+                    "Gestor dedicado"
+                ],
+                "preco_medio": "R$ 249,90",
+                "idade_minima": 25,
+                "idade_maxima": 65,
+                "capital_maximo": "R$ 15.000.000",
+                "destaques": ["Investidores", "Patrimonial", "Wealth"]
+            },
+            "Empresarial Plus": {
+                "descricao": "Proteção para empresários e profissionais liberais",
+                "caracteristicas": [
+                    "Proteção key-person",
+                    "Seguro sócio",
+                    "Capitalização empresarial",
+                    "Planejamento sucessório"
+                ],
+                "preco_medio": "R$ 189,90",
+                "idade_minima": 21,
+                "idade_maxima": 65,
+                "capital_maximo": "R$ 3.000.000",
+                "destaques": ["Empresarial", "Key-Person", "Sucessão"]
+            }
+        }
+    },
+    "MetLife": {
+        "cores": ["#DC2626", "#B91C1C"],
+        "produtos": {
+            "Global Protection": {
+                "descricao": "Solução internacional para multinacionais",
+                "caracteristicas": [
+                    "Cobertura global",
+                    "Padrão internacional",
+                    "Assistência worldwide",
+                    "Solução para expatriados"
+                ],
+                "preco_medio": "R$ 299,90",
+                "idade_minima": 18,
+                "idade_maxima": 65,
+                "capital_maximo": "R$ 8.000.000",
+                "destaques": ["Global", "Multinacional", "Expatriados"]
+            },
+            "Coletivo Empresarial": {
+                "descricao": "Benefícios para colaboradores de grandes empresas",
+                "caracteristicas": [
+                    "Customização total",
+                    "Gestão de benefícios",
+                    "Plataforma digital",
+                    "Wellness corporativo"
+                ],
+                "preco_medio": "Sob consulta",
+                "idade_minima": 18,
+                "idade_maxima": 70,
+                "capital_maximo": "Personalizado",
+                "destaques": ["Coletivo", "Empresas", "Benefícios"]
+            }
+        }
+    }
+}
+
 # ---------- INTERFACE PRINCIPAL ----------
 st.markdown("""
 <div class="main-header floating-card">
@@ -3075,6 +3415,7 @@ aba_selecionada = st.sidebar.radio("", [
     "👤 Cadastro Completo", 
     "🏆 Seguradoras Recomendadas",
     "🛡️ Análise de Coberturas",
+    "📊 Comparativo de Produtos",  # NOVA ABA
     "❓ FAQ Interativo"  
 ], label_visibility="collapsed")
 
@@ -3978,7 +4319,185 @@ elif aba_selecionada == "🛡️ Análise de Coberturas":
         st.markdown("---")
         create_coverage_recommendations(cliente, calculo)
 
-# ---------- ABA 5: FAQ INTERATIVO ----------
+# ---------- ABA 5: COMPARATIVO DE PRODUTOS ----------
+elif aba_selecionada == "📊 Comparativo de Produtos":
+    st.markdown('<div class="section-title">📊 Comparativo de Produtos de Seguro de Vida</div>', unsafe_allow_html=True)
+    
+    st.markdown("""
+    <div class="success-card">
+        <h2 style="margin: 0 0 1rem 0; font-size: 2.5rem; text-align: center;">🏆 Comparativo Completo</h2>
+        <p style="font-size: 1.3rem; opacity: 0.9; text-align: center; margin: 0;">Análise detalhada dos produtos das principais seguradoras</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Filtros
+    st.markdown("""
+    <div class="section-header">
+        <h3 style="margin: 0; font-size: 1.5rem;">🔍 Filtros de Pesquisa</h3>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    col1, col2, col3 = st.columns(3)
+    
+    with col1:
+        seguradora_filtro = st.selectbox(
+            "**Filtrar por Seguradora**",
+            ["Todas as Seguradoras"] + list(COMPARATIVO_PRODUTOS.keys())
+        )
+    
+    with col2:
+        preco_filtro = st.selectbox(
+            "**Faixa de Preço**",
+            ["Qualquer preço", "Até R$ 100", "R$ 100 - R$ 200", "R$ 200 - R$ 300", "Acima de R$ 300"]
+        )
+    
+    with col3:
+        perfil_filtro = st.selectbox(
+            "**Perfil do Cliente**",
+            ["Todos os perfis", "Alta Renda", "Classe Média", "Primeiro Seguro", "Empresarial", "Servidores"]
+        )
+    
+    # Comparativo principal
+    st.markdown("""
+    <div class="section-header">
+        <h3 style="margin: 0; font-size: 1.5rem;">📈 Comparativo de Produtos</h3>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Aplicar filtros
+    seguradoras_filtradas = COMPARATIVO_PRODUTOS
+    
+    if seguradora_filtro != "Todas as Seguradoras":
+        seguradoras_filtradas = {seguradora_filtro: COMPARATIVO_PRODUTOS[seguradora_filtro]}
+    
+    # Exibir produtos filtrados - SEM TÍTULOS DOS PRODUTOS
+    for seguradora, dados_seguradora in seguradoras_filtradas.items():
+        cor_primaria = dados_seguradora["cores"][0]
+        cor_secundaria = dados_seguradora["cores"][1]
+        
+        st.markdown(f"""
+        <div style="background: linear-gradient(135deg, {cor_primaria}, {cor_secundaria}); color: white; padding: 1.5rem 2rem; border-radius: 20px; margin: 2rem 0 1rem 0; box-shadow: 0 8px 25px rgba(0,0,0,0.2);">
+            <h2 style="margin: 0; font-size: 2rem; text-align: center;">{seguradora}</h2>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        col1, col2 = st.columns(2)
+        
+        produtos = list(dados_seguradora["produtos"].items())
+        
+        for i, (nome_produto, dados_produto) in enumerate(produtos):
+            with col1 if i % 2 == 0 else col2:
+                st.markdown(f"""
+                <div class="produto-card" style="border-color: {cor_primaria}">
+                    <div class="produto-badge" style="background: {cor_primaria}">🔥 {nome_produto}</div>
+                """, unsafe_allow_html=True)
+                
+                for caracteristica in dados_produto['caracteristicas']:
+                    st.markdown(f"""
+                    <div class="coverage-feature">
+                        <div style="display: flex; align-items: center;">
+                            <span style="color: {cor_primaria}; margin-right: 0.8rem; font-size: 1.1rem;">✓</span>
+                            <span style="font-weight: 500;">{caracteristica}</span>
+                        </div>
+                    </div>
+                    """, unsafe_allow_html=True)
+                
+                st.markdown(f"""
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0;">
+                        <div style="background: rgba({int(cor_primaria[1:3], 16)}, {int(cor_primaria[3:5], 16)}, {int(cor_primaria[5:7], 16)}, 0.1); padding: 1rem; border-radius: 10px; text-align: center;">
+                            <strong style="color: {cor_primaria};">💰 Preço Médio</strong><br>
+                            <span style="font-weight: bold; font-size: 1.1rem;">{dados_produto['preco_medio']}</span>
+                        </div>
+                        <div style="background: rgba({int(cor_primaria[1:3], 16)}, {int(cor_primaria[3:5], 16)}, {int(cor_primaria[5:7], 16)}, 0.1); padding: 1rem; border-radius: 10px; text-align: center;">
+                            <strong style="color: {cor_primaria};">🎯 Idade</strong><br>
+                            <span>{dados_produto['idade_minima']}-{dados_produto['idade_maxima']} anos</span>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-bottom: 1.5rem;">
+                        <strong style="color: #2c3e50;">📊 Capital Máximo:</strong> {dados_produto['capital_maximo']}
+                    </div>
+                    
+                    <div style="margin-bottom: 1rem;">
+                        <strong style="color: #2c3e50;">🏷️ Destaques:</strong><br>
+                """, unsafe_allow_html=True)
+                
+                for destaque in dados_produto['destaques']:
+                    st.markdown(f'<span class="compatibility-badge" style="background: {cor_primaria}; margin: 0.2rem;">{destaque}</span>', unsafe_allow_html=True)
+                
+                st.markdown("""
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
+                 # Guia de escolha
+    st.markdown("""
+    <div class="section-header">
+        <h3 style="margin: 0; font-size: 1.5rem;">🎯 Como Escolher o Melhor Produto</h3>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    col_guide1, col_guide2, col_guide3 = st.columns(3)
+    
+    with col_guide1:
+        st.markdown("""
+        <div class="info-card">
+            <h4 style="color: #2c3e50; margin-bottom: 1rem;">💰 Por Faixa de Preço</h4>
+            <ul style="color: #666; line-height: 1.6;">
+                <li><strong>Até R$ 100:</strong> Azos, MAG Seguros</li>
+                <li><strong>R$ 100-200:</strong> Prudential, Icatu</li>
+                <li><strong>R$ 200-300:</strong> MetLife, Omint básico</li>
+                <li><strong>Acima de R$ 300:</strong> Omint Premium</li>
+            </ul>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col_guide2:
+        st.markdown("""
+        <div class="info-card">
+            <h4 style="color: #2c3e50; margin-bottom: 1rem;">👤 Por Perfil</h4>
+            <ul style="color: #666; line-height: 1.6;">
+                <li><strong>Primeiro Seguro:</strong> MAG Seguros</li>
+                <li><strong>Alta Renda:</strong> Omint, Icatu</li>
+                <li><strong>Empresarial:</strong> MetLife, Icatu</li>
+                <li><strong>Servidores:</strong> MAG Seguros</li>
+                <li><strong>Porte de Armas:</strong> Azos</li>
+            </ul>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col_guide3:
+        st.markdown("""
+        <div class="info-card">
+            <h4 style="color: #2c3e50; margin-bottom: 1rem;">🎯 Por Necessidade</h4>
+            <ul style="color: #666; line-height: 1.6;">
+                <li><strong>Proteção Básica:</strong> Vida Individual</li>
+                <li><strong>Patrimônio:</strong> Wealth Protection</li>
+                <li><strong>Saúde Premium:</strong> Executivo Premium</li>
+                <li><strong>Internacional:</strong> Global Protection</li>
+                <li><strong>Coletivo:</strong> Planos Corporativos</li>
+            </ul>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    # Call to Action
+    st.markdown("""
+    <div class="download-section">
+        <h3 style="margin: 0 0 1rem 0; font-size: 2rem;">🚀 Pronto para Contratar?</h3>
+        <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">
+            Nossos especialistas estão prontos para ajudar você a escolher o produto ideal!
+        </p>
+        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+            <div style="background: white; color: #f5576c; padding: 1rem 2rem; border-radius: 50px; font-weight: bold; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2); text-align: center;">
+                📞 Falar com Especialista
+            </div>
+            <div style="background: rgba(255,255,255,0.2); color: white; padding: 1rem 2rem; border-radius: 50px; font-weight: bold; font-size: 1.1rem; border: 2px solid white; text-align: center;">
+                💬 WhatsApp
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+# ---------- ABA 6: FAQ INTERATIVO ----------
 elif aba_selecionada == "❓ FAQ Interativo":
     st.markdown('<div class="section-title">❓ FAQ Interativo</div>', unsafe_allow_html=True)
     
@@ -4164,5 +4683,6 @@ if st.session_state.get('calculation_complete'):
     </script>
     """, unsafe_allow_html=True)
     st.session_state.calculation_complete = False
+
 
 
