@@ -3568,7 +3568,7 @@ elif aba_selecionada == "👤 Cadastro Completo":
             
             # CAMPO REGIME DE CASAMENTO - AGORA DISPONÍVEL PARA TODOS (NÃO OBRIGATÓRIO)
             regime_casamento = st.selectbox(
-                "**Regime de Casamento** (Opcional)", 
+                "**Regime de Casamento** (preencher apenas para comunhão parcial de bens)", 
                 REGIME_CASAMENTO_OPCOES,
                 help="Regime de bens - preencha se aplicável ao seu estado civil"
             )
@@ -4683,6 +4683,7 @@ if st.session_state.get('calculation_complete'):
     </script>
     """, unsafe_allow_html=True)
     st.session_state.calculation_complete = False
+
 
 
 
