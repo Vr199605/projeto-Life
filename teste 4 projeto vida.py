@@ -242,6 +242,18 @@ def apply_custom_styles():
         box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
     
+    .valor-formatado {
+        background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+        padding: 0.6rem 1rem;
+        border-radius: 8px;
+        margin: 0.3rem 0;
+        border-left: 3px solid #2196f3;
+        font-size: 0.85rem;
+        color: #1565c0;
+        font-weight: 500;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    
     .faq-question {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
@@ -1581,6 +1593,11 @@ def criar_campo_moeda_com_extenso(label: str, valor_padrao: float = 0.0, key: st
     
     # Converte de volta para float
     valor_float = converter_moeda_para_float(valor_digitado)
+    
+    # Mostra o valor formatado em moeda
+    if valor_float > 0:
+        valor_formatado_moeda = formatar_moeda(valor_float)
+        st.markdown(f'<div class="valor-formatado">💰 <strong>Valor informado:</strong> {valor_formatado_moeda}</div>', unsafe_allow_html=True)
     
     # Mostra o valor por extenso
     if valor_float > 0:
