@@ -2603,7 +2603,7 @@ def gerar_proposta_txt(cliente, seguradoras_recomendadas, melhores_seguradoras):
     patrimonio_imobilizado = cliente.get('patrimonio_imobilizado', 0)
     patrimonio_total = cliente.get('patrimonio_total', 0)
     
-    Estudo = f"""
+    proposta = f"""
 ============================================
 PROPOSTA DE SEGURO DE VIDA - BESMART PRO
 ============================================
@@ -2699,6 +2699,115 @@ BeSmart PRO - Parceiro Oficial
 """
     
     return proposta
+
+def gerar_estudo_txt(cliente, recommendations, melhores_seguradoras):
+    """Gera um estudo em formato TXT"""
+    
+    calculo = CalculadoraCapital.calcular_capital_total(cliente)
+    coberturas = calculo['coberturas_detalhadas']
+    pilar_financeiro = cliente.get('pilar_financeiro', False)
+    estado_civil = cliente.get('estado_civil', '')
+    regime_casamento = cliente.get('regime_casamento', '')
+    patrimonio_liquido = cliente.get('patrimonio_liquido', 0)
+    patrimonio_imobilizado = cliente.get('patrimonio_imobilizado', 0)
+    patrimonio_total = cliente.get('patrimonio_total', 0)
+    
+    estudo = f"""
+============================================
+ESTUDO DE SEGURO DE VIDA - BESMART PRO
+============================================
+
+DADOS DO CLIENTE:
+----------------
+Nome: {cliente.get('nome', 'Não informado')}
+Idade: {cliente.get('idade', 'Não informado')} anos
+Profissão: {cliente.get('profissao', 'Não informado')}
+Estado Civil: {estado_civil}
+{('Regime de Casamento: ' + regime_casamento) if estado_civil == 'Casado(a)' else ''}
+Dependentes: {cliente.get('dependentes', 0)}
+Renda Mensal: {formatar_moeda(cliente.get('renda_mensal', 0))}
+
+COMPOSIÇÃO PATRIMONIAL:
+----------------------
+Patrimônio Líquido: {formatar_moeda(patrimonio_liquido)}
+Patrimônio Imobilizado: {formatar_moeda(patrimonio_imobilizado)}
+Patrimônio Total: {formatar_moeda(patrimonio_total)}
+
+Pilar Financeiro: {'Sim' if pilar_financeiro else 'Não'}
+Filial: {cliente.get('filial', 'Não informado')}
+
+PERFIL DO CLIENTE:
+-----------------
+"""
+    
+    perfis_ativos = [perfil for perfil, ativo in st.session_state.perfil_cliente.items() if ativo]
+    if perfis_ativos:
+        for perfil in perfis_ativos:
+            estudo += f"- {perfil}\n"
+    else:
+        estudo += "- Nenhum perfil específico selecionado\n"
+    
+    estudo += f"""
+DETALHAMENTO DAS COBERTURAS:
+---------------------------
+"""
+    
+    for cobertura, valor in coberturas.items():
+        if valor > 0:
+            if 'Diária' in cobertura:
+                estudo += f"- {cobertura}: {formatar_moeda(valor)}/dia\n"
+            else:
+                estudo += f"- {cobertura}: {formatar_moeda(valor)}\n"
+    
+    # Informação sobre ajuste de regime de casamento
+    if 'detalhes_whole_life' in cliente:
+        detalhes = cliente['detalhes_whole_life']
+        estudo += f"\n💡 **OBSERVAÇÃO:** {detalhes['descricao_pilar']} sobre {detalhes['descricao_regime'].lower()}\n"
+    
+    estudo += f"""
+CAPITAL TOTAL SUGERIDO: {formatar_moeda(calculo['capital_total'])}
+
+MELHORES SEGURADORAS PARA SEU PERFIL:
+------------------------------------
+"""
+    
+    for melhor in melhores_seguradoras:
+        estudo += f"""
+{melhor['posicao']}. {melhor['seguradora']}
+   - Score de Compatibilidade: {melhor['score']} pontos
+   - Porcentagem: {melhor['porcentagem']:.1f}%
+   - Perfis que mais contribuíram: {', '.join(list(melhor['detalhes'].keys())[:3])}
+"""
+    
+    estudo += f"""
+SEGURADORAS RECOMENDADAS:
+-----------------------
+"""
+    
+    for i, seguradora in enumerate(recommendations[:3], 1):
+        estudo += f"""
+{i}. {seguradora['Seguradora']}
+   - Compatibilidade: {seguradora['Match']}
+   - Score: {seguradora['Score']}/10
+   - Pontuação Total: {seguradora['Pontuacao_Total']} pontos
+   - Porcentagem: {seguradora['Porcentagem_Compatibilidade']:.1f}%
+   - Especialidade: {seguradora['Especialidade']}
+   - Preço Médio: {seguradora['Preço Médio']}
+"""
+    
+    estudo += f"""
+DADOS DO ASSESSOR:
+-----------------
+Filial: {cliente.get('filial', 'Não informado')}
+Assessor: {cliente.get('assessor', 'Não informado')}
+Data: {datetime.now().strftime('%d/%m/%Y %H:%M')}
+
+============================================
+BeSmart PRO - Parceiro Oficial
+============================================
+"""
+    
+    return estudo
 
 def criar_download_button(data, filename, button_text, file_type):
     """Cria um botão de download"""
