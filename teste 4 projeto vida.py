@@ -2592,7 +2592,7 @@ def show_risk_analysis(cliente):
 
 # ---------- FUNÇÕES DE DOWNLOAD ----------
 def gerar_proposta_txt(cliente, seguradoras_recomendadas, melhores_seguradoras):
-    """Gera uma proposta em formato TXT"""
+    """Gera um estudo em formato TXT"""
     
     calculo = CalculadoraCapital.calcular_capital_total(cliente)
     coberturas = calculo['coberturas_detalhadas']
@@ -2603,7 +2603,7 @@ def gerar_proposta_txt(cliente, seguradoras_recomendadas, melhores_seguradoras):
     patrimonio_imobilizado = cliente.get('patrimonio_imobilizado', 0)
     patrimonio_total = cliente.get('patrimonio_total', 0)
     
-    proposta = f"""
+    Estudo = f"""
 ============================================
 PROPOSTA DE SEGURO DE VIDA - BESMART PRO
 ============================================
@@ -4146,10 +4146,10 @@ elif aba_selecionada == "🏆 Seguradoras Recomendadas":
     col1, col2 = st.columns(2)
     
     with col1:
-        proposta_txt = gerar_estudo_txt(cliente, recommendations, melhores_seguradoras)
+        estudo_txt = gerar_estudo_txt(cliente, recommendations, melhores_seguradoras)
         download_txt = criar_download_button(
-            proposta_txt, 
-            f"proposta_besmart_{cliente.get('nome', 'cliente')}.txt", 
+            estudo_txt, 
+            f"estudo_besmart_{cliente.get('nome', 'cliente')}.txt", 
             "📄 Baixar Estudo Completo (TXT)", 
             'txt'
         )
@@ -4704,6 +4704,7 @@ if st.session_state.get('calculation_complete'):
     </script>
     """, unsafe_allow_html=True)
     st.session_state.calculation_complete = False
+
 
 
 
