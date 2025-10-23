@@ -3379,6 +3379,185 @@ COMPARATIVO_PRODUTOS = {
                 "idade_maxima": 70,
                 "capital_maximo": "R$ 500.000",
                 "destaques": ["Porte de Armas", "DIT", "Profissões Risco"]
+            },
+            "Vida Plus": {
+                "descricao": "Proteção ampliada com coberturas adicionais",
+                "caracteristicas": [
+                    "Todas as características do Vida Individual",
+                    "Doenças Graves incluída",
+                    "Invalidez Funcional",
+                    "Assistência funeral"
+                ],
+                "preco_medio": "R$ 129,90",
+                "idade_minima": 18,
+                "idade_maxima": 65,
+                "capital_maximo": "R$ 1.000.000",
+                "destaques": ["Cobertura Completa", "Doenças Graves", "Assistências"]
+            }
+        }
+    },
+    "Prudential": {
+        "cores": ["#1E40AF", "#1E3A8A"],
+        "produtos": {
+            "Planejamento Sucessório": {
+                "descricao": "Focado em proteção patrimonial e sucessão familiar",
+                "caracteristicas": [
+                    "Whole Life com acumulação",
+                    "Proteção sucessória",
+                    "Resgate parcial após 2 anos",
+                    "Cobertura internacional"
+                ],
+                "preco_medio": "R$ 199,90",
+                "idade_minima": 18,
+                "idade_maxima": 60,
+                "capital_maximo": "R$ 5.000.000",
+                "destaques": ["Sucessão", "Whole Life", "Alta Renda"]
+            },
+            "Doenças Graves Plus": {
+                "descricao": "Proteção especializada contra doenças graves",
+                "caracteristicas": [
+                    "85 doenças graves cobertas",
+                    "Pagamento em 30 dias",
+                    "Carência reduzida",
+                    "Segunda opinião médica"
+                ],
+                "preco_medio": "R$ 159,90",
+                "idade_minima": 18,
+                "idade_maxima": 55,
+                "capital_maximo": "R$ 2.000.000",
+                "destaques": ["Doenças Graves", "Cobertura Ampla", "Saúde"]
+            }
+        }
+    },
+    "Omint": {
+        "cores": ["#FF6B35", "#EA580C"],
+        "produtos": {
+            "Executivo Premium": {
+                "descricao": "Solução completa para executivos de alta renda",
+                "caracteristicas": [
+                    "Rede médica premium",
+                    "Atendimento concierge",
+                    "Cobertura internacional",
+                    "Hospitais de excelência"
+                ],
+                "preco_medio": "R$ 399,00",
+                "idade_minima": 25,
+                "idade_maxima": 60,
+                "capital_maximo": "R$ 10.000.000",
+                "destaques": ["Alta Renda", "Premium", "Internacional"]
+            },
+            "Saúde Corporativa": {
+                "descricao": "Soluções para empresas com foco em saúde",
+                "caracteristicas": [
+                    "Planos coletivos personalizados",
+                    "Gestão de saúde populacional",
+                    "Prevenção e wellness",
+                    "Telemedicina inclusa"
+                ],
+                "preco_medio": "Sob consulta",
+                "idade_minima": 18,
+                "idade_maxima": 70,
+                "capital_maximo": "Personalizado",
+                "destaques": ["Corporativo", "Saúde", "Personalizado"]
+            }
+        }
+    },
+    "MAG Seguros": {
+        "cores": ["#8A2BE2", "#7C3AED"],
+        "produtos": {
+            "Primeiro Seguro": {
+                "descricao": "Ideal para primeira contratação e classe média",
+                "caracteristicas": [
+                    "Preço acessível",
+                    "Documentação simplificada",
+                    "Carências reduzidas",
+                    "Pagamento flexível"
+                ],
+                "preco_medio": "R$ 59,90",
+                "idade_minima": 18,
+                "idade_maxima": 65,
+                "capital_maximo": "R$ 300.000",
+                "destaques": ["Econômico", "Primeira Vez", "Simples"]
+            },
+            "Servidor Público": {
+                "descricao": "Condições especiais para servidores públicos",
+                "caracteristicas": [
+                    "Desconto especial",
+                    "Carência diferenciada",
+                    "Pagamento via desconto em folha",
+                    "Cobertura familiar"
+                ],
+                "preco_medio": "R$ 79,90",
+                "idade_minima": 18,
+                "idade_maxima": 70,
+                "capital_maximo": "R$ 500.000",
+                "destaques": ["Servidores", "Desconto", "Folha"]
+            }
+        }
+    },
+    "Icatu Seguros": {
+        "cores": ["#00A859", "#059669"],
+        "produtos": {
+            "Wealth Protection": {
+                "descricao": "Proteção patrimonial para investidores",
+                "caracteristicas": [
+                    "Integração com investimentos",
+                    "Consultoria wealth",
+                    "Solução sucessória",
+                    "Gestor dedicado"
+                ],
+                "preco_medio": "R$ 249,90",
+                "idade_minima": 25,
+                "idade_maxima": 65,
+                "capital_maximo": "R$ 15.000.000",
+                "destaques": ["Investidores", "Patrimonial", "Wealth"]
+            },
+            "Empresarial Plus": {
+                "descricao": "Proteção para empresários e profissionais liberais",
+                "caracteristicas": [
+                    "Proteção key-person",
+                    "Seguro sócio",
+                    "Capitalização empresarial",
+                    "Planejamento sucessório"
+                ],
+                "preco_medio": "R$ 189,90",
+                "idade_minima": 21,
+                "idade_maxima": 65,
+                "capital_maximo": "R$ 3.000.000",
+                "destaques": ["Empresarial", "Key-Person", "Sucessão"]
+            }
+        }
+    },
+    "MetLife": {
+        "cores": ["#DC2626", "#B91C1C"],
+        "produtos": {
+            "Global Protection": {
+                "descricao": "Solução internacional para multinacionais",
+                "caracteristicas": [
+                    "Cobertura global",
+                    "Padrão internacional",
+                    "Assistência worldwide",
+                    "Solução para expatriados"
+                ],
+                "preco_medio": "R$ 299,90",
+                "idade_minima": 18,
+                "idade_maxima": 65,
+                "capital_maximo": "R$ 8.000.000",
+                "destaques": ["Global", "Multinacional", "Expatriados"]
+            },
+            "Coletivo Empresarial": {
+                "descricao": "Benefícios para colaboradores de grandes empresas",
+                "caracteristicas": [
+                    "Customização total",
+                    "Gestão de benefícios",
+                    "Plataforma digital",
+                    "Wellness corporativo"
+                ],
+                "preco_medio": "Sob consulta",
+                "idade_minima": 18,
+                "idade_maxima": 70,
+                "capital_maximo": "Personalizado",
+                "destaques": ["Coletivo", "Empresas", "Benefícios"]
             }
         }
     }
@@ -4704,6 +4883,7 @@ if st.session_state.get('calculation_complete'):
     </script>
     """, unsafe_allow_html=True)
     st.session_state.calculation_complete = False
+
 
 
 
