@@ -2285,33 +2285,38 @@ def create_coverage_comparison_chart(calculo):
     coberturas_validas = {k: v for k, v in coberturas.items() if v > 0}
     
     if not coberturas_validas:
+        st.info("📊 Complete o cadastro para ver a distribuição das coberturas.")
         return
     
-    df = pd.DataFrame({
-        'Cobertura': list(coberturas_validas.keys()),
-        'Valor': list(coberturas_validas.values())
-    })
-    
-    # Gráfico de barras com Altair
-    chart = alt.Chart(df).mark_bar().encode(
-        x=alt.X('Cobertura:N', title='', axis=alt.Axis(labelAngle=0)),
-        y=alt.Y('Valor:Q', title='Valor (R$)'),
-        color=alt.Color('Valor:Q', scale=alt.Scale(scheme='viridis'), legend=None),
-        tooltip=['Cobertura', 'Valor']
-    ).properties(
-        title='📊 Distribuição do Capital por Cobertura',
-        height=400
-    ).configure_title(
-        fontSize=20,
-        color='#2c3e50'
-    ).configure_axis(
-        labelFontSize=12,
-        titleFontSize=14
-    ).configure_view(
-        strokeWidth=0
-    )
-    
-    st.altair_chart(chart, use_container_width=True)
+    try:
+        df = pd.DataFrame({
+            'Cobertura': list(coberturas_validas.keys()),
+            'Valor': list(coberturas_validas.values())
+        })
+        
+        # Gráfico de barras com Altair
+        chart = alt.Chart(df).mark_bar().encode(
+            x=alt.X('Cobertura:N', title='', axis=alt.Axis(labelAngle=0)),
+            y=alt.Y('Valor:Q', title='Valor (R$)'),
+            color=alt.Color('Valor:Q', scale=alt.Scale(scheme='viridis'), legend=None),
+            tooltip=['Cobertura', 'Valor']
+        ).properties(
+            title='📊 Distribuição do Capital por Cobertura',
+            height=400
+        ).configure_title(
+            fontSize=20,
+            color='#2c3e50'
+        ).configure_axis(
+            labelFontSize=12,
+            titleFontSize=14
+        ).configure_view(
+            strokeWidth=0
+        )
+        
+        st.altair_chart(chart, use_container_width=True)
+    except Exception as e:
+        st.error(f"❌ Erro ao criar gráfico: {str(e)}")
+        st.info("📊 Visualização alternativa: Complete o cadastro para ver a distribuição.")
 
 def create_protection_level_analysis(cliente, calculo):
     """Cria análise dos níveis de proteção"""
@@ -2460,6 +2465,20 @@ def create_coverage_recommendations(cliente, calculo):
 def show_detailed_coverage_card(cobertura_nome, dados_cobertura, valor_calculado, cliente):
     """Mostra card detalhado da cobertura quando clicar em Ver Detalhes"""
     
+    # CORREÇÃO: Informação específica para Doenças Graves
+    info_meses = ""
+    if cobertura_nome == 'Doenças Graves':
+        meses = st.session_state.meses_doencas_graves
+        despesas_mensais = cliente.get('despesas_mensais', 0)
+        info_meses = f"""
+        <div class="tech-detail-row">
+            <div class="tech-detail-label">Período de Cobertura</div>
+            <div class="tech-detail-value" style="color: #28a745; font-weight: bold;">
+                {meses} meses de despesas ({formatar_moeda(despesas_mensais)} × {meses})
+            </div>
+        </div>
+        """
+    
     st.markdown(f"""
     <div class="detailed-coverage-card" style="border-color: {dados_cobertura['cor']}">
         <div class="coverage-detail-header">
@@ -2478,7 +2497,8 @@ def show_detailed_coverage_card(cobertura_nome, dados_cobertura, valor_calculado
             </div>
         </div>
         
-        
+        <div class="detail-section">
+            <h3 class="detail-section-title">🎯 Benefícios Incluídos</h3>
     """, unsafe_allow_html=True)
     
     for beneficio in dados_cobertura['beneficios']:
@@ -2491,10 +2511,11 @@ def show_detailed_coverage_card(cobertura_nome, dados_cobertura, valor_calculado
         </div>
         """, unsafe_allow_html=True)
     
-    st.markdown("""
+    st.markdown(f"""
             </div>
             <div class="detail-section">
                 <h3 class="detail-section-title">📋 Detalhes Técnicos</h3>
+                {info_meses}
     """, unsafe_allow_html=True)
     
     for chave, valor in dados_cobertura['detalhes_tecnicos'].items():
@@ -2505,7 +2526,7 @@ def show_detailed_coverage_card(cobertura_nome, dados_cobertura, valor_calculado
         </div>
         """, unsafe_allow_html=True)
     
-    st.markdown(f"""
+    st.markdown("""
             </div>
         </div>
     </div>
@@ -2527,72 +2548,90 @@ def show_detailed_coverage_card(cobertura_nome, dados_cobertura, valor_calculado
             st.session_state.coverage_details_expanded[cobertura_nome] = False
             st.rerun()
 
-# ---------- FUNÇÃO PARA GRÁFICO DE PAGAMENTO X RECEBIMENTO ----------
+# ---------- FUNÇÃO CORRIGIDA PARA GRÁFICO DE PAGAMENTO X RECEBIMENTO ----------
 def create_payment_receipt_chart(cliente):
-    """Cria gráfico de pagamento x recebimento usando Altair"""
+    """Cria gráfico de pagamento x recebimento usando Altair - CORRIGIDO"""
     capital_total = cliente.get('capital_sugerido', 0)
     idade = cliente.get('idade', 30)
     
     if capital_total == 0:
-        return
+        return None
     
-    # Simular dados para 20 anos
-    anos = list(range(1, 21))
-    pagamentos_anuais = []
-    recebimentos_potenciais = []
-    
-    # Estimativa de pagamento anual (aproximadamente 1-2% do capital segurado)
-    pagamento_anual_estimado = capital_total * 0.015
-    
-    for ano in anos:
-        # Pagamentos acumulados
-        pagamento_acumulado = pagamento_anual_estimado * ano
-        pagamentos_anuais.append(pagamento_acumulado)
+    try:
+        # Simular dados para 20 anos - CORREÇÃO: Garantir dados válidos
+        anos = list(range(1, 21))
+        pagamentos_anuais = []
+        recebimentos_potenciais = []
         
-        # Recebimento potencial (capital total disponível a qualquer momento)
-        recebimentos_potenciais.append(capital_total)
-    
-    # Criar DataFrame
-    df = pd.DataFrame({
-        'Ano': anos,
-        'Pagamentos_Acumulados': pagamentos_anuais,
-        'Recebimento_Potencial': recebimentos_potenciais
-    })
-    
-    # Criar gráfico com Altair
-    base = alt.Chart(df).transform_fold(
-        ['Pagamentos_Acumulados', 'Recebimento_Potencial'],
-        as_=['Tipo', 'Valor']
-    ).encode(
-        x=alt.X('Ano:O', title='Anos de Pagamento'),
-        y=alt.Y('Valor:Q', title='Valor (R$)', axis=alt.Axis(format='$.2f')),
-        color=alt.Color('Tipo:N', 
-                       scale=alt.Scale(domain=['Pagamentos_Acumulados', 'Recebimento_Potencial'],
-                                      range=['#FF6B6B', '#4ECDC4']),
-                       legend=alt.Legend(title='Legenda')),
-        tooltip=['Ano', 'Tipo', alt.Tooltip('Valor:Q', format='$.2f')]
-    )
-    
-    line = base.mark_line(point=True, strokeWidth=3).encode(
-        opacity=alt.value(0.8)
-    )
-    
-    chart = (line).properties(
-        title='📈 Projeção de Pagamento x Recebimento (20 anos)',
-        width=600,
-        height=400
-    ).configure_title(
-        fontSize=18,
-        color='#2c3e50'
-    ).configure_axis(
-        labelFontSize=12,
-        titleFontSize=14
-    ).configure_legend(
-        titleFontSize=12,
-        labelFontSize=11
-    )
-    
-    return chart
+        # Estimativa de pagamento anual (aproximadamente 1-2% do capital segurado)
+        pagamento_anual_estimado = capital_total * 0.015
+        
+        for ano in anos:
+            # Pagamentos acumulados
+            pagamento_acumulado = pagamento_anual_estimado * ano
+            pagamentos_anuais.append(float(pagamento_acumulado))  # CORREÇÃO: Converter para float
+            
+            # Recebimento potencial (capital total disponível a qualquer momento)
+            recebimentos_potenciais.append(float(capital_total))  # CORREÇÃO: Converter para float
+        
+        # CORREÇÃO: Criar DataFrame com dados válidos
+        df = pd.DataFrame({
+            'Ano': anos,
+            'Pagamentos_Acumulados': pagamentos_anuais,
+            'Recebimento_Potencial': recebimentos_potenciais
+        })
+        
+        # CORREÇÃO: Verificar se há dados válidos
+        if df.empty or df['Pagamentos_Acumulados'].isna().all() or df['Recebimento_Potencial'].isna().all():
+            return None
+        
+        # CORREÇÃO: Criar gráfico com tratamento de erro
+        try:
+            # Transformar dados para formato longo
+            df_melted = df.melt(id_vars=['Ano'], 
+                              value_vars=['Pagamentos_Acumulados', 'Recebimento_Potencial'],
+                              var_name='Tipo', 
+                              value_name='Valor')
+            
+            # Mapear nomes mais amigáveis
+            df_melted['Tipo'] = df_melted['Tipo'].map({
+                'Pagamentos_Acumulados': 'Pagamentos Acumulados',
+                'Recebimento_Potencial': 'Recebimento Potencial'
+            })
+            
+            # Criar gráfico
+            chart = alt.Chart(df_melted).mark_line(point=True, strokeWidth=3).encode(
+                x=alt.X('Ano:O', title='Anos de Pagamento', axis=alt.Axis(labelAngle=0)),
+                y=alt.Y('Valor:Q', title='Valor (R$)', axis=alt.Axis(format='$.2f')),
+                color=alt.Color('Tipo:N', 
+                              scale=alt.Scale(
+                                  domain=['Pagamentos Acumulados', 'Recebimento Potencial'],
+                                  range=['#FF6B6B', '#4ECDC4']
+                              ),
+                              legend=alt.Legend(title='Legenda')),
+                tooltip=['Ano', 'Tipo', alt.Tooltip('Valor:Q', format='$.2f')]
+            ).properties(
+                title='📈 Projeção de Pagamento x Recebimento (20 anos)',
+                height=400,
+                width=600
+            ).configure_title(
+                fontSize=18,
+                anchor='start'
+            ).configure_axis(
+                labelFontSize=12,
+                titleFontSize=14
+            ).configure_legend(
+                titleFontSize=12,
+                labelFontSize=11
+            )
+            
+            return chart
+            
+        except Exception as e:
+            return None
+            
+    except Exception as e:
+        return None
 
 # ---------- COMPONENTES ----------
 def create_progress_tracker(step, total_steps=3):
@@ -3795,7 +3834,7 @@ elif aba_selecionada == "👥 Análise do Cliente":
             st.markdown("</div>", unsafe_allow_html=True)
         
         with col4:
-            # Gráfico de Pagamento x Recebimento
+            # Gráfico de Pagamento x Recebimento - CORRIGIDO
             st.markdown("""
             <div class="payment-receipt-chart">
                 <h4 style="color: #2c3e50; margin-bottom: 1.5rem; text-align: center;">📈 Projeção de Pagamento x Recebimento</h4>
@@ -3803,17 +3842,28 @@ elif aba_selecionada == "👥 Análise do Cliente":
             
             chart = create_payment_receipt_chart(cliente)
             if chart:
-                st.altair_chart(chart, use_container_width=True)
-                st.markdown("""
-                <div style="background: rgba(102, 126, 234, 0.1); padding: 1rem; border-radius: 10px; margin-top: 1rem;">
-                    <p style="margin: 0; color: #666; font-size: 0.9rem; text-align: center;">
-                        <strong>💡 Análise:</strong> O gráfico mostra a relação entre seus pagamentos acumulados 
-                        e o benefício potencial disponível a qualquer momento.
-                    </p>
-                </div>
-                """, unsafe_allow_html=True)
+                try:
+                    st.altair_chart(chart, use_container_width=True)
+                    st.markdown("""
+                    <div style="background: rgba(102, 126, 234, 0.1); padding: 1rem; border-radius: 10px; margin-top: 1rem;">
+                        <p style="margin: 0; color: #666; font-size: 0.9rem; text-align: center;">
+                            <strong>💡 Análise:</strong> O gráfico mostra a relação entre seus pagamentos acumulados 
+                            e o benefício potencial disponível a qualquer momento.
+                        </p>
+                    </div>
+                    """, unsafe_allow_html=True)
+                except Exception as e:
+                    st.error(f"❌ Erro ao exibir gráfico: {str(e)}")
+                    st.info("📊 Alternativa: Visualização não disponível no momento.")
             else:
-                st.info("Complete o cadastro para ver a projeção de pagamentos.")
+                st.info("""
+                **💡 Complete o cadastro para ver a projeção de pagamentos.**
+                
+                O gráfico mostrará:
+                - Pagamentos acumulados ao longo do tempo
+                - Benefício potencial disponível
+                - Relação entre investimento e proteção
+                """)
             
             st.markdown("</div>", unsafe_allow_html=True)
         
@@ -4321,6 +4371,7 @@ with st.sidebar:
         </div>
     </div>
     """, unsafe_allow_html=True)
+
 
 
 
