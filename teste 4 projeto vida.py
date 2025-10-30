@@ -976,47 +976,6 @@ def apply_custom_styles():
         line-height: 1.4;
     }
     
-    /* Previdência Card Styles */
-    .previdencia-card {
-        background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
-        padding: 2rem;
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        margin: 2rem 0;
-        border-left: 8px solid #ff6b35;
-        color: #2c3e50;
-    }
-    
-    .previdencia-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 1.5rem;
-    }
-    
-    .previdencia-title {
-        font-size: 1.8rem;
-        font-weight: 700;
-        color: #2c3e50;
-        margin: 0;
-    }
-    
-    .previdencia-value {
-        font-size: 2.2rem;
-        font-weight: bold;
-        color: #ff6b35;
-        margin: 0;
-    }
-    
-    .oportunidade-alavancagem {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        padding: 1.5rem;
-        border-radius: 15px;
-        margin: 1rem 0;
-        box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-    }
-    
     /* Pilar Financeiro Card */
     .pilar-financeiro-card {
         background: linear-gradient(135deg, #00b09b 0%, #96c93d 100%);
@@ -1321,6 +1280,107 @@ def apply_custom_styles():
         font-weight: 600;
         margin-bottom: 0.5rem;
     }
+
+    /* NOVOS ESTILOS PARA AS MELHORIAS IMPLEMENTADAS */
+    
+    /* Aba Como Escolher o Melhor */
+    .decision-matrix {
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        padding: 2rem;
+        border-radius: 20px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        margin: 1.5rem 0;
+    }
+    
+    .profile-question {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 1.5rem;
+        border-radius: 15px;
+        margin: 1rem 0;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .profile-question:hover {
+        transform: translateX(10px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+    
+    .flow-chart {
+        background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+        padding: 2rem;
+        border-radius: 20px;
+        border: 2px dashed #667eea;
+        margin: 1.5rem 0;
+        text-align: center;
+    }
+    
+    /* Aba Cliente Aprimorada */
+    .client-details-card {
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        padding: 2rem;
+        border-radius: 20px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        margin: 1.5rem 0;
+        border-left: 8px solid #667eea;
+    }
+    
+    .partner-info {
+        background: linear-gradient(135deg, #00b09b 0%, #96c93d 100%);
+        color: white;
+        padding: 1.5rem;
+        border-radius: 15px;
+        margin: 1rem 0;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+    
+    .payment-receipt-chart {
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        padding: 2rem;
+        border-radius: 20px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        margin: 1.5rem 0;
+    }
+    
+    /* Cards Informativos Melhorados */
+    .info-card-enhanced {
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        padding: 2rem;
+        border-radius: 20px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        margin: 1rem 0;
+        border-left: 8px solid;
+        transition: all 0.3s ease;
+    }
+    
+    .info-card-enhanced:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    }
+    
+    /* Navegação Atualizada */
+    .nav-tab {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 12px;
+        margin: 0.5rem 0;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        text-align: center;
+        font-weight: 600;
+    }
+    
+    .nav-tab:hover {
+        transform: translateX(5px);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    }
+    
+    .nav-tab.active {
+        background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
     </style>
     """, unsafe_allow_html=True)
 
@@ -1341,6 +1401,17 @@ if 'selected_coverage' not in st.session_state:
     st.session_state.selected_coverage = None
 if 'coverage_details_expanded' not in st.session_state:
     st.session_state.coverage_details_expanded = {}
+if 'coberturas_selecionadas' not in st.session_state:
+    st.session_state.coberturas_selecionadas = {
+        'Doenças Graves': True,
+        'Whole Life': True,
+        'Term Life': True,
+        'Invalidez Permanente': True,
+        'Diária Incapacidade Temporária': True,
+        'Diária Internação Hospitalar': True
+    }
+if 'meses_doencas_graves' not in st.session_state:
+    st.session_state.meses_doencas_graves = 36
 
 # ---------- LISTA DE FILIAIS ----------
 FILIAIS = [
@@ -1610,14 +1681,20 @@ def criar_campo_moeda_com_extenso(label: str, valor_padrao: float = 0.0, key: st
 class CalculadoraCapital:
     @staticmethod
     def calcular_cobertura_doencas_graves(cliente):
-        """Calcula cobertura para doenças graves - 36x despesas mensais"""
+        """Calcula cobertura para doenças graves - flexível entre 24 ou 36x despesas mensais"""
+        if not st.session_state.coberturas_selecionadas.get('Doenças Graves', True):
+            return 0
+            
         despesas_mensais = cliente.get('despesas_mensais', 0)
-        despesas_filhos = cliente.get('despesas_filhos_mensais', 0)
-        return (despesas_mensais) * 36
+        meses = st.session_state.meses_doencas_graves
+        return despesas_mensais * meses
     
     @staticmethod
     def calcular_whole_life(cliente):
         """Calcula Whole Life - Ajustado para regime de casamento"""
+        if not st.session_state.coberturas_selecionadas.get('Whole Life', True):
+            return 0
+            
         patrimonio_total = cliente.get('patrimonio_total', 0)
         pilar_financeiro = cliente.get('pilar_financeiro', False)
         
@@ -1697,6 +1774,9 @@ class CalculadoraCapital:
     @staticmethod
     def calcular_term_life(cliente):
         """Calcula Term Life - Custo do filho x Anos até independência"""
+        if not st.session_state.coberturas_selecionadas.get('Term Life', True):
+            return 0
+            
         despesas_filhos = cliente.get('despesas_filhos_mensais', 0)
         anos_independencia = cliente.get('anos_ate_independencia', 0)
         return despesas_filhos * anos_independencia * 12
@@ -1704,24 +1784,29 @@ class CalculadoraCapital:
     @staticmethod
     def calcular_ipa(cliente):
         """Calcula Invalidez Permanente Total - Renda x 100"""
+        if not st.session_state.coberturas_selecionadas.get('Invalidez Permanente', True):
+            return 0
+            
         renda_mensal = cliente.get('renda_mensal', 0)
         return renda_mensal * 100
     
     @staticmethod
     def calcular_dit_rit(cliente):
         """Calcula Diária por Incapacidade Temporária - Despesas/30"""
+        if not st.session_state.coberturas_selecionadas.get('Diária Incapacidade Temporária', True):
+            return 0
+            
         despesas_mensais = cliente.get('despesas_mensais', 0)
-        despesas_filhos = cliente.get('despesas_filhos_mensais', 0)
-        despesas_totais = despesas_mensais
-        return despesas_totais / 30
+        return despesas_mensais / 30
     
     @staticmethod
     def calcular_dih(cliente):
         """Calcula Diária por Internação Hospitalar - Despesas/30"""
+        if not st.session_state.coberturas_selecionadas.get('Diária Internação Hospitalar', True):
+            return 0
+            
         despesas_mensais = cliente.get('despesas_mensais', 0)
-        despesas_filhos = cliente.get('despesas_filhos_mensais', 0)
-        despesas_totais = despesas_mensais
-        return despesas_totais / 30
+        return despesas_mensais / 30
     
     @staticmethod
     def calcular_capital_total(cliente):
@@ -1810,7 +1895,8 @@ SEGURADORAS_BESMART = {
         "tempo_aprovacao": "24h",
         "rating": "A",
         "preco_medio": "R$ 89,90",
-        "perfil_ideal": "Profissionais com porte de armas e busca por DIT"
+        "perfil_ideal": "Profissionais com porte de armas e busca por DIT",
+        "doencas_graves": ["Câncer", "Infarto", "AVC", "Insuficiência Renal", "Transplantes", "Doença de Parkinson", "Alzheimer", "Esclerose Múltipla", "Paralisia", "Cegueira", "Surdez", "Queimaduras Graves"]
     },
     "Prudential": {
         "pontuacao": 9.0,
@@ -1820,7 +1906,8 @@ SEGURADORAS_BESMART = {
         "tempo_aprovacao": "48h",
         "rating": "AA+",
         "preco_medio": "R$ 199,90",
-        "perfil_ideal": "Clientes com foco em proteção contra doenças graves e sucessão"
+        "perfil_ideal": "Clientes com foco em proteção contra doenças graves e sucessão",
+        "doencas_graves": ["Câncer", "Infarto", "AVC", "Insuficiência Renal", "Transplantes", "Doença de Parkinson", "Alzheimer", "Esclerose Múltipla", "Paralisia", "Cegueira", "Surdez", "Queimaduras Graves", "ELA", "Miocardiopatias", "Doenças Coronarianas"]
     },
     "Omint": {
         "pontuacao": 9.4,
@@ -1830,7 +1917,8 @@ SEGURADORAS_BESMART = {
         "tempo_aprovacao": "24-72h",
         "rating": "AAA",
         "preco_medio": "R$ 299+",
-        "perfil_ideal": "Executivos de alta renda que buscam saúde premium e atendimento diferenciado"
+        "perfil_ideal": "Executivos de alta renda que buscam saúde premium e atendimento diferenciado",
+        "doencas_graves": ["Câncer", "Infarto", "AVC", "Insuficiência Renal", "Transplantes", "Doença de Parkinson", "Alzheimer", "Esclerose Múltipla", "Paralisia", "Cegueira", "Surdez", "Queimaduras Graves", "ELA", "Miocardiopatias", "Doenças Coronarianas", "Doença de Crohn", "Esclerose Lateral Amiotrófica"]
     },
     "MAG Seguros": {
         "pontuacao": 8.8,
@@ -1840,7 +1928,8 @@ SEGURADORAS_BESMART = {
         "tempo_aprovacao": "24h",
         "rating": "A+",
         "preco_medio": "R$ 59,90",
-        "perfil_ideal": "Servidores públicos e classe média buscando primeira proteção"
+        "perfil_ideal": "Servidores públicos e classe média buscando primeira proteção",
+        "doencas_graves": ["Câncer", "Infarto", "AVC", "Insuficiência Renal", "Transplantes", "Doença de Parkinson", "Alzheimer", "Esclerose Múltipla"]
     },
     "Icatu Seguros": {
         "pontuacao": 9.1,
@@ -1850,7 +1939,8 @@ SEGURADORAS_BESMART = {
         "tempo_aprovacao": "48-72h",
         "rating": "AA+",
         "preco_medio": "R$ 189,90",
-        "perfil_ideal": "Investidores e profissionais liberais com foco em proteção patrimonial"
+        "perfil_ideal": "Investidores e profissionais liberais com foco em proteção patrimonial",
+        "doencas_graves": ["Câncer", "Infarto", "AVC", "Insuficiência Renal", "Transplantes", "Doença de Parkinson", "Alzheimer", "Esclerose Múltipla", "Paralisia", "Cegueira", "Surdez", "Queimaduras Graves", "ELA"]
     },
     "MetLife": {
         "pontuacao": 8.9,
@@ -1860,7 +1950,8 @@ SEGURADORAS_BESMART = {
         "tempo_aprovacao": "72h",
         "rating": "AA",
         "preco_medio": "R$ 179,90",
-        "perfil_ideal": "Funcionários de multinacionais e grandes corporações"
+        "perfil_ideal": "Funcionários de multinacionais e grandes corporações",
+        "doencas_graves": ["Câncer", "Infarto", "AVC", "Insuficiência Renal", "Transplantes", "Doença de Parkinson", "Alzheimer", "Esclerose Múltipla", "Paralisia", "Cegueira", "Surdez"]
     }
 }
 
@@ -2154,7 +2245,8 @@ class InsuranceAI:
                 'Perfil_Ideal': dados['perfil_ideal'],
                 'Razões_Match': match_reasons,
                 'Cor': dados['cor'],
-                'Perfis_Compatíveis': scores_perfil.get(nome, {}).get('perfis_compatíveis', [])
+                'Perfis_Compatíveis': scores_perfil.get(nome, {}).get('perfis_compatíveis', []),
+                'Doencas_Graves': dados.get('doencas_graves', [])
             })
         
         recommendations.sort(key=lambda x: x['Score'], reverse=True)
@@ -2435,6 +2527,73 @@ def show_detailed_coverage_card(cobertura_nome, dados_cobertura, valor_calculado
             st.session_state.coverage_details_expanded[cobertura_nome] = False
             st.rerun()
 
+# ---------- FUNÇÃO PARA GRÁFICO DE PAGAMENTO X RECEBIMENTO ----------
+def create_payment_receipt_chart(cliente):
+    """Cria gráfico de pagamento x recebimento usando Altair"""
+    capital_total = cliente.get('capital_sugerido', 0)
+    idade = cliente.get('idade', 30)
+    
+    if capital_total == 0:
+        return
+    
+    # Simular dados para 20 anos
+    anos = list(range(1, 21))
+    pagamentos_anuais = []
+    recebimentos_potenciais = []
+    
+    # Estimativa de pagamento anual (aproximadamente 1-2% do capital segurado)
+    pagamento_anual_estimado = capital_total * 0.015
+    
+    for ano in anos:
+        # Pagamentos acumulados
+        pagamento_acumulado = pagamento_anual_estimado * ano
+        pagamentos_anuais.append(pagamento_acumulado)
+        
+        # Recebimento potencial (capital total disponível a qualquer momento)
+        recebimentos_potenciais.append(capital_total)
+    
+    # Criar DataFrame
+    df = pd.DataFrame({
+        'Ano': anos,
+        'Pagamentos_Acumulados': pagamentos_anuais,
+        'Recebimento_Potencial': recebimentos_potenciais
+    })
+    
+    # Criar gráfico com Altair
+    base = alt.Chart(df).transform_fold(
+        ['Pagamentos_Acumulados', 'Recebimento_Potencial'],
+        as_=['Tipo', 'Valor']
+    ).encode(
+        x=alt.X('Ano:O', title='Anos de Pagamento'),
+        y=alt.Y('Valor:Q', title='Valor (R$)', axis=alt.Axis(format='$.2f')),
+        color=alt.Color('Tipo:N', 
+                       scale=alt.Scale(domain=['Pagamentos_Acumulados', 'Recebimento_Potencial'],
+                                      range=['#FF6B6B', '#4ECDC4']),
+                       legend=alt.Legend(title='Legenda')),
+        tooltip=['Ano', 'Tipo', alt.Tooltip('Valor:Q', format='$.2f')]
+    )
+    
+    line = base.mark_line(point=True, strokeWidth=3).encode(
+        opacity=alt.value(0.8)
+    )
+    
+    chart = (line).properties(
+        title='📈 Projeção de Pagamento x Recebimento (20 anos)',
+        width=600,
+        height=400
+    ).configure_title(
+        fontSize=18,
+        color='#2c3e50'
+    ).configure_axis(
+        labelFontSize=12,
+        titleFontSize=14
+    ).configure_legend(
+        titleFontSize=12,
+        labelFontSize=11
+    )
+    
+    return chart
+
 # ---------- COMPONENTES ----------
 def create_progress_tracker(step, total_steps=3):
     progress = (step / total_steps) * 100
@@ -2713,855 +2872,209 @@ def criar_download_button(data, filename, button_text, file_type):
     
     return href
 
-# ---------- FAQ COMPLETO ----------
-FAQ_COMPLETO = {
-    "🧭 1. Conceitos Gerais e Funcionamento (1 – 30)": [
+# ---------- CONTEÚDO PARA ABA "COMO ESCOLHER O MELHOR" ----------
+def create_how_to_choose_section():
+    """Cria a seção 'Como Escolher o Melhor Produto'"""
+    
+    st.markdown("""
+    <div class="success-card">
+        <h2 style="margin: 0 0 1rem 0; font-size: 2.5rem; text-align: center;">🏆 Como Escolher o Melhor Seguro</h2>
+        <p style="font-size: 1.3rem; opacity: 0.9; text-align: center; margin: 0;">Guia completo para tomar a melhor decisão</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Critérios de Escolha
+    st.markdown("""
+    <div class="section-header">
+        <h3 style="margin: 0; font-size: 1.5rem;">🎯 Critérios Essenciais para Escolha</h3>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    criterios = [
         {
-            "pergunta": "O que é um seguro de vida?",
-            "resposta": """
-            **Seguro de Vida** é um contrato entre você (segurado) e uma seguradora, onde você paga prêmios periódicos em troca de proteção financeira para seus beneficiários em caso de:
-            
-            • **Morte** - Sua família recebe o capital segurado
-            • **Invalidez** - Você recebe em caso de acidentes incapacitantes
-            • **Doenças Graves** - Suporte financeiro para tratamentos
-            
-            É a **proteção mais importante** que você pode oferecer à sua família! 🛡️
-            """,
-            "destaque": "Proteção financeira familiar essencial"
+            "titulo": "💰 Custo-Benefício",
+            "descricao": "Não é só sobre o preço, mas o valor que você recebe por ele",
+            "detalhes": [
+                "Compare o custo anual total (prêmio)",
+                "Avalie as coberturas incluídas no valor",
+                "Considere franquias e carências",
+                "Verifique se há cobrança de taxas extras"
+            ],
+            "icone": "💰"
         },
         {
-            "pergunta": "Como funciona um seguro de vida?",
-            "resposta": """
-            **Funcionamento do Seguro de Vida:**
-            
-            1. **Contratação**: Você escolhe as coberturas e valores
-            2. **Pagamento**: Paga prêmios mensais/anuais
-            3. **Vigência**: A proteção está ativa enquanto pagar
-            4. **Sinistro**: Em caso de evento coberto, aciona a seguradora
-            5. **Indenização**: Beneficiários recebem o capital segurado
-            
-            **💡 É como um guarda-chuva: você espera nunca precisar, mas fica tranquilo sabendo que está protegido.**
-            """,
-            "destaque": "Proteção contínua em troca de pagamento periódico"
+            "titulo": "🛡️ Coberturas Incluídas",
+            "descricao": "O que realmente importa quando você precisar",
+            "detalhes": [
+                "Doenças Graves (quantas e quais)",
+                "Invalidez por acidente e doença",
+                "Diárias por incapacidade",
+                "Assistências funeral e residencial"
+            ],
+            "icone": "🛡️"
         },
         {
-            "pergunta": "Qual a diferença entre seguro de vida e previdência privada?",
-            "resposta": """
-            **Principais Diferenças:**
-            
-            **🎯 Seguro de Vida:**
-            • Foco em **proteção**
-            • Indenização em caso de sinistro
-            • Beneficiários recebem
-            • Prazo determinado ou vitalício
-            
-            **💰 Previdência Privada:**
-            • Foco em **acumulação**
-            • Você recebe o valor
-            • Para aposentadoria
-            • Longo prazo com rentabilidade
-            
-            **💡 Ideal: Ter ambos para proteção completa!**
-            """,
-            "destaque": "Seguro protege, previdência acumula"
+            "titulo": "⚡ Carências e Exclusões",
+            "descricao": "Os detalhes que fazem toda a diferença",
+            "detalhes": [
+                "Tempo de carência para cada cobertura",
+                "Condições pré-existentes cobertas",
+                "Exclusões por atividades de risco",
+                "Limites de idade para renovação"
+            ],
+            "icone": "⚡"
         },
         {
-            "pergunta": "Qual a importância de ter um seguro de vida?",
-            "resposta": """
-            **Importância do Seguro de Vida:**
-            
-            • **Proteção Familiar**: Garante sustento dos dependentes
-            • **Cobertura de Dívidas**: Evita herança de financiamentos
-            • **Educação dos Filhos**: Assegura continuidade dos estudos
-            • **Custos Finais**: Cobre despesas funerárias e médicas
-            • **Planejamento Sucessório**: Organiza transferência patrimonial
-            • **Tranquilidade**: Segurança psicológica e emocional
-            
-            **🎯 É um ato de amor e responsabilidade com quem você ama.**
-            """,
-            "destaque": "Proteção para quem depende de você"
-        },
-        {
-            "pergunta": "Existe carência no seguro de vida?",
-            "resposta": """
-            **Sim, existe carência no seguro de vida:**
-            
-            • **Morte Natural**: 2 anos (em média)
-            • **Morte Acidental**: 24 horas a 30 dias
-            • **Doenças Graves**: 90 a 180 dias
-            • **Invalidez**: 30 a 90 dias
-            
-            **💡 A carência é o período entre a contratação e o início da cobertura total.**
-            
-            **Importante**: Suicídio geralmente tem carência de 2 anos.
-            """,
-            "destaque": "Período de espera para cobertura total"
-        },
-        {
-            "pergunta": "Qual a idade mínima para contratar?",
-            "resposta": """
-            **Idade Mínima para Contratar:**
-            
-            • **18 anos** - Maioridade civil
-            • Algumas seguradoras aceitam a partir de **16 anos** com autorização dos pais
-            • Para crianças, pais podem contratar a partir do **nascimento**
-            
-            **💡 Quanto mais cedo contratar, menores serão os prêmios!**
-            """,
-            "destaque": "A partir de 18 anos, ou 16 com autorização"
-        },
-        {
-            "pergunta": "Qual a idade máxima para contratar?",
-            "resposta": """
-            **Idade Máxima para Contratação:**
-            
-            • **Seguro Temporário**: Até 70-75 anos
-            • **Seguro Vitalício**: Até 80-85 anos
-            • **Doenças Graves**: Até 60-65 anos
-            
-            **💡 A idade máxima varia por seguradora e tipo de cobertura.**
-            
-            **Dica**: Contrate enquanto é jovem para garantir melhores condições!
-            """,
-            "destaque": "Varia de 70 a 85 anos dependendo do produto"
-        },
-        {
-            "pergunta": "Quem pode contratar um seguro de vida?",
-            "resposta": """
-            **Quem Pode Contratar:**
-            
-            • **Maiores de 18 anos** em pleno gozo de capacidade civil
-            • **Estrangeiros** residentes no Brasil com documentação regular
-            • **Pessoas físicas** de qualquer profissão (algumas com restrições)
-            • **Empresas** para seguros coletivos de funcionários
-            
-            **💡 Basicamente qualquer pessoa que tenha interesse em proteger sua família ou patrimônio.**
-            """,
-            "destaque": "Maiores de 18 anos com capacidade civil"
-        },
-        {
-            "pergunta": "Qual a duração do seguro?",
-            "resposta": """
-            **Duração do Seguro de Vida:**
-            
-            • **Temporário**: 1 a 30 anos (prazo determinado)
-            • **Vitalício**: Até o falecimento (sem prazo)
-            • **Resgatável**: 15+ anos (com valor de resgate)
-            • **Anual**: Renovação anual
-            
-            **💡 Você escolhe a duração de acordo com suas necessidades!**
-            
-            **Exemplo**: Contrate até os filhos se formarem ou até a aposentadoria.
-            """,
-            "destaque": "De 1 ano até vitalício, conforme necessidade"
-        },
-        {
-            "pergunta": "O seguro de vida tem validade no exterior?",
-            "resposta": """
-            **Validade no Exterior:**
-            
-            • **Morte e Invalidez**: Geralmente cobertura mundial
-            • **Doenças Graves**: Pode ter restrições por país
-            • **Assistências**: Podem ser apenas no Brasil
-            
-            **💡 Verifique sempre as condições específicas da apólice!**
-            
-            **Dica**: Se viaja muito, contrate cobertura internacional.
-            """,
-            "destaque": "Geralmente sim, mas verifique condições específicas"
-        }
-    ],
-    "📝 2. Tipos e Modalidades de Seguro (31 – 60)": [
-        {
-            "pergunta": "Quais são os principais tipos de seguro de vida?",
-            "resposta": """
-            **Principais Tipos de Seguro de Vida:**
-            
-            • **Temporário**: Proteção por prazo determinado
-            • **Vitalício**: Proteção por toda a vida
-            • **Resgatável**: Combina proteção com investimento
-            • **Universal**: Flexibilidade de prêmios e coberturas
-            • **Coletivo**: Para grupos (empresas, associações)
-            • **Acidentes Pessoais**: Foco em acidentes
-            
-            **💡 Cada tipo atende a uma necessidade específica!**
-            """,
-            "destaque": "Temporário, vitalício, resgatável, universal e coletivo"
-        },
-        {
-            "pergunta": "O que é seguro temporário?",
-            "resposta": """
-            **Seguro Temporário:**
-            
-            • **Proteção por prazo determinado** (ex: 10, 20, 30 anos)
-            • **Mais barato** que o vitalício
-            • **Ideal** para períodos específicos (filhos na escola, financiamento)
-            • **Sem valor de resgate** (puro risco)
-            
-            **💡 Perfeito para quem precisa de proteção por um período específico!**
-            
-            **Exemplo**: Até os filhos se formarem na faculdade.
-            """,
-            "destaque": "Proteção por prazo determinado, mais econômico"
-        },
-        {
-            "pergunta": "O que é seguro vitalício?",
-            "resposta": """
-            **Seguro Vitalício:**
-            
-            • **Proteção por toda a vida**
-            • **Prêmios geralmente mais altos**
-            • **Garantia** de que os beneficiários sempre receberão
-            • **Excelente** para planejamento sucessório
-            
-            **💡 Ideal para quem quer garantir que a família receba independentemente de quando falecer!**
-            """,
-            "destaque": "Proteção vitalícia, ideal para sucessão"
-        },
-        {
-            "pergunta": "O que é seguro de vida resgatável?",
-            "resposta": """
-            **Seguro Resgatável:**
-            
-            • **Combina proteção com poupança**
-            • **Acumula valor** em conta de participação
-            • **Pode resgatar** após período de carência
-            • **Prêmios mais altos** que o temporário
-            
-            **💡 Protege sua família e ajuda a construir patrimônio!**
-            
-            **Funciona como**: Seguro + investimento de longo prazo.
-            """,
-            "destaque": "Combina proteção com acumulação de patrimônio"
-        },
-        {
-            "pergunta": "O que é seguro universal?",
-            "resposta": """
-            **Seguro Universal:**
-            
-            • **Máxima flexibilidade** de prêmios e coberturas
-            • **Pode ajustar** valores conforme necessidade
-            • **Componente de investimento**
-            • **Transparência** total dos custos
-            
-            **💡 Para quem quer controle total sobre o seguro!**
-            
-            **Vantagem**: Adapta-se às mudanças da sua vida.
-            """,
-            "destaque": "Máxima flexibilidade em prêmios e coberturas"
-        }
-    ],
-    "💰 3. Coberturas e Benefícios (61 – 100)": [
-        {
-            "pergunta": "Quais são as coberturas básicas?",
-            "resposta": """
-            **Coberturas Básicas do Seguro de Vida:**
-            
-            • **Morte por qualquer causa** (natural ou acidental)
-            • **Invalidez Permanente** por acidente
-            • **Doenças Graves** (câncer, infarto, AVC)
-            • **Diária por Incapacidade Temporária** (DIT)
-            • **Diária por Internação Hospitalar** (DIH)
-            
-            **💡 Estas são as coberturas essenciais para proteção completa!**
-            """,
-            "destaque": "Morte, invalidez, doenças graves, DIT e DIH"
-        },
-        {
-            "pergunta": "Quais são as coberturas adicionais mais comuns?",
-            "resposta": """
-            **Coberturas Adicionais Mais Comuns:**
-            
-            • **Invalidez Funcional** por doença
-            • **Transplante de Órgãos**
-            • **Assistência Funeral**
-            • **Despesas Médicas**
-            • **Proteção Financeira**
-            • **Cesta Básica Familiar**
-            
-            **💡 Personalize seu seguro conforme suas necessidades específicas!**
-            """,
-            "destaque": "Diversas opções para personalização completa"
-        },
-        {
-            "pergunta": "O que é cobertura por morte natural?",
-            "resposta": """
-            **Cobertura por Morte Natural:**
-            
-            • **Proteção** contra morte por causas naturais
-            • **Doenças**, idade avançada, condições crônicas
-            • **Carência** geralmente de 2 anos
-            • **Capital** pago aos beneficiários
-            
-            **💡 Garante que sua família receba mesmo se falecer por causas naturais!**
-            """,
-            "destaque": "Proteção contra morte por causas naturais"
-        },
-        {
-            "pergunta": "O que é cobertura por morte acidental?",
-            "resposta": """
-            **Cobertura por Morte Acidental:**
-            
-            • **Proteção** contra morte por acidentes
-            • **Trânsito**, quedas, afogamento, etc.
-            • **Carência** geralmente de 24h a 30 dias
-            • **Capital** geralmente dobrado ou triplicado
-            
-            **💡 Cobertura essencial, especialmente para profissões de risco!**
-            """,
-            "destaque": "Proteção contra morte por acidentes"
-        },
-        {
-            "pergunta": "O que é cobertura por invalidez permanente total ou parcial?",
-            "resposta": """
-            **Cobertura por Invalidez:**
-            
-            • **Invalidez Total**: Incapacidade para trabalho
-            • **Invalidez Parcial**: Perda parcial de capacidade
-            • **Por Acidente**: Geralmente sem carência
-            • **Por Doença**: Carência de 30-90 dias
-            
-            **💡 Protege sua renda em caso de incapacidade para trabalhar!**
-            
-            **Importante**: Define percentuais de acordo com o grau de invalidez.
-            """,
-            "destaque": "Proteção contra incapacidade para trabalho"
-        }
-    ],
-    "🧑‍💼 4. Beneficiários (101 – 130)": [
-        {
-            "pergunta": "Quem pode ser beneficiário?",
-            "resposta": """
-            **Quem Pode Ser Beneficiário:**
-            
-            • **Qualquer pessoa física** (parentes ou não)
-            • **Instituições** (ONGs, fundações)
-            • **Herdeiros legais** (se não indicar beneficiários)
-            • **Menores de idade** (com representante)
-            
-            **💡 Você tem liberdade para escolher quem receberá a indenização!**
-            
-            **Dica**: Sempre indique beneficiários específicos para evitar inventário.
-            """,
-            "destaque": "Qualquer pessoa física ou instituição"
-        },
-        {
-            "pergunta": "Posso indicar qualquer pessoa?",
-            "resposta": """
-            **Sim, pode indicar qualquer pessoa:**
-            
-            • **Cônjuge/Companheiro**
-            • **Filhos** (mesmo adotivos)
-            • **Pais e avós**
-            • **Amigos**
-            • **Funcionários**
-            • **Instituições de caridade**
-            
-            **💡 Não é necessário ter parentesco com o beneficiário!**
-            
-            **Importante**: Para evitar problemas, sempre informe os beneficiários.
-            """,
-            "destaque": "Sim, qualquer pessoa sem necessidade de parentesco"
-        },
-        {
-            "pergunta": "Posso indicar menores de idade?",
-            "resposta": """
-            **Sim, pode indicar menores:**
-            
-            • **Com representante legal** para receber
-            • **Valor fica em conta bloqueada** até maioridade
-            • **Administrado** por tutor indicado
-            • **Pode receber** rendimentos periodicamente
-            
-            **💡 Perfeito para garantir educação e sustento dos filhos!**
-            
-            **Dica**: Indique um administrador responsável.
-            """,
-            "destaque": "Sim, com representante legal para administração"
-        },
-        {
-            "pergunta": "Como indicar um beneficiário?",
-            "resposta": """
-            **Como Indicar Beneficiários:**
-            
-            1. **Na proposta**: Durante a contratação
-            2. **Por escrito**: Comunicado à seguradora
-            3. **Por percentuais**: Definir partes de cada um
-            4. **Com dados completos**: Nome, CPF, parentesco
-            
-            **💡 Pode alterar quantas vezes quiser, sem custo!**
-            
-            **Importante**: Mantenha sempre atualizado.
-            """,
-            "destaque": "Na proposta ou por comunicação à seguradora"
-        },
-        {
-            "pergunta": "Preciso informar CPF do beneficiário?",
-            "resposta": """
-            **Sim, é necessário informar CPF:**
-            
-            • **Identificação** precisa do beneficiário
-            • **Evita confusões** com nomes iguais
-            • **Agiliza** o pagamento da indenização
-            • **Obrigatório** para pessoas físicas
-            
-            **💡 Sem o CPF, pode haver dificuldades no pagamento!**
-            
-            **Dica**: Tenha os CPFs em mãos na hora da contratação.
-            """,
-            "destaque": "Sim, é obrigatório para identificação precisa"
-        }
-    ],
-    "📊 5. Custos, Prêmios e Valores (131 – 160)": [
-        {
-            "pergunta": "Quanto custa um seguro de vida?",
-            "resposta": """
-            **Custo do Seguro de Vida:**
-            
-            • **A partir de R$ 20/mês** para coberturas básicas
-            • **R$ 50-200/mês** para proteção familiar completa
-            • **R$ 300+/mês** para alta renda e coberturas especiais
-            
-            **💡 O custo depende da idade, saúde, profissão e coberturas escolhidas!**
-            
-            **Dica**: Quanto mais jovem contratar, mais barato será.
-            """,
-            "destaque": "A partir de R$ 20/mês, varia conforme perfil"
-        },
-        {
-            "pergunta": "Como é calculado o valor do prêmio?",
-            "resposta": """
-            **Fatores que Influenciam o Prêmio:**
-            
-            • **Idade** (quanto mais jovem, mais barato)
-            • **Sexo** (mulheres geralmente pagam menos)
-            • **Profissão** (risco ocupacional)
-            • **Hábitos** (fumo, esportes radicais)
-            • **Coberturas** escolhidas
-            • **Capital segurado**
-            
-            **💡 Cada seguradora tem sua própria tabela de risco!**
-            """,
-            "destaque": "Baseado em idade, saúde, profissão e coberturas"
-        },
-        {
-            "pergunta": "Quais fatores influenciam no preço?",
-            "resposta": """
-            **Principais Fatores de Preço:**
-            
-            • **Idade**: Principal fator (tabela por idade)
-            • **Sexo**: Mulheres têm expectativa de vida maior
-            • **Profissão**: Risco ocupacional
-            • **Hábitos**: Fumo, álcool, esportes radicais
-            • **Histórico médico**: Doenças preexistentes
-            • **Coberturas**: Quantidade e valores
-            
-            **💡 Seja sincero nas informações para evitar problemas futuros!**
-            """,
-            "destaque": "Idade, sexo, profissão, hábitos e histórico médico"
-        },
-        {
-            "pergunta": "Idade influencia no preço?",
-            "resposta": """
-            **Sim, a idade é o principal fator:**
-            
-            • **18-30 anos**: Melhores preços
-            • **31-45 anos**: Preços moderados
-            • **46-60 anos**: Preços mais altos
-            • **61+ anos**: Preços significativamente mais altos
-            
-            **💡 Contrate jovem para travar preços baixos por mais tempo!**
-            
-            **Dica**: Alguns seguros têm preço fixo por período.
-            """,
-            "destaque": "Sim, é o principal fator de precificação"
-        },
-        {
-            "pergunta": "Doenças preexistentes influenciam no preço?",
-            "resposta": """
-            **Sim, doenças preexistentes influenciam:**
-            
-            • **Pode aumentar** o prêmio
-            • **Pode excluir** cobertura para aquela doença
-            • **Pode ter carência** maior
-            • **Pode recusar** a proposta em casos graves
-            
-            **💡 Seja sempre transparente sobre condições médicas!**
-            
-            **Importante**: Omitir informações pode anular a apólice.
-            """,
-            "destaque": "Sim, podem aumentar preço ou excluir coberturas"
-        }
-    ],
-    "🧾 6. Contratação e Documentação (161 – 185)": [
-        {
-            "pergunta": "Como contratar um seguro de vida?",
-            "resposta": """
-            **Passos para Contratar:**
-            
-            1. **Análise de necessidades** (quanto e por quanto tempo)
-            2. **Cotação** com várias seguradoras
-            3. **Preenchimento** da proposta
-            4. **Pagamento** do primeiro prêmio
-            5. **Análise** pela seguradora
-            6. **Emissão** da apólice
-            
-            **💡 Pode contratar online, por telefone ou com corretor!**
-            """,
-            "destaque": "Análise, cotação, proposta, pagamento e emissão"
-        },
-        {
-            "pergunta": "Posso contratar online?",
-            "resposta": """
-            **Sim, pode contratar online:**
-            
-            • **Site das seguradoras**
-            • **Corretoras online**
-            • **Comparadores de seguro**
-            • **Totalmente digital**
-            
-            **💡 Processo rápido, seguro e conveniente!**
-            
-            **Vantagens**: Rapidez, praticidade e often melhores preços.
-            """,
-            "destaque": "Sim, processo 100% digital disponível"
-        },
-        {
-            "pergunta": "Posso contratar pelo celular?",
-            "resposta": """
-            **Sim, pode contratar pelo celular:**
-            
-            • **Apps** das seguradoras
-            • **Sites mobile**
-            • **WhatsApp** de corretores
-            • **Assinatura eletrônica**
-            
-            **💡 Contrate onde e quando quiser!**
-            
-            **Conveniência**: Documentação digital e pagamento por PIX/cartão.
-            """,
-            "destaque": "Sim, através de apps e sites mobile"
-        },
-        {
-            "pergunta": "Preciso apresentar exames?",
-            "resposta": """
-            **Depende do caso:**
-            
-            • **Seguros simples**: Geralmente não
-            • **Capital alto**: Pode exigir exames
-            • **Idade avançada**: Maior probabilidade
-            • **Histórico médico**: Pode exigir complementares
-            
-            **💡 A necessidade de exames varia por seguradora e capital!**
-            
-            **Dica**: Seguros até R$ 100.000 geralmente não exigem exames.
-            """,
-            "destaque": "Depende do capital, idade e histórico médico"
-        },
-        {
-            "pergunta": "Quais documentos são exigidos?",
-            "resposta": """
-            **Documentos Básicos:**
-            
-            • **CPF** do segurado e beneficiários
-            • **RG** ou CNH
-            • **Comprovante de residência**
-            • **Comprovante de renda** (para capitais altos)
-            
-            **💡 Documentação simples e rápida!**
-            
-            **Processo**: Geralmente digital, sem necessidade de cópias físicas.
-            """,
-            "destaque": "CPF, RG, comprovante de residência e renda"
-        }
-    ],
-    "⚖️ 7. Sinistro e Indenização (186 – 200)": [
-        {
-            "pergunta": "O que é sinistro?",
-            "resposta": """
-            **Sinistro é o evento coberto:**
-            
-            • **Morte** do segurado
-            • **Invalidez** permanente
-            • **Diagnóstico** de doença grave
-            • **Internação** hospitalar
-            • **Incapacidade** temporária
-            
-            **💡 É a ocorrência que dá direito ao recebimento da indenização!**
-            
-            **Importante**: Comunique o sinistro o mais rápido possível.
-            """,
-            "destaque": "Evento coberto que gera direito à indenização"
-        },
-        {
-            "pergunta": "Como acionar o seguro?",
-            "resposta": """
-            **Como Acionar o Seguro:**
-            
-            1. **Contate a seguradora** imediatamente
-            2. **Preencha** formulário de sinistro
-            3. **Envie documentos** necessários
-            4. **Aguarde análise** (geralmente 30 dias)
-            5. **Receba** a indenização
-            
-            **💡 Pode acionar por telefone, app ou site!**
-            
-            **Dica**: Tenha a apólice em mãos para agilizar.
-            """,
-            "destaque": "Contatar seguradora e enviar documentação"
-        },
-        {
-            "pergunta": "Quais documentos são necessários para acionar?",
-            "resposta": """
-            **Documentos para Sinistro:**
-            
-            • **Apólice** ou número do contrato
-            • **Documentos pessoais** do segurado e beneficiários
-            • **Comprovante** do sinistro (atestado óbito, laudo médico)
-            • **Formulário** de sinistro preenchido
-            
-            **💡 Cada tipo de sinistro exige documentos específicos!**
-            
-            **Dica**: A seguradora informará a lista completa.
-            """,
-            "destaque": "Apólice, documentos pessoais e comprovante do sinistro"
-        },
-        {
-            "pergunta": "Quem pode solicitar a indenização?",
-            "resposta": """
-            **Quem Pode Solicitar:**
-            
-            • **Beneficiários** indicados na apólice
-            • **Herdeiros legais** (se não há beneficiários)
-            • **Representante legal** (para menores)
-            • **Procurador** com poderes específicos
-            
-            **💡 Os beneficiários não precisam ser parentes!**
-            
-            **Importante**: Mantenha os beneficiários sempre atualizados.
-            """,
-            "destaque": "Beneficiários indicados ou herdeiros legais"
-        },
-        {
-            "pergunta": "Quanto tempo leva para pagar a indenização?",
-            "resposta": """
-            **Prazo para Pagamento:**
-            
-            • **30 dias** após documentação completa
-            • **Casos simples**: 15-20 dias
-            • **Casos complexos**: Até 45 dias
-            • **Com documentação incompleta**: Pode demorar mais
-            
-            **💡 A agilidade depende da qualidade da documentação!**
-            
-            **Dica**: Envie todos os documentos de uma vez para agilizar.
-            """,
-            "destaque": "Até 30 dias após documentação completa"
+            "titulo": "🏆 Solidez da Seguradora",
+            "descricao": "Segurança de que receberá quando precisar",
+            "detalhes": [
+                "Rating de solvência (ANS, SUSEP)",
+                "Tempo de mercado e reputação",
+                "Índice de reclamações (Procon)",
+                "Rede de hospitais e atendimento"
+            ],
+            "icone": "🏆"
         }
     ]
-}
-
-# ---------- DADOS PARA COMPARATIVO DE PRODUTOS ----------
-COMPARATIVO_PRODUTOS = {
-    "Azos": {
-        "cores": ["#7C3AED", "#6D28D9"],
-        "produtos": {
-            "Vida Individual": {
-                "descricao": "Proteção básica com foco em DIT e profissões de risco",
-                "caracteristicas": [
-                    "Aceita porte de armas",
-                    "DIT ampliada",
-                    "Carência reduzida para acidentes",
-                    "Perfis especiais aceitos"
-                ],
-                "preco_medio": "R$ 89,90",
-                "idade_minima": 18,
-                "idade_maxima": 70,
-                "capital_maximo": "R$ 500.000",
-                "destaques": ["Porte de Armas", "DIT", "Profissões Risco"]
-            },
-            "Vida Plus": {
-                "descricao": "Proteção ampliada com coberturas adicionais",
-                "caracteristicas": [
-                    "Todas as características do Vida Individual",
-                    "Doenças Graves incluída",
-                    "Invalidez Funcional",
-                    "Assistência funeral"
-                ],
-                "preco_medio": "R$ 129,90",
-                "idade_minima": 18,
-                "idade_maxima": 65,
-                "capital_maximo": "R$ 1.000.000",
-                "destaques": ["Cobertura Completa", "Doenças Graves", "Assistências"]
-            }
-        }
-    },
-    "Prudential": {
-        "cores": ["#1E40AF", "#1E3A8A"],
-        "produtos": {
-            "Planejamento Sucessório": {
-                "descricao": "Focado em proteção patrimonial e sucessão familiar",
-                "caracteristicas": [
-                    "Whole Life com acumulação",
-                    "Proteção sucessória",
-                    "Resgate parcial após 2 anos",
-                    "Cobertura internacional"
-                ],
-                "preco_medio": "R$ 199,90",
-                "idade_minima": 18,
-                "idade_maxima": 60,
-                "capital_maximo": "R$ 5.000.000",
-                "destaques": ["Sucessão", "Whole Life", "Alta Renda"]
-            },
-            "Doenças Graves Plus": {
-                "descricao": "Proteção especializada contra doenças graves",
-                "caracteristicas": [
-                    "85 doenças graves cobertas",
-                    "Pagamento em 30 dias",
-                    "Carência reduzida",
-                    "Segunda opinião médica"
-                ],
-                "preco_medio": "R$ 159,90",
-                "idade_minima": 18,
-                "idade_maxima": 55,
-                "capital_maximo": "R$ 2.000.000",
-                "destaques": ["Doenças Graves", "Cobertura Ampla", "Saúde"]
-            }
-        }
-    },
-    "Omint": {
-        "cores": ["#FF6B35", "#EA580C"],
-        "produtos": {
-            "Executivo Premium": {
-                "descricao": "Solução completa para executivos de alta renda",
-                "caracteristicas": [
-                    "Rede médica premium",
-                    "Atendimento concierge",
-                    "Cobertura internacional",
-                    "Hospitais de excelência"
-                ],
-                "preco_medio": "R$ 399,00",
-                "idade_minima": 25,
-                "idade_maxima": 60,
-                "capital_maximo": "R$ 10.000.000",
-                "destaques": ["Alta Renda", "Premium", "Internacional"]
-            },
-            "Saúde Corporativa": {
-                "descricao": "Soluções para empresas com foco em saúde",
-                "caracteristicas": [
-                    "Planos coletivos personalizados",
-                    "Gestão de saúde populacional",
-                    "Prevenção e wellness",
-                    "Telemedicina inclusa"
-                ],
-                "preco_medio": "Sob consulta",
-                "idade_minima": 18,
-                "idade_maxima": 70,
-                "capital_maximo": "Personalizado",
-                "destaques": ["Corporativo", "Saúde", "Personalizado"]
-            }
-        }
-    },
-    "MAG Seguros": {
-        "cores": ["#8A2BE2", "#7C3AED"],
-        "produtos": {
-            "Primeiro Seguro": {
-                "descricao": "Ideal para primeira contratação e classe média",
-                "caracteristicas": [
-                    "Preço acessível",
-                    "Documentação simplificada",
-                    "Carências reduzidas",
-                    "Pagamento flexível"
-                ],
-                "preco_medio": "R$ 59,90",
-                "idade_minima": 18,
-                "idade_maxima": 65,
-                "capital_maximo": "R$ 300.000",
-                "destaques": ["Econômico", "Primeira Vez", "Simples"]
-            },
-            "Servidor Público": {
-                "descricao": "Condições especiais para servidores públicos",
-                "caracteristicas": [
-                    "Desconto especial",
-                    "Carência diferenciada",
-                    "Pagamento via desconto em folha",
-                    "Cobertura familiar"
-                ],
-                "preco_medio": "R$ 79,90",
-                "idade_minima": 18,
-                "idade_maxima": 70,
-                "capital_maximo": "R$ 500.000",
-                "destaques": ["Servidores", "Desconto", "Folha"]
-            }
-        }
-    },
-    "Icatu Seguros": {
-        "cores": ["#00A859", "#059669"],
-        "produtos": {
-            "Wealth Protection": {
-                "descricao": "Proteção patrimonial para investidores",
-                "caracteristicas": [
-                    "Integração com investimentos",
-                    "Consultoria wealth",
-                    "Solução sucessória",
-                    "Gestor dedicado"
-                ],
-                "preco_medio": "R$ 249,90",
-                "idade_minima": 25,
-                "idade_maxima": 65,
-                "capital_maximo": "R$ 15.000.000",
-                "destaques": ["Investidores", "Patrimonial", "Wealth"]
-            },
-            "Empresarial Plus": {
-                "descricao": "Proteção para empresários e profissionais liberais",
-                "caracteristicas": [
-                    "Proteção key-person",
-                    "Seguro sócio",
-                    "Capitalização empresarial",
-                    "Planejamento sucessório"
-                ],
-                "preco_medio": "R$ 189,90",
-                "idade_minima": 21,
-                "idade_maxima": 65,
-                "capital_maximo": "R$ 3.000.000",
-                "destaques": ["Empresarial", "Key-Person", "Sucessão"]
-            }
-        }
-    },
-    "MetLife": {
-        "cores": ["#DC2626", "#B91C1C"],
-        "produtos": {
-            "Global Protection": {
-                "descricao": "Solução internacional para multinacionais",
-                "caracteristicas": [
-                    "Cobertura global",
-                    "Padrão internacional",
-                    "Assistência worldwide",
-                    "Solução para expatriados"
-                ],
-                "preco_medio": "R$ 299,90",
-                "idade_minima": 18,
-                "idade_maxima": 65,
-                "capital_maximo": "R$ 8.000.000",
-                "destaques": ["Global", "Multinacional", "Expatriados"]
-            },
-            "Coletivo Empresarial": {
-                "descricao": "Benefícios para colaboradores de grandes empresas",
-                "caracteristicas": [
-                    "Customização total",
-                    "Gestão de benefícios",
-                    "Plataforma digital",
-                    "Wellness corporativo"
-                ],
-                "preco_medio": "Sob consulta",
-                "idade_minima": 18,
-                "idade_maxima": 70,
-                "capital_maximo": "Personalizado",
-                "destaques": ["Coletivo", "Empresas", "Benefícios"]
-            }
+    
+    col1, col2 = st.columns(2)
+    for i, criterio in enumerate(criterios):
+        with col1 if i % 2 == 0 else col2:
+            st.markdown(f"""
+            <div class="info-card-enhanced" style="border-color: #667eea">
+                <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                    <span style="font-size: 2rem; margin-right: 1rem;">{criterio['icone']}</span>
+                    <h4 style="margin: 0; color: #2c3e50;">{criterio['titulo']}</h4>
+                </div>
+                <p style="color: #666; margin-bottom: 1rem;">{criterio['descricao']}</p>
+                <ul style="color: #666; padding-left: 1.5rem;">
+            """, unsafe_allow_html=True)
+            
+            for detalhe in criterio['detalhes']:
+                st.markdown(f"<li>{detalhe}</li>", unsafe_allow_html=True)
+            
+            st.markdown("</ul></div>", unsafe_allow_html=True)
+    
+    # Matriz de Decisão por Perfil
+    st.markdown("""
+    <div class="section-header">
+        <h3 style="margin: 0; font-size: 1.5rem;">🎭 Matriz de Decisão por Perfil</h3>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    matriz_decisao = {
+        "👶 Jovem Solteiro (18-30 anos)": {
+            "foco": "Proteção básica + acumulação",
+            "recomendacao": "Term Life + Doenças Graves",
+            "seguradoras": ["MAG Seguros", "Azos"],
+            "valor_sugerido": "R$ 50-150/mês"
+        },
+        "👨‍👩‍👧‍👦 Família com Filhos": {
+            "foco": "Proteção familiar completa",
+            "recomendacao": "Whole Life + Term Life + Doenças Graves",
+            "seguradoras": ["Prudential", "Icatu"],
+            "valor_sugerido": "R$ 150-300/mês"
+        },
+        "💼 Executivo Alta Renda": {
+            "foco": "Proteção patrimonial + saúde premium",
+            "recomendacao": "Whole Life + Doenças Graves Ampliado",
+            "seguradoras": ["Omint", "Icatu"],
+            "valor_sugerido": "R$ 300+/mês"
+        },
+        "🏢 Profissional Liberal": {
+            "foco": "Proteção de renda + patrimônio",
+            "recomendacao": "DIT + Invalidez + Whole Life",
+            "seguradoras": ["MetLife", "Prudential"],
+            "valor_sugerido": "R$ 200-400/mês"
         }
     }
-}
+    
+    for perfil, dados in matriz_decisao.items():
+        st.markdown(f"""
+        <div class="decision-matrix">
+            <h4 style="color: #2c3e50; margin-bottom: 1rem;">{perfil}</h4>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div>
+                    <strong>🎯 Foco Principal:</strong><br>
+                    <span style="color: #666;">{dados['foco']}</span>
+                </div>
+                <div>
+                    <strong>🛡️ Coberturas Recomendadas:</strong><br>
+                    <span style="color: #666;">{dados['recomendacao']}</span>
+                </div>
+                <div>
+                    <strong>🏆 Seguradoras Ideais:</strong><br>
+                    <span style="color: #666;">{', '.join(dados['seguradoras'])}</span>
+                </div>
+                <div>
+                    <strong>💰 Investimento Sugerido:</strong><br>
+                    <span style="color: #667eea; font-weight: bold;">{dados['valor_sugerido']}</span>
+                </div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    # Perguntas para Autoavaliação
+    st.markdown("""
+    <div class="section-header">
+        <h3 style="margin: 0; font-size: 1.5rem;">🤔 Perguntas para Autoavaliação</h3>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    perguntas = [
+        "Qual é minha principal preocupação financeira para minha família?",
+        "Quantas pessoas dependem da minha renda atualmente?",
+        "Tenho dívidas ou financiamentos que precisariam ser quitados?",
+        "Qual é o valor necessário para educar meus filhos até a faculdade?",
+        "Meu patrimônio está adequadamente protegido?",
+        "Preciso de cobertura internacional por viagens a trabalho?",
+        "Minha profissão envolve riscos específicos?",
+        "Tenho condições pré-existentes que precisam de cobertura especial?"
+    ]
+    
+    for i, pergunta in enumerate(perguntas, 1):
+        st.markdown(f"""
+        <div class="profile-question">
+            <div style="display: flex; align-items: center;">
+                <span style="background: white; color: #667eea; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 1rem;">{i}</span>
+                <span style="font-size: 1.1rem;">{pergunta}</span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    # Fluxo de Decisão
+    st.markdown("""
+    <div class="section-header">
+        <h3 style="margin: 0; font-size: 1.5rem;">🔄 Fluxo de Decisão Recomendado</h3>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.markdown("""
+    <div class="flow-chart">
+        <h4 style="color: #2c3e50; margin-bottom: 2rem;">🎯 Siga Este Processo para Decidir</h4>
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 1.5rem;">
+            <div style="background: #667eea; color: white; padding: 1rem 2rem; border-radius: 25px; font-weight: bold; text-align: center;">
+                1️⃣ Identifique Suas Necessidades
+            </div>
+            <div style="font-size: 1.5rem;">⬇️</div>
+            <div style="background: #00b09b; color: white; padding: 1rem 2rem; border-radius: 25px; font-weight: bold; text-align: center;">
+                2️⃣ Calcule o Capital Necessário
+            </div>
+            <div style="font-size: 1.5rem;">⬇️</div>
+            <div style="background: #ff6b6b; color: white; padding: 1rem 2rem; border-radius: 25px; font-weight: bold; text-align: center;">
+                3️⃣ Compare Seguradoras
+            </div>
+            <div style="font-size: 1.5rem;">⬇️</div>
+            <div style="background: #ffa726; color: white; padding: 1rem 2rem; border-radius: 25px; font-weight: bold; text-align: center;">
+                4️⃣ Analise Coberturas e Exclusões
+            </div>
+            <div style="font-size: 1.5rem;">⬇️</div>
+            <div style="background: #4ecdc4; color: white; padding: 1rem 2rem; border-radius: 25px; font-weight: bold; text-align: center;">
+                5️⃣ Escolha o Melhor Custo-Benefício
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
 # ---------- INTERFACE PRINCIPAL ----------
 st.markdown("""
@@ -3579,19 +3092,21 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# Navegação
+# Navegação ATUALIZADA
 st.sidebar.markdown("""
 <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 2rem; border-radius: 15px; text-align: center; margin-bottom: 2rem; box-shadow: 0 6px 20px rgba(0,0,0,0.15);">
     <h3 style="color: white; margin: 0; font-size: 1.5rem;">🧭 Navegação</h3>
 </div>
 """, unsafe_allow_html=True)
 
+# Navegação atualizada com nova ordem e abas
 aba_selecionada = st.sidebar.radio("", [
     "🎯 Dashboard", 
     "👤 Cadastro Completo", 
-    "🏆 Seguradoras Recomendadas",
+    "🏆 Como Escolher o Melhor",  # NOVA ABA
+    "👥 Análise do Cliente",      # ABA CLIENTE APRIMORADA
     "🛡️ Análise de Coberturas",
-    "📊 Comparativo de Produtos",  # NOVA ABA
+    "📊 Comparativo de Produtos",
     "❓ FAQ Interativo"  
 ], label_visibility="collapsed")
 
@@ -3647,7 +3162,9 @@ if aba_selecionada == "🎯 Dashboard":
             <div class="metric-card">
                 <div style="font-size: 1rem; color: #666; margin-bottom: 0.8rem;">📊 Coberturas</div>
                 <div style="font-size: 2rem; font-weight: bold; color: #6f42c1; margin-bottom: 0.5rem;">{coberturas_ativas}/6</div>
-                <div style="font-size: 0.9rem; color: #6f42c1; background: rgba(111, 66, 193, 0.1); padding: 0.3rem 0.8rem; border-radius: 10px; display: inline-block;">Proteções ativas</div>
+                <div style="font-size: 0.9rem; color: #6f42c1; background: rgba(111, 66, 193, 0.1); padding: 0.3rem 0.8rem; border-radius: 10px; display: inline-block;">
+                    {f"{coberturas_ativas/6*100:.0f}% do potencial" if coberturas_ativas > 0 else "Complete seu perfil"}
+                </div>
             </div>
             """, unsafe_allow_html=True)
         
@@ -3833,12 +3350,27 @@ elif aba_selecionada == "👤 Cadastro Completo":
             <div class="info-card">
                 <h4 style="margin: 0 0 1rem 0; color: #2c3e50;">🏠 Despesas Familiares</h4>
             """, unsafe_allow_html=True)
+            
+            # === NOVO: SEPARAÇÃO DE DESPESAS MENSAL COM FILHOS E SEM FILHOS ===
+            st.markdown("**💸 Despesas Mensais Detalhadas**")
+            
+            despesas_sem_filhos = criar_campo_moeda_com_extenso(
+                "**Despesas Mensais Sem Filhos (R$)**", 
+                valor_padrao=despesas_mensais,
+                key="despesas_sem_filhos",
+                help_text="Despesas mensais sem considerar filhos (moradia, alimentação, transporte, etc.)"
+            )
+            
             despesas_filhos_mensais = criar_campo_moeda_com_extenso(
                 "**Despesas Mensais com Filhos (R$)**", 
                 valor_padrao=0.0,
                 key="despesas_filhos_mensais",
-                help_text="Despesas com educação, saúde, alimentação dos filhos"
+                help_text="Despesas específicas com filhos (educação, saúde, alimentação, etc.)"
             )
+            
+            # Atualizar despesas totais
+            despesas_mensais = despesas_sem_filhos + despesas_filhos_mensais
+            
             anos_ate_independencia = st.number_input("**Anos até Independência dos Filhos**", min_value=0, max_value=30, value=0,
                                                    help="Anos até que os filhos se tornem independentes financeiramente")
             st.markdown("</div>", unsafe_allow_html=True)
@@ -3853,6 +3385,66 @@ elif aba_selecionada == "👤 Cadastro Completo":
                 </p>
             </div>
             """, unsafe_allow_html=True)
+        
+        # SEÇÃO: CHECKLIST DE COBERTURAS
+        st.markdown("""
+        <div class="section-header">
+            <h3 style="margin: 0; font-size: 1.5rem;">✅ Checklist de Coberturas</h3>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        st.markdown("""
+        <div class="info-card">
+            <h4 style="margin: 0 0 1rem 0; color: #2c3e50;">🎯 Selecione as Coberturas Desejadas</h4>
+            <p style="color: #666; line-height: 1.5; margin: 0;">
+                Marque as coberturas que deseja incluir no cálculo. Você pode desmarcar aquelas que não são de seu interesse.
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        col_cobertura1, col_cobertura2 = st.columns(2)
+        
+        with col_cobertura1:
+            for cobertura in ['Doenças Graves', 'Whole Life', 'Term Life']:
+                st.session_state.coberturas_selecionadas[cobertura] = st.checkbox(
+                    f"**{cobertura}**", 
+                    value=st.session_state.coberturas_selecionadas[cobertura],
+                    key=f"check_{cobertura}",
+                    help=f"Incluir {cobertura} no cálculo"
+                )
+        
+        with col_cobertura2:
+            for cobertura in ['Invalidez Permanente', 'Diária Incapacidade Temporária', 'Diária Internação Hospitalar']:
+                st.session_state.coberturas_selecionadas[cobertura] = st.checkbox(
+                    f"**{cobertura}**", 
+                    value=st.session_state.coberturas_selecionadas[cobertura],
+                    key=f"check_{cobertura}",
+                    help=f"Incluir {cobertura} no cálculo"
+                )
+        
+        # CONFIGURAÇÃO ESPECÍFICA PARA DOENÇAS GRAVES
+        if st.session_state.coberturas_selecionadas['Doenças Graves']:
+            st.markdown("---")
+            st.markdown("**🦠 Configuração para Doenças Graves**")
+            
+            col_dg1, col_dg2 = st.columns(2)
+            
+            with col_dg1:
+                st.session_state.meses_doencas_graves = st.radio(
+                    "**Período de cobertura para doenças graves:**",
+                    [24, 36],
+                    index=1,  # Default para 36 meses
+                    help="Escolha entre 24 ou 36 meses de despesas para cálculo"
+                )
+            
+            with col_dg2:
+                st.info(f"""
+                **💡 Informação:**
+                
+                - **{st.session_state.meses_doencas_graves} meses** de despesas
+                - Cobertura para tratamento e recuperação
+                - Período adequado para a maioria dos tratamentos
+                """)
         
         # SEÇÃO: PILAR FINANCEIRO
         st.markdown("""
@@ -3910,146 +3502,6 @@ elif aba_selecionada == "👤 Cadastro Completo":
                 </ul>
                 <p style="color: #666; line-height: 1.5; margin: 0;">
                     Esta diferenciação garante que cada perfil receba a <strong>proteção ideal</strong> para sua realidade familiar.
-                </p>
-            </div>
-            """, unsafe_allow_html=True)
-        
-        # SEÇÃO: PREVIDÊNCIA PRIVADA
-        st.markdown("""
-        <div class="section-header">
-            <h3 style="margin: 0; font-size: 1.5rem;">💰 Previdência Privada</h3>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        col7, col8 = st.columns(2)
-        
-        with col7:
-            st.markdown("""
-            <div class="info-card">
-                <h4 style="margin: 0 0 1rem 0; color: #2c3e50;">🏦 Informações de Previdência</h4>
-            """, unsafe_allow_html=True)
-            
-            tem_previdencia = st.radio(
-                "**Tem previdência privada?***",
-                ["Sim", "Não"],
-                horizontal=True,
-                help="Possui algum plano de previdência privada ativo?"
-            )
-            
-            if tem_previdencia == "Sim":
-                valor_previdencia = criar_campo_moeda_com_extenso(
-                    "**Qual o valor acumulado? (R$)**",
-                    valor_padrao=0.0,
-                    key="valor_previdencia",
-                    help_text="Valor total acumulado na previdência privada"
-                )
-                
-                # CAMPO: RENTABILIDADE DA PREVIDÊNCIA
-                rentabilidade_previdencia = st.number_input(
-                    "**Rentabilidade da Previdência (%)**",
-                    min_value=0.0,
-                    max_value=100.0,
-                    value=0.0,
-                    step=0.1,
-                    format="%.1f",
-                    help="Rentabilidade anual média da previdência privada em porcentagem"
-                )
-                
-                modelo_previdencia = st.selectbox(
-                    "**Qual o modelo?**",
-                    ["VGBL", "PGBL", "Não sei"],
-                    help="Modelo do plano de previdência"
-                )
-                
-                # CAMPO MODIFICADO: ALÍQUOTA DE RESGATE - AGORA É UM NÚMERO
-                aliquota_resgate = st.number_input(
-                    "**Alíquota de Resgate (%)**",
-                    min_value=0.0,
-                    max_value=100.0,
-                    value=15.0,
-                    step=0.5,
-                    format="%.1f",
-                    help="Alíquota regressiva atual para resgate em porcentagem"
-                )
-                
-                st.markdown("</div>", unsafe_allow_html=True)
-                
-                # Card de oportunidade de alavancagem para valores >= 500 mil
-                if valor_previdencia >= 500000:
-                    _, valor_previdencia_extenso = formatar_valor_com_extenso(valor_previdencia)
-                    st.markdown(f"""
-                    <div class="previdencia-card">
-                        <div class="previdencia-header">
-                            <h3 class="previdencia-title">🚀 Oportunidade de Alavancagem Financeira</h3>
-                            <div class="previdencia-value">{formatar_moeda(valor_previdencia)}</div>
-                        </div>
-                        
-                        <div class="oportunidade-alavancagem">
-                            <h4 style="margin: 0 0 1rem 0; color: white;">💎 Estratégia Recomendada</h4>
-                            <p style="margin: 0 0 1rem 0; line-height: 1.5;">
-                                Com <strong>{formatar_moeda(valor_previdencia)}</strong> acumulados em previdência {modelo_previdencia}, 
-                                você tem uma excelente oportunidade para <strong>otimizar sua estratégia financeira</strong>.
-                            </p>
-                            <div class="valor-extenso" style="background: rgba(255,255,255,0.2); color: white; border-left: 4px solid #FFD700;">
-                                💬 <strong>Valor por extenso:</strong> {valor_previdencia_extenso}
-                            </div>
-                            
-                            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
-                                <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 10px;">
-                                    <strong style="color: white;">📊 Modelo Atual</strong><br>
-                                    <span>{modelo_previdencia}</span>
-                                </div>
-                                <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 10px;">
-                                    <strong style="color: white;">📈 Rentabilidade</strong><br>
-                                    <span>{rentabilidade_previdencia}% ao ano</span>
-                                </div>
-                                <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 10px;">
-                                    <strong style="color: white;">💰 Alíquota</strong><br>
-                                    <span>{aliquota_resgate}%</span>
-                                </div>
-                            </div>
-                            
-                            <h5 style="margin: 0 0 0.5rem 0; color: white;">🎯 Benefícios da Otimização:</h5>
-                            <ul style="margin: 0; padding-left: 1.5rem; color: white;">
-                                <li><strong>Redução de impostos</strong> na aposentadoria</li>
-                                <li><strong>Proteção patrimonial</strong> adicional</li>
-                                <li><strong>Sucessão planejada</strong> para herdeiros</li>
-                                <li><strong>Rentabilidade potencializada</strong></li>
-                            </ul>
-                        </div>
-                        
-                        <div style="margin-top: 1.5rem; text-align: center;">
-                            <p style="color: #2c3e50; font-weight: 500; margin: 0;">
-                                💡 <strong>Consulte nosso especialista em wealth management</strong><br>
-                                para uma análise personalizada da sua estratégia
-                            </p>
-                        </div>
-                    </div>
-                    """, unsafe_allow_html=True)
-            else:
-                valor_previdencia = 0.0
-                rentabilidade_previdencia = 0.0
-                modelo_previdencia = "Não"
-                aliquota_resgate = 0.0
-                st.markdown("</div>", unsafe_allow_html=True)
-        
-        with col8:
-            st.markdown("""
-            <div class="info-card">
-                <h4 style="margin: 0 0 1rem 0; color: #2c3e50;">💡 Por que essa informação é importante?</h4>
-                <p style="color: #666; line-height: 1.5; margin: 0;">
-                    A <strong>previdência privada</strong> é um pilar importante do seu planejamento financeiro:
-                </p>
-                <ul style="color: #666; line-height: 1.5; margin: 1rem 0;">
-                    <li><strong>Complemento da aposentadoria</strong> do INSS</li>
-                    <li><strong>Proteção tributária</strong> inteligente</li>
-                    <li><strong>Acumulo de patrimônio</strong> de longo prazo</li>
-                    <li><strong>Sucessão patrimonial</strong> planejada</li>
-                    <li><strong>Rentabilidade</strong> do seu investimento</li>
-                    <li><strong>Alíquota de resgate</strong> impacta no valor líquido recebido</li>
-                </ul>
-                <p style="color: #666; line-height: 1.5; margin: 0;">
-                    Com essas informações, podemos <strong>integrar sua previdência</strong> com a proteção de seguros para uma estratégia completa.
                 </p>
             </div>
             """, unsafe_allow_html=True)
@@ -4120,6 +3572,7 @@ elif aba_selecionada == "👤 Cadastro Completo":
                     'patrimonio_imobilizado': patrimonio_imobilizado,
                     'patrimonio_total': patrimonio_total,
                     'despesas_mensais': despesas_mensais,
+                    'despesas_sem_filhos': despesas_sem_filhos,
                     'despesas_filhos_mensais': despesas_filhos_mensais,
                     'anos_ate_independencia': anos_ate_independencia,
                     'pilar_financeiro': pilar_financeiro == "Sim",
@@ -4141,16 +3594,12 @@ elif aba_selecionada == "👤 Cadastro Completo":
                     'patrimonio_imobilizado': patrimonio_imobilizado,
                     'patrimonio_total': patrimonio_total,
                     'despesas_mensais': despesas_mensais,
+                    'despesas_sem_filhos': despesas_sem_filhos,
                     'despesas_filhos_mensais': despesas_filhos_mensais,
                     'anos_ate_independencia': anos_ate_independencia,
                     'pilar_financeiro': pilar_financeiro == "Sim",
                     'patrimonio_antes_casamento': patrimonio_antes_casamento,
                     'patrimonio_depois_casamento': patrimonio_depois_casamento,
-                    'tem_previdencia': tem_previdencia,
-                    'valor_previdencia': valor_previdencia,
-                    'rentabilidade_previdencia': rentabilidade_previdencia,
-                    'modelo_previdencia': modelo_previdencia,
-                    'aliquota_resgate': aliquota_resgate,
                     'filial': filial,
                     'assessor': assessor,
                     'capital_sugerido': calculo['capital_total'],
@@ -4207,27 +3656,6 @@ elif aba_selecionada == "👤 Cadastro Completo":
                         percentual_protecao = 0.20 if pilar_financeiro == "Sim" else 0.15
                         st.info(f"**🛡️ Percentual de Proteção:** {percentual_protecao*100}%")
                 
-                # Mostrar informações da previdência se aplicável
-                if tem_previdencia == "Sim":
-                    st.markdown('<div class="subsection-title">💰 Situação da Previdência</div>', unsafe_allow_html=True)
-                    col_prev1, col_prev2, col_prev3, col_prev4 = st.columns(4)
-                    
-                    with col_prev1:
-                        st.info(f"**🏦 Previdência:** {formatar_moeda(valor_previdencia)}")
-                    with col_prev2:
-                        st.info(f"**📈 Rentabilidade:** {rentabilidade_previdencia}% ao ano")
-                    with col_prev3:
-                        st.info(f"**📊 Modelo:** {modelo_previdencia}")
-                    with col_prev4:
-                        st.info(f"**💰 Alíquota:** {aliquota_resgate}%")
-                    
-                    if valor_previdencia >= 500000:
-                        st.success("""
-                        **🚀 Oportunidade Identificada!**
-                        
-                        Seu patrimônio em previdência privada é significativo. Recomendamos uma consulta com nosso especialista em wealth management para otimização tributária e sucessória.
-                        """)
-                
                 with st.expander("📈 **Detalhamento das Coberturas**", expanded=True):
                     for cobertura, valor in calculo['coberturas_detalhadas'].items():
                         if valor > 0:
@@ -4271,94 +3699,190 @@ elif aba_selecionada == "👤 Cadastro Completo":
                 - Nome do assessor está preenchido
                 """)
 
-# ---------- ABA 3: SEGURADORAS RECOMENDADAS ----------
-elif aba_selecionada == "🏆 Seguradoras Recomendadas":
-    st.markdown('<div class="section-title">🏆 Seguradoras Recomendadas</div>', unsafe_allow_html=True)
+# ---------- ABA 3: COMO ESCOLHER O MELHOR ----------
+elif aba_selecionada == "🏆 Como Escolher o Melhor":
+    create_how_to_choose_section()
+
+# ---------- ABA 4: ANÁLISE DO CLIENTE (APRIMORADA) ----------
+elif aba_selecionada == "👥 Análise do Cliente":
+    st.markdown('<div class="section-title">👥 Análise Completa do Cliente</div>', unsafe_allow_html=True)
     
     if not st.session_state.cliente:
         st.warning("""
-        **⚠️ Complete seu cadastro primeiro para ver recomendações personalizadas!**
+        **⚠️ Complete seu cadastro primeiro para ver a análise personalizada!**
         
-        Acesse a aba **👤 Cadastro Completo** para fornecer suas informações e receber recomendações específicas para seu perfil.
+        Acesse a aba **👤 Cadastro Completo** para fornecer suas informações.
         """)
-        st.stop()
-    
-    cliente = st.session_state.cliente
-    perfil_cliente = st.session_state.perfil_cliente
-    create_progress_tracker(3)
-    
-    recommendations = InsuranceAI.recommend_insurers(cliente, perfil_cliente)
-    melhores_seguradoras = SistemaRecomendacao.recomendar_melhores_seguradoras(perfil_cliente)
-    
-    st.markdown('<div class="subsection-title">🎯 Seguradoras Compatíveis com Seu Perfil</div>', unsafe_allow_html=True)
-    st.write(f"**Baseado no seu perfil:** **{cliente['profissao']}**, **{cliente['idade']} anos**, **Renda {formatar_moeda(cliente['renda_mensal'])}**")
-    
-    # Mostrar top 3 melhores seguradoras
-    st.markdown('<div class="subsection-title">🥇 Melhores Seguradoras para seu Perfil</div>', unsafe_allow_html=True)
-    
-    col1, col2, col3 = st.columns(3)
-    posicoes = {1: col1, 2: col2, 3: col3}
-    
-    for melhor in melhores_seguradoras:
-        with posicoes[melhor['posicao']]:
-            emoji = {1: "🥇", 2: "🥈", 3: "🥉"}[melhor['posicao']]
+    else:
+        cliente = st.session_state.cliente
+        calculo = CalculadoraCapital.calcular_capital_total(cliente)
+        
+        # Header da Análise do Cliente
+        st.markdown(f"""
+        <div class="success-card">
+            <h2 style="margin: 0 0 1rem 0; font-size: 2.5rem; text-align: center;">👤 Análise de {cliente.get('nome', 'Cliente')}</h2>
+            <p style="font-size: 1.3rem; opacity: 0.9; text-align: center; margin: 0;">Perfil completo e detalhado do cliente</p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # Detalhes do Cliente
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.markdown("""
+            <div class="client-details-card">
+                <h3 style="color: #2c3e50; margin-bottom: 1.5rem;">📋 Dados Pessoais</h3>
+            """, unsafe_allow_html=True)
+            
+            st.info(f"**👤 Nome:** {cliente.get('nome', 'Não informado')}")
+            st.info(f"**🎂 Idade:** {cliente.get('idade', 'Não informado')} anos")
+            st.info(f"**💼 Profissão:** {cliente.get('profissao', 'Não informado')}")
+            st.info(f"**💍 Estado Civil:** {cliente.get('estado_civil', 'Não informado')}")
+            if cliente.get('estado_civil') == 'Casado(a)':
+                st.info(f"**📝 Regime de Casamento:** {cliente.get('regime_casamento', 'Não especificado')}")
+            st.info(f"**👨‍👩‍👧‍👦 Dependentes:** {cliente.get('dependentes', 0)}")
+            st.info(f"**🏆 Pilar Financeiro:** {'Sim' if cliente.get('pilar_financeiro') else 'Não'}")
+            
+            st.markdown("</div>", unsafe_allow_html=True)
+        
+        with col2:
+            st.markdown("""
+            <div class="client-details-card">
+                <h3 style="color: #2c3e50; margin-bottom: 1.5rem;">💰 Situação Financeira</h3>
+            """, unsafe_allow_html=True)
+            
+            st.info(f"**💰 Renda Mensal:** {formatar_moeda(cliente.get('renda_mensal', 0))}")
+            st.info(f"**💵 Patrimônio Líquido:** {formatar_moeda(cliente.get('patrimonio_liquido', 0))}")
+            st.info(f"**🏠 Patrimônio Imobilizado:** {formatar_moeda(cliente.get('patrimonio_imobilizado', 0))}")
+            st.info(f"**📊 Patrimônio Total:** {formatar_moeda(cliente.get('patrimonio_total', 0))}")
+            st.info(f"**💸 Despesas Mensais:** {formatar_moeda(cliente.get('despesas_mensais', 0))}")
+            st.info(f"**📚 Despesas com Filhos:** {formatar_moeda(cliente.get('despesas_filhos_mensais', 0))}")
+            
+            st.markdown("</div>", unsafe_allow_html=True)
+        
+        # Capital Segurado e Coberturas
+        st.markdown("""
+        <div class="section-header">
+            <h3 style="margin: 0; font-size: 1.5rem;">🛡️ Capital Segurado e Coberturas</h3>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        col3, col4 = st.columns(2)
+        
+        with col3:
             st.markdown(f"""
-            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 2rem; border-radius: 20px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); margin-bottom: 1rem;">
-                <div style="font-size: 3rem; margin-bottom: 1rem;">{emoji}</div>
-                <h3 style="margin: 0 0 1rem 0; font-size: 1.8rem;">{melhor['seguradora']}</h3>
-                <p style="margin: 0.5rem 0; font-size: 1.2rem;"><strong>Pontuação:</strong> {melhor['score']} pts</p>
-                <p style="margin: 0.5rem 0; font-size: 1.2rem;"><strong>Compatibilidade:</strong> {melhor['porcentagem']:.1f}%</p>
+            <div class="capital-total">
+                <h3 class="capital-title">💎 CAPITAL TOTAL SUGERIDO</h3>
+                <p class="capital-value">{formatar_moeda(calculo['capital_total'])}</p>
+                <p class="capital-subtitle">Proteção personalizada baseada no seu perfil</p>
             </div>
             """, unsafe_allow_html=True)
             
-            with st.expander(f"📋 **Ver detalhes de {melhor['seguradora']}**"):
-                st.write("**🎯 Perfis que mais contribuíram:**")
-                for perfil, peso in list(melhor['detalhes'].items())[:5]:
-                    if peso > 5:
-                        especificidade = "🔴 Alta" if peso >= 80 else "🟡 Média" if peso >= 50 else "🟢 Baixa"
-                        st.write(f"- **{perfil}:** {peso} pontos ({especificidade})")
-    
-    # Seção de downloads
-    st.markdown("---")
-    st.markdown('<div class="subsection-title">📥 Download da Proposta</div>', unsafe_allow_html=True)
-    
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        proposta_txt = gerar_proposta_txt(cliente, recommendations, melhores_seguradoras)
-        download_txt = criar_download_button(
-            proposta_txt, 
-            f"proposta_besmart_{cliente.get('nome', 'cliente')}.txt", 
-            "📄 Baixar Proposta Completa (TXT)", 
-            'txt'
-        )
-        st.markdown(download_txt, unsafe_allow_html=True)
-    
-    with col2:
-        dados_csv = {
-            'Cliente': [cliente.get('nome', '')],
-            'Capital_Sugerido': [cliente.get('capital_sugerido', 0)],
-            'Renda_Mensal': [cliente.get('renda_mensal', 0)],
-            'Patrimonio_Total': [cliente.get('patrimonio_total', 0)],
-            'Patrimonio_Liquido': [cliente.get('patrimonio_liquido', 0)],
-            'Patrimonio_Imobilizado': [cliente.get('patrimonio_imobilizado', 0)],
-            'Dependentes': [cliente.get('dependentes', 0)],
-            'Pilar_Financeiro': [cliente.get('pilar_financeiro', False)],
-            'Melhor_Seguradora': [melhores_seguradoras[0]['seguradora'] if melhores_seguradoras else ''],
-            'Pontuacao_Melhor': [melhores_seguradoras[0]['score'] if melhores_seguradoras else 0],
-            'Compatibilidade_Melhor': [melhores_seguradoras[0]['porcentagem'] if melhores_seguradoras else 0]
-        }
-        df_csv = pd.DataFrame(dados_csv)
+            # Principais Coberturas
+            st.markdown("""
+            <div class="info-card-enhanced" style="border-color: #667eea">
+                <h4 style="color: #2c3e50; margin-bottom: 1rem;">🎯 Principais Coberturas</h4>
+            """, unsafe_allow_html=True)
+            
+            coberturas = calculo['coberturas_detalhadas']
+            for cobertura, valor in coberturas.items():
+                if valor > 0:
+                    if 'Diária' in cobertura:
+                        st.success(f"**{cobertura}:** {formatar_moeda(valor)}/dia")
+                    else:
+                        st.success(f"**{cobertura}:** {formatar_moeda(valor)}")
+            
+            st.markdown("</div>", unsafe_allow_html=True)
         
-        download_csv = criar_download_button(
-            df_csv,
-            f"dados_cliente_{cliente.get('nome', 'cliente')}.csv",
-            "📊 Baixar Dados Resumidos (CSV)",
-            'csv'
-        )
-        st.markdown(download_csv, unsafe_allow_html=True)
+        with col4:
+            # Gráfico de Pagamento x Recebimento
+            st.markdown("""
+            <div class="payment-receipt-chart">
+                <h4 style="color: #2c3e50; margin-bottom: 1.5rem; text-align: center;">📈 Projeção de Pagamento x Recebimento</h4>
+            """, unsafe_allow_html=True)
+            
+            chart = create_payment_receipt_chart(cliente)
+            if chart:
+                st.altair_chart(chart, use_container_width=True)
+                st.markdown("""
+                <div style="background: rgba(102, 126, 234, 0.1); padding: 1rem; border-radius: 10px; margin-top: 1rem;">
+                    <p style="margin: 0; color: #666; font-size: 0.9rem; text-align: center;">
+                        <strong>💡 Análise:</strong> O gráfico mostra a relação entre seus pagamentos acumulados 
+                        e o benefício potencial disponível a qualquer momento.
+                    </p>
+                </div>
+                """, unsafe_allow_html=True)
+            else:
+                st.info("Complete o cadastro para ver a projeção de pagamentos.")
+            
+            st.markdown("</div>", unsafe_allow_html=True)
+        
+        # Parcerias e Informações do Assessor
+        st.markdown("""
+        <div class="section-header">
+            <h3 style="margin: 0; font-size: 1.5rem;">🤝 Parcerias e Assessor</h3>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        col5, col6 = st.columns(2)
+        
+        with col5:
+            st.markdown("""
+            <div class="partner-info">
+                <h4 style="margin: 0 0 1rem 0; color: white;">🏢 Informações da Filial</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div>
+                        <strong>📋 Filial:</strong><br>
+                        <span>{cliente.get('filial', 'Não informado')}</span>
+                    </div>
+                    <div>
+                        <strong>👤 Assessor:</strong><br>
+                        <span>{cliente.get('assessor', 'Não informado')}</span>
+                    </div>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+        
+        with col6:
+            st.markdown("""
+            <div class="info-card-enhanced" style="border-color: #00b09b">
+                <h4 style="color: #2c3e50; margin-bottom: 1rem;">🎯 Próximos Passos</h4>
+                <ul style="color: #666; line-height: 1.6;">
+                    <li><strong>Contato do Assessor:</strong> Em até 24h úteis</li>
+                    <li><strong>Análise Personalizada:</strong> Proposta detalhada</li>
+                    <li><strong>Documentação:</strong> Lista de documentos necessários</li>
+                    <li><strong>Formalização:</strong> Assinatura digital</li>
+                </ul>
+            </div>
+            """, unsafe_allow_html=True)
+        
+        # Perfis Identificados
+        if st.session_state.perfil_cliente:
+            st.markdown("""
+            <div class="section-header">
+                <h3 style="margin: 0; font-size: 1.5rem;">🎭 Perfis Identificados</h3>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            perfis_ativos = [perfil for perfil, ativo in st.session_state.perfil_cliente.items() if ativo]
+            if perfis_ativos:
+                col7, col8, col9 = st.columns(3)
+                cols = [col7, col8, col9]
+                
+                for i, perfil in enumerate(perfis_ativos):
+                    with cols[i % 3]:
+                        st.markdown(f"""
+                        <div class="profile-checkbox">
+                            <div style="display: flex; align-items: center; margin-bottom: 0.5rem;">
+                                <span style="color: #667eea; margin-right: 0.5rem;">✓</span>
+                                <span style="font-weight: 500;">{perfil}</span>
+                            </div>
+                        </div>
+                        """, unsafe_allow_html=True)
+            else:
+                st.info("Nenhum perfil específico selecionado.")
 
-# ---------- ABA 4: ANÁLISE DE COBERTURAS ----------
+# ---------- ABA 5: ANÁLISE DE COBERTURAS ----------
 elif aba_selecionada == "🛡️ Análise de Coberturas":
     st.markdown('<div class="section-title">🛡️ Análise de Coberturas</div>', unsafe_allow_html=True)
     
@@ -4519,7 +4043,7 @@ elif aba_selecionada == "🛡️ Análise de Coberturas":
         st.markdown("---")
         create_coverage_recommendations(cliente, calculo)
 
-# ---------- ABA 5: COMPARATIVO DE PRODUTOS ----------
+# ---------- ABA 6: COMPARATIVO DE PRODUTOS ----------
 elif aba_selecionada == "📊 Comparativo de Produtos":
     st.markdown('<div class="section-title">📊 Comparativo de Produtos de Seguro de Vida</div>', unsafe_allow_html=True)
     
@@ -4542,7 +4066,7 @@ elif aba_selecionada == "📊 Comparativo de Produtos":
     with col1:
         seguradora_filtro = st.selectbox(
             "**Filtrar por Seguradora**",
-            ["Todas as Seguradoras"] + list(COMPARATIVO_PRODUTOS.keys())
+            ["Todas as Seguradoras"] + list(SEGURADORAS_BESMART.keys())
         )
     
     with col2:
@@ -4565,139 +4089,110 @@ elif aba_selecionada == "📊 Comparativo de Produtos":
     """, unsafe_allow_html=True)
     
     # Aplicar filtros
-    seguradoras_filtradas = COMPARATIVO_PRODUTOS
+    seguradoras_filtradas = SEGURADORAS_BESMART
     
     if seguradora_filtro != "Todas as Seguradoras":
-        seguradoras_filtradas = {seguradora_filtro: COMPARATIVO_PRODUTOS[seguradora_filtro]}
+        seguradoras_filtradas = {seguradora_filtro: SEGURADORAS_BESMART[seguradora_filtro]}
     
-    # Exibir produtos filtrados - SEM TÍTULOS DOS PRODUTOS
+    # Exibir produtos filtrados
     for seguradora, dados_seguradora in seguradoras_filtradas.items():
-        cor_primaria = dados_seguradora["cores"][0]
-        cor_secundaria = dados_seguradora["cores"][1]
+        cor_primaria = dados_seguradora["cor"]
         
         st.markdown(f"""
-        <div style="background: linear-gradient(135deg, {cor_primaria}, {cor_secundaria}); color: white; padding: 1.5rem 2rem; border-radius: 20px; margin: 2rem 0 1rem 0; box-shadow: 0 8px 25px rgba(0,0,0,0.2);">
+        <div style="background: linear-gradient(135deg, {cor_primaria}, {cor_primaria}99); color: white; padding: 1.5rem 2rem; border-radius: 20px; margin: 2rem 0 1rem 0; box-shadow: 0 8px 25px rgba(0,0,0,0.2);">
             <h2 style="margin: 0; font-size: 2rem; text-align: center;">{seguradora}</h2>
         </div>
         """, unsafe_allow_html=True)
         
         col1, col2 = st.columns(2)
         
-        produtos = list(dados_seguradora["produtos"].items())
-        
-        for i, (nome_produto, dados_produto) in enumerate(produtos):
-            with col1 if i % 2 == 0 else col2:
-                st.markdown(f"""
-                <div class="produto-card" style="border-color: {cor_primaria}">
-                    <div class="produto-badge" style="background: {cor_primaria}">🔥 {nome_produto}</div>
-                """, unsafe_allow_html=True)
-                
-                for caracteristica in dados_produto['caracteristicas']:
-                    st.markdown(f"""
-                    <div class="coverage-feature">
-                        <div style="display: flex; align-items: center;">
-                            <span style="color: {cor_primaria}; margin-right: 0.8rem; font-size: 1.1rem;">✓</span>
-                            <span style="font-weight: 500;">{caracteristica}</span>
-                        </div>
+        with col1:
+            st.markdown(f"""
+            <div class="info-card-enhanced" style="border-color: {cor_primaria}">
+                <h4 style="color: #2c3e50; margin-bottom: 1rem;">📊 Informações Gerais</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div>
+                        <strong>⭐ Pontuação:</strong><br>
+                        <span style="color: {cor_primaria}; font-weight: bold; font-size: 1.2rem;">{dados_seguradora['pontuacao']}/10</span>
                     </div>
-                    """, unsafe_allow_html=True)
-                
-                st.markdown(f"""
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1.5rem 0;">
-                        <div style="background: rgba({int(cor_primaria[1:3], 16)}, {int(cor_primaria[3:5], 16)}, {int(cor_primaria[5:7], 16)}, 0.1); padding: 1rem; border-radius: 10px; text-align: center;">
-                            <strong style="color: {cor_primaria};">💰 Preço Médio</strong><br>
-                            <span style="font-weight: bold; font-size: 1.1rem;">{dados_produto['preco_medio']}</span>
-                        </div>
-                        <div style="background: rgba({int(cor_primaria[1:3], 16)}, {int(cor_primaria[3:5], 16)}, {int(cor_primaria[5:7], 16)}, 0.1); padding: 1rem; border-radius: 10px; text-align: center;">
-                            <strong style="color: {cor_primaria};">🎯 Idade</strong><br>
-                            <span>{dados_produto['idade_minima']}-{dados_produto['idade_maxima']} anos</span>
-                        </div>
+                    <div>
+                        <strong>🏆 Rating:</strong><br>
+                        <span>{dados_seguradora['rating']}</span>
                     </div>
-                    
-                    <div style="margin-bottom: 1.5rem;">
-                        <strong style="color: #2c3e50;">📊 Capital Máximo:</strong> {dados_produto['capital_maximo']}
+                    <div>
+                        <strong>💰 Preço Médio:</strong><br>
+                        <span style="font-weight: bold;">{dados_seguradora['preco_medio']}</span>
                     </div>
-                    
-                    <div style="margin-bottom: 1rem;">
-                        <strong style="color: #2c3e50;">🏷️ Destaques:</strong><br>
-                """, unsafe_allow_html=True)
-                
-                for destaque in dados_produto['destaques']:
-                    st.markdown(f'<span class="compatibility-badge" style="background: {cor_primaria}; margin: 0.2rem;">{destaque}</span>', unsafe_allow_html=True)
-                
-                st.markdown("""
+                    <div>
+                        <strong>⏱️ Aprovação:</strong><br>
+                        <span>{dados_seguradora['tempo_aprovacao']}</span>
                     </div>
                 </div>
-                """, unsafe_allow_html=True)
-                 # Guia de escolha
-    st.markdown("""
-    <div class="section-header">
-        <h3 style="margin: 0; font-size: 1.5rem;">🎯 Como Escolher o Melhor Produto</h3>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    col_guide1, col_guide2, col_guide3 = st.columns(3)
-    
-    with col_guide1:
-        st.markdown("""
-        <div class="info-card">
-            <h4 style="color: #2c3e50; margin-bottom: 1rem;">💰 Por Faixa de Preço</h4>
-            <ul style="color: #666; line-height: 1.6;">
-                <li><strong>Até R$ 100:</strong> Azos, MAG Seguros</li>
-                <li><strong>R$ 100-200:</strong> Prudential, Icatu</li>
-                <li><strong>R$ 200-300:</strong> MetLife, Omint básico</li>
-                <li><strong>Acima de R$ 300:</strong> Omint Premium</li>
-            </ul>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col_guide2:
-        st.markdown("""
-        <div class="info-card">
-            <h4 style="color: #2c3e50; margin-bottom: 1rem;">👤 Por Perfil</h4>
-            <ul style="color: #666; line-height: 1.6;">
-                <li><strong>Primeiro Seguro:</strong> MAG Seguros</li>
-                <li><strong>Alta Renda:</strong> Omint, Icatu</li>
-                <li><strong>Empresarial:</strong> MetLife, Icatu</li>
-                <li><strong>Servidores:</strong> MAG Seguros</li>
-                <li><strong>Porte de Armas:</strong> Azos</li>
-            </ul>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    with col_guide3:
-        st.markdown("""
-        <div class="info-card">
-            <h4 style="color: #2c3e50; margin-bottom: 1rem;">🎯 Por Necessidade</h4>
-            <ul style="color: #666; line-height: 1.6;">
-                <li><strong>Proteção Básica:</strong> Vida Individual</li>
-                <li><strong>Patrimônio:</strong> Wealth Protection</li>
-                <li><strong>Saúde Premium:</strong> Executivo Premium</li>
-                <li><strong>Internacional:</strong> Global Protection</li>
-                <li><strong>Coletivo:</strong> Planos Corporativos</li>
-            </ul>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    # Call to Action
-    st.markdown("""
-    <div class="download-section">
-        <h3 style="margin: 0 0 1rem 0; font-size: 2rem;">🚀 Pronto para Contratar?</h3>
-        <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">
-            Nossos especialistas estão prontos para ajudar você a escolher o produto ideal!
-        </p>
-        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-            <div style="background: white; color: #f5576c; padding: 1rem 2rem; border-radius: 50px; font-weight: bold; font-size: 1.1rem; box-shadow: 0 4px 15px rgba(0,0,0,0.2); text-align: center;">
-                📞 Falar com Especialista
             </div>
-            <div style="background: rgba(255,255,255,0.2); color: white; padding: 1rem 2rem; border-radius: 50px; font-weight: bold; font-size: 1.1rem; border: 2px solid white; text-align: center;">
-                💬 WhatsApp
+            """, unsafe_allow_html=True)
+        
+        with col2:
+            st.markdown(f"""
+            <div class="info-card-enhanced" style="border-color: {cor_primaria}">
+                <h4 style="color: #2c3e50; margin-bottom: 1rem;">🎯 Especialidades</h4>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+            """, unsafe_allow_html=True)
+            
+            for especialidade in dados_seguradora['especialidade']:
+                st.markdown(f'<span class="compatibility-badge" style="background: {cor_primaria}">{especialidade}</span>', unsafe_allow_html=True)
+            
+            st.markdown("""
+                </div>
+                <p style="color: #666; margin-top: 1rem; font-size: 0.9rem;">
+                    <strong>Perfil Ideal:</strong> {dados_seguradora['perfil_ideal']}
+                </p>
             </div>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+            """, unsafe_allow_html=True)
+        
+        # Vantagens
+        st.markdown(f"""
+        <div class="info-card-enhanced" style="border-color: {cor_primaria}">
+            <h4 style="color: #2c3e50; margin-bottom: 1rem;">✨ Vantagens Principais</h4>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+        """, unsafe_allow_html=True)
+        
+        for vantagem in dados_seguradora['vantagens']:
+            st.markdown(f"""
+            <div class="coverage-feature">
+                <div style="display: flex; align-items: center;">
+                    <span style="color: {cor_primaria}; margin-right: 0.8rem; font-size: 1.1rem;">✓</span>
+                    <span style="font-weight: 500;">{vantagem}</span>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+        
+        st.markdown("</div></div>", unsafe_allow_html=True)
+        
+        # Doenças Graves Cobertas
+        st.markdown(f"""
+        <div class="info-card-enhanced" style="border-color: {cor_primaria}">
+            <h4 style="color: #2c3e50; margin-bottom: 1rem;">🦠 Doenças Graves Cobertas</h4>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem;">
+        """, unsafe_allow_html=True)
+        
+        doencas = dados_seguradora.get('doencas_graves', [])
+        for doenca in doencas[:8]:  # Mostrar apenas as primeiras 8
+            st.markdown(f"""
+            <div style="background: rgba({int(cor_primaria[1:3], 16)}, {int(cor_primaria[3:5], 16)}, {int(cor_primaria[5:7], 16)}, 0.1); padding: 0.8rem; border-radius: 8px; text-align: center;">
+                <span style="color: {cor_primaria}; font-weight: 500;">{doenca}</span>
+            </div>
+            """, unsafe_allow_html=True)
+        
+        if len(doencas) > 8:
+            st.markdown(f"""
+            <div style="background: rgba({int(cor_primaria[1:3], 16)}, {int(cor_primaria[3:5], 16)}, {int(cor_primaria[5:7], 16)}, 0.1); padding: 0.8rem; border-radius: 8px; text-align: center;">
+                <span style="color: {cor_primaria}; font-weight: 500;">+ {len(doencas) - 8} outras</span>
+            </div>
+            """, unsafe_allow_html=True)
+        
+        st.markdown("</div></div>", unsafe_allow_html=True)
 
-# ---------- ABA 6: FAQ INTERATIVO ----------
+# ---------- ABA 7: FAQ INTERATIVO ----------
 elif aba_selecionada == "❓ FAQ Interativo":
     st.markdown('<div class="section-title">❓ FAQ Interativo</div>', unsafe_allow_html=True)
     
@@ -4713,86 +4208,42 @@ elif aba_selecionada == "❓ FAQ Interativo":
     with col1:
         pesquisa = st.text_input("**🔍 Pesquisar no FAQ:**", placeholder="Digite sua dúvida...", help="Encontre respostas específicas")
     
-    with col2:
-        categoria_selecionada = st.selectbox("**📂 Filtrar por categoria:**", [
-            "Todas as Categorias",
-            "🧭 1. Conceitos Gerais e Funcionamento (1 – 30)",
-            "📝 2. Tipos e Modalidades de Seguro (31 – 60)", 
-            "💰 3. Coberturas e Benefícios (61 – 100)",
-            "🧑‍💼 4. Beneficiários (101 – 130)",
-            "📊 5. Custos, Prêmios e Valores (131 – 160)",
-            "🧾 6. Contratação e Documentação (161 – 185)",
-            "⚖️ 7. Sinistro e Indenização (186 – 200)"
-        ])
+    # FAQ Simplificado
+    faq_simplificado = {
+        "📝 Conceitos Básicos": [
+            {"pergunta": "O que é um seguro de vida?", "resposta": "É um contrato onde você paga prêmios em troca de proteção financeira para sua família em caso de morte, invalidez ou doenças graves."},
+            {"pergunta": "Como funciona um seguro de vida?", "resposta": "Você escolhe as coberturas, paga prêmios periódicos e, em caso de sinistro, seus beneficiários recebem o capital segurado."},
+            {"pergunta": "Qual a diferença entre seguro e previdência?", "resposta": "Seguro protege contra riscos, previdência acumula para aposentadoria. O seguro paga aos beneficiários, a previdência paga a você."}
+        ],
+        "💰 Coberturas e Valores": [
+            {"pergunta": "Quais são as coberturas básicas?", "resposta": "Morte, invalidez permanente, doenças graves, diária por incapacidade temporária e diária por internação hospitalar."},
+            {"pergunta": "Como é calculado o capital segurado?", "resposta": "Baseado em sua renda, patrimônio, despesas familiares, número de dependentes e objetivos de proteção."},
+            {"pergunta": "Posso ajustar as coberturas depois?", "resposta": "Sim, a maioria dos seguros permite ajustes nas coberturas e valores conforme suas necessidades mudam."}
+        ],
+        "🏆 Escolha do Seguro": [
+            {"pergunta": "Como escolher a melhor seguradora?", "resposta": "Considere solidez financeira, coberturas oferecidas, preço, tempo de aprovação e atendimento ao cliente."},
+            {"pergunta": "Qual o valor ideal para investir?", "resposta": "Recomendamos entre 1% e 3% da sua renda mensal, dependendo do seu perfil e necessidades de proteção."},
+            {"pergunta": "Preciso de exames médicos?", "resposta": "Depende da idade, capital segurado e histórico de saúde. Capitais mais altos geralmente exigem exames."}
+        ]
+    }
     
-    # Função para criar FAQ interativo
-    def create_faq_section():
-        categorias_exibidas = []
-        
-        if categoria_selecionada == "Todas as Categorias":
-            categorias_exibidas = list(FAQ_COMPLETO.keys())
-        else:
-            categorias_exibidas = [categoria_selecionada]
-        
-        for categoria in categorias_exibidas:
-            st.markdown(f"""
-            <div style="background: linear-gradient(135deg, #00b09b 0%, #96c93d 100%); color: white; padding: 1rem 2rem; border-radius: 15px; margin: 2rem 0 1rem 0;">
-                <h3 style="margin: 0; font-size: 1.5rem;">{categoria}</h3>
-            </div>
-            """, unsafe_allow_html=True)
-            
-            perguntas_filtradas = FAQ_COMPLETO[categoria]
-            
-            if pesquisa:
-                perguntas_filtradas = [
-                    p for p in perguntas_filtradas 
-                    if pesquisa.lower() in p['pergunta'].lower() or 
-                       pesquisa.lower() in p['resposta'].lower() or
-                       pesquisa.lower() in p['destaque'].lower()
-                ]
-            
-            if not perguntas_filtradas:
-                st.info("🔍 Nenhuma pergunta encontrada com os filtros atuais.")
-            else:
-                for i, pergunta_data in enumerate(perguntas_filtradas):
-                    with st.expander(f"**{pergunta_data['pergunta']}**", expanded=False):
-                        st.markdown(f"""
-                        <div class="info-card">
-                            <div style="color: #666; line-height: 1.6; margin-bottom: 1rem;">
-                                {pergunta_data['resposta']}
-                            
-                        """, unsafe_allow_html=True)
-    
-    create_faq_section()
-    
-    # Seção de ajuda adicional
-    st.markdown("---")
-    st.markdown('<div class="subsection-title">💬 Não encontrou sua dúvida?</div>', unsafe_allow_html=True)
-    
-    col1, col2, col3 = st.columns(3)
-    
-    with col1:
-        st.markdown("""
-       
-        """, unsafe_allow_html=True)
-    
-    with col2:
-        st.markdown("""
-        <div style="text-align: center; padding: 1.5rem; background: linear-gradient(135deg, #00b09b 0%, #96c93d 100%); color: white; border-radius: 15px;">
-            <div style="font-size: 2rem;">💬</div>
-            <h4>WhatsApp</h4>
-            <p>(21) 99799-4515</p>
+    for categoria, perguntas in faq_simplificado.items():
+        st.markdown(f"""
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 1rem 2rem; border-radius: 15px; margin: 2rem 0 1rem 0;">
+            <h3 style="margin: 0; font-size: 1.5rem;">{categoria}</h3>
         </div>
         """, unsafe_allow_html=True)
-    
-    with col3:
-        st.markdown("""
-        <div style="text-align: center; padding: 1.5rem; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border-radius: 15px;">
-            <div style="font-size: 2rem;">📧</div>
-            <h4>E-mail</h4>
-            <p>vida@besmart.com.br</p>
-        </div>
-        """, unsafe_allow_html=True)
+        
+        perguntas_filtradas = perguntas
+        if pesquisa:
+            perguntas_filtradas = [
+                p for p in perguntas 
+                if pesquisa.lower() in p['pergunta'].lower() or pesquisa.lower() in p['resposta'].lower()
+            ]
+        
+        for pergunta_data in perguntas_filtradas:
+            with st.expander(f"**{pergunta_data['pergunta']}**", expanded=False):
+                st.info(pergunta_data['resposta'])
 
 # ---------- SIDEBAR ----------
 with st.sidebar:
@@ -4871,18 +4322,6 @@ with st.sidebar:
     </div>
     """, unsafe_allow_html=True)
 
-# ---------- ANIMAÇÕES ----------
-#if st.session_state.get('cliente'):
-    #st.balloons()
-    
-if st.session_state.get('calculation_complete'):
-    st.markdown("""
-    <script>
-    setTimeout(() => {
-    }, 1000);
-    </script>
-    """, unsafe_allow_html=True)
-    st.session_state.calculation_complete = False
 
 
 
